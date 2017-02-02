@@ -9,6 +9,7 @@ public class Lab0a2
 {
 	public static void main(String[] args)
 	{
+		//A box of AP Computer Science A
 		System.out.println(		"Alex Chen");
 		System.out.println(		"2/1/17");
 		System.out.println(		"Period 2");

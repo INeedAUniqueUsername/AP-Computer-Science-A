@@ -10,6 +10,7 @@ public class Lab0a3
 {
 	public static void main ( String[] args )
 	{
+		//Look at this ASCII Bat
 		System.out.println("Alex Chen");
 		System.out.println("2/1/17");
 		System.out.println("Period 2");
@@ -26,9 +27,9 @@ public class Lab0a3
 		System.out.println("      |_---V--  --\\/--__|      \\>           ");
 		System.out.println("                        V_     /              ");
 		System.out.println("                          \\__/               ");
-		System.out.println("  __   __    __              __       __    _   ___     ");
-		System.out.println(" /    /  \\  |  \\  |  |\\  |  /        |  \\  / \\   | ");
-		System.out.println(" |   |    | |  |  |  | \\ | |  __     |  < |___|  |     ");
-		System.out.println(" \\__  \\__/  |__/  |  |  \\|  \\__|     |__/ |   |  |  ");
+		System.out.println("  __   __    __   ___          __    __    _   ___");
+		System.out.println(" /    /  \\  |  \\   |   |\\  |  /     |  \\  / \\   | ");
+		System.out.println(" |   |    | |  |   |   | \\ | |  __  |  < |___|  | ");
+		System.out.println(" \\__  \\__/  |__/  _|_  |  \\|  \\__|  |__/ |   |  | ");
 	}
 }

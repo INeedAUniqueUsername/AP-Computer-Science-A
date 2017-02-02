@@ -12,13 +12,15 @@ public class Lab0c
 {
 	public static void main (String[] args)
 	{
-		Scanner keyboard = new Scanner(System.in);
+		
 
 		int intOne, intTwo;
 		double doubleOne, doubleTwo;
 		float floatOne, floatTwo;
 		short shortOne, shortTwo;
+		String stringOne, stringTwo;
 
+		Scanner keyboard = new Scanner(System.in);
 
 		System.out.print("Enter an integer :: ");
 		intOne = keyboard.nextInt();
@@ -39,8 +41,13 @@ public class Lab0c
 		System.out.print("Enter a float :: ");
 		floatTwo = keyboard.nextFloat();
 		
-		shortOne = getShort();
-		shortTwo = getShort();
+		shortOne = getShort(keyboard);
+		shortTwo = getShort(keyboard);
+		
+		System.out.println("ENTER A STRING :: ");
+		stringOne = keyboard.next();
+		System.out.println("enter a string :: ");
+		stringTwo = keyboard.next();
 
 
 		System.out.println();
@@ -55,22 +62,28 @@ public class Lab0c
 
 		System.out.println("double one = " + doubleOne );
 		System.out.println("double two = " + doubleTwo );
-		System.out.println("" + doubleOne + " * " + doubleTwo + " = " + (doubleOne * doubleTwo));
+		System.out.println("" + doubleOne + " - " + doubleTwo + " = " + (doubleOne - doubleTwo));
 		
 		System.out.println("float one = " + floatOne );
 		System.out.println("float two = " + floatTwo );
+		System.out.println("" + floatOne + " * " + floatTwo + " = " + (floatOne * floatTwo));
 		
 		System.out.println("short one = " + shortOne );
 		System.out.println("short two = " + shortTwo );
+		
+		System.out.println("STRING ONE = " + stringOne.toUpperCase());
+		System.out.println("string two = " + stringTwo.toLowerCase());
+		keyboard.close();
 	}
-	public static short getShort()
+	//Filter out decimals and letters from the input
+	public static short getShort(Scanner scan)
 	{
 		boolean done = false;
 		short result = 0;
 		while(!done)
 		{
-			System.out.println("Enter a short ::");
-			String input = new Scanner(System.in).nextLine();
+			System.out.print("Enter a short ::");
+			String input = scan.next();
 			boolean isDecimal = input.contains(".");
 			boolean hasLetters = false;
 			for(int i = 0; i < input.length(); i++)
