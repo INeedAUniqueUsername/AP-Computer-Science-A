@@ -1,4 +1,4 @@
-package Assignments;
+package Unit0.Assignments;
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -57,17 +57,5 @@ public class Lab0b
 		System.out.println("*theBoolean = "+theBoolean+"\t\t*");
 		System.out.println("*theString = "+theString+"\t\t*");
 		System.out.println("/////////////////////////////////");
-		
-
-
-
-
-
-
-
-
-
-
-
 	}
 }
