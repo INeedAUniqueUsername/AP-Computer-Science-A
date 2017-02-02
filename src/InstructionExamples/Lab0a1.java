@@ -12,9 +12,14 @@ public class Lab0a1
 		System.out.println("Alex Chen");
 		System.out.println("2/1/17");
 		System.out.println("Period 2");
+		System.out.println("+++++++++++++++++++++++++ ");
 		for(int i = 0; i < 23; i++)
 		{
-			System.out.println("+++++++++++++++++++++++++ " );
+			if(Math.random() > 0.4)
+				System.out.println(	"||||||||||||||||||||||||| " );
+			else
+				System.out.println("========================= ");
 		}
+		System.out.println("+++++++++++++++++++++++++ ");
 	}
 }

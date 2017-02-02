@@ -10,10 +10,25 @@ public class Lab0a3
 {
 	public static void main ( String[] args )
 	{
-		System.out.println("Your Name \t  Date \t Period\n\n" );
-		System.out.println("What type of ANIMAL YOU WILL DRAW" );
-		System.out.println("\n\n\n\n" );
-		
-		
+		System.out.println("Alex Chen");
+		System.out.println("2/1/17");
+		System.out.println("Period 2");
+		System.out.println("                                          __  ");
+		System.out.println("                                    ____--  > ");
+		System.out.println("                                   /       /  ");
+		System.out.println("                                 /____    /   ");
+		System.out.println("                                /\\    --->   ");
+		System.out.println("            ___---^\\   _   _   |   \\    /   ");
+		System.out.println("          --    / | \\ / \\_/ \\_/      \\ /    ");
+		System.out.println("         /    /   |  \\| ..  |       __V      ");
+		System.out.println("       /    /     |   \\     /\\     /        ");
+		System.out.println("      /    |  __  |    \\___/  \\  /          ");
+		System.out.println("      |_---V--  --\\/--__|      \\>           ");
+		System.out.println("                        V_     /              ");
+		System.out.println("                          \\__/               ");
+		System.out.println("  __   __    __              __       __    _   ___     ");
+		System.out.println(" /    /  \\  |  \\  |  |\\  |  /        |  \\  / \\   | ");
+		System.out.println(" |   |    | |  |  |  | \\ | |  __     |  < |___|  |     ");
+		System.out.println(" \\__  \\__/  |__/  |  |  \\|  \\__|     |__/ |   |  |  ");
 	}
 }
