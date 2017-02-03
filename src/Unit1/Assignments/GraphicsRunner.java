@@ -1,7 +1,9 @@
+package Unit1.Assignments;
+
 //© A+ Computer Science  -  www.apluscompsci.com
-//Name -
-//Date -
-//Class -
+//Name - Alex Chen
+//Date - 2/3/17
+//Class - AP Computer Science A
 //Lab  -
 
 import javax.swing.JFrame;
@@ -20,7 +22,6 @@ public class GraphicsRunner extends JFrame
 		setSize(WIDTH,HEIGHT);
 
 		getContentPane().add(new ShapePanel());
-
 		setVisible(true);
 	}
 

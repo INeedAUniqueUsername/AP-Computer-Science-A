@@ -1,7 +1,8 @@
+package Unit1.InstructionExamples;
 //© A+ Computer Science  -  www.apluscompsci.com
-//Name -
-//Date -
-//Class -
+//Name - Alex Chen
+//Date - 2/3/17
+//Class - AP Computer Science A
 //Lab  -
 
 import javax.swing.JFrame;

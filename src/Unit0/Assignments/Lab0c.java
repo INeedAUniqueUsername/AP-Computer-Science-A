@@ -41,8 +41,15 @@ public class Lab0c
 		System.out.print("Enter a float :: ");
 		floatTwo = keyboard.nextFloat();
 		
+		/*//Just for fun
 		shortOne = getShort(keyboard);
 		shortTwo = getShort(keyboard);
+		*/
+		
+		System.out.print("Enter a short :: ");
+		shortOne = keyboard.nextShort();
+		System.out.print("Enter a short :: ");
+		shortTwo = keyboard.nextShort();
 		
 		System.out.println("ENTER A STRING :: ");
 		stringOne = keyboard.next();
@@ -56,25 +63,32 @@ public class Lab0c
 
 		//add in output for all variables
 
-		System.out.println("" + intOne + " + " + intTwo + " = " + intOne + intTwo );
-		System.out.println("Oops");
-		System.out.println("" + intOne + " + " + intTwo + " = " + (intOne + intTwo) );
-
 		System.out.println("double one = " + doubleOne );
 		System.out.println("double two = " + doubleTwo );
-		System.out.println("" + doubleOne + " - " + doubleTwo + " = " + (doubleOne - doubleTwo));
+		
 		
 		System.out.println("float one = " + floatOne );
 		System.out.println("float two = " + floatTwo );
-		System.out.println("" + floatOne + " * " + floatTwo + " = " + (floatOne * floatTwo));
+		
 		
 		System.out.println("short one = " + shortOne );
 		System.out.println("short two = " + shortTwo );
 		
+		System.out.println("string one = " + stringOne);
+		System.out.println("string two = " + stringTwo);
+		
+		keyboard.close();
+		/*//Just for fun//
+		System.out.println("" + intOne + " + " + intTwo + " = " + intOne + intTwo );
+		System.out.println("Oops");
+		System.out.println("" + intOne + " + " + intTwo + " = " + (intOne + intTwo) );
+		System.out.println("" + doubleOne + " - " + doubleTwo + " = " + (doubleOne - doubleTwo));
+		System.out.println("" + floatOne + " * " + floatTwo + " = " + (floatOne * floatTwo));
 		System.out.println("STRING ONE = " + stringOne.toUpperCase());
 		System.out.println("string two = " + stringTwo.toLowerCase());
-		keyboard.close();
+		*/
 	}
+	/*
 	//Filter out decimals and letters from the input
 	public static short getShort(Scanner scan)
 	{
@@ -82,7 +96,7 @@ public class Lab0c
 		short result = 0;
 		while(!done)
 		{
-			System.out.print("Enter a short ::");
+			System.out.print("Enter a short. Do not try to do anything \"funny\" ::");
 			String input = scan.next();
 			boolean isDecimal = input.contains(".");
 			boolean hasLetters = false;
@@ -96,11 +110,11 @@ public class Lab0c
 			}
 			if(isDecimal)
 			{
-				System.out.println("Is that a decimal? Disgusting!");
+				System.out.println("No decimals allowed. Enter a short ::");
 			}
 			else if(hasLetters)
 			{
-				System.out.println("A letter! Eww!");
+				System.out.println("Sorry, cannot read. Enter a short ::");
 			}
 			else {
 				result = Short.parseShort(input);
@@ -109,4 +123,5 @@ public class Lab0c
 		}
 		return result;
 	}
+	*/
 }

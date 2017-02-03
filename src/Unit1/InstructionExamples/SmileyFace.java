@@ -1,7 +1,10 @@
+package Unit1.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
-//Name -
-//Date -
-//Class -
+//Name - Alex Chen
+//Date - 2/3/17
+//Class - AP Computer Science A
 //Lab  -
 
 import java.awt.Graphics;
@@ -29,9 +32,16 @@ public class SmileyFace extends Canvas
 
       window.setColor(Color.YELLOW);
       window.fillOval( 210, 100, 400, 400 );
+      
 
 		//add more code here
-
-
+      window.setColor(Color.BLACK);
+      
+      //Smile
+      window.drawArc(265, 150, 300, 300, 225, 90);
+      
+      //Eyes
+      window.drawOval(300, 200, 50, 50);
+      window.drawOval(460, 200, 50, 50);
    }
 }
