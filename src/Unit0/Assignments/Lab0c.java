@@ -51,9 +51,9 @@ public class Lab0c
 		System.out.print("Enter a short :: ");
 		shortTwo = keyboard.nextShort();
 		
-		System.out.println("ENTER A STRING :: ");
+		System.out.println("Enter a string :: ");
 		stringOne = keyboard.next();
-		System.out.println("enter a string :: ");
+		System.out.println("Enter a string :: ");
 		stringTwo = keyboard.next();
 
 
