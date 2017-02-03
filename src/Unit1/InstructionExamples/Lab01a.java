@@ -1,3 +1,6 @@
+package Unit1.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -11,7 +14,10 @@ public class Lab01a
    public static void main(String args[])
    {
       //instantiate a StarsAndStripes object
-      
+      StarsAndStripes stars = new StarsAndStripes();
       //call the methods needed to make the patterns on the word document
+      stars.printASmallBox();
+      System.out.println();
+      stars.printABigBox();
    }
 }
