@@ -12,7 +12,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Canvas;
+import java.awt.Polygon;
+import java.awt.Rectangle;
+
 import javax.swing.JPanel;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -59,8 +63,6 @@ public class ShapePanel extends JPanel
 		window.drawRect(20,20,getWidth()-40,getHeight()-40);
 		window.setFont(new Font("TAHOMA",Font.BOLD,18));
 		window.drawString("CREATE YOUR OWN SHAPE!",40,40);
-
-
 		//instantiate a Shape
 		//tell your shape to draw
 		new Shape(250, 250, 100, 100, Color.BLUE).draw(window);

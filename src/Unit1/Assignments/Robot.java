@@ -1,3 +1,6 @@
+package Unit1.Assignments;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -24,9 +27,10 @@ class Robot extends Canvas
       window.drawString("Robot LAB ", 35, 35 );
 
       //call head method
-      
+      head(window);
       //call other methods
-      
+      upperBody(window);
+      lowerBody(window);
    }
 
    public void head( Graphics window )

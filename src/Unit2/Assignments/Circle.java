@@ -1,3 +1,6 @@
+package Unit2.Assignments;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -11,13 +14,16 @@ public class Circle
 
 	public void setRadius(double rad)
 	{
+		radius = rad;
 	}
 
 	public void calculateArea( )
 	{
+		area = Math.PI * Math.pow(radius, 2);
 	}
 
 	public void print( )
 	{
+		System.out.println("The area of a circle with radius " + radius + " is: " + area);
 	}
 }

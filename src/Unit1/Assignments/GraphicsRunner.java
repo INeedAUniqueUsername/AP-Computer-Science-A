@@ -7,6 +7,7 @@ package Unit1.Assignments;
 //Lab  -
 
 import javax.swing.JFrame;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,10 +19,10 @@ public class GraphicsRunner extends JFrame
 	public GraphicsRunner()
 	{
 		super("MAKE YOUR OWN SHAPE");
-
 		setSize(WIDTH,HEIGHT);
 
-		getContentPane().add(new ShapePanel());
+		//getContentPane().add(new ShapePanel());
+		getContentPane().add(new Robot());
 		setVisible(true);
 	}
 
