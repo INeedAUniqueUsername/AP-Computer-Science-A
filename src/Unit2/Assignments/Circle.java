@@ -24,6 +24,6 @@ public class Circle
 
 	public void print( )
 	{
-		System.out.println("The area of a circle with radius " + radius + " is: " + area);
+		System.out.println(String.format("The area of a circle with radius %.3f is %.3f", radius, area));
 	}
 }

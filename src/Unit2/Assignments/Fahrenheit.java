@@ -30,6 +30,6 @@ public class Fahrenheit
 		//this is part of the solution
 		//System.out.println(getCelsius());
 		System.out.println();
-		System.out.printf("%.3f degrees Fahrenheit == %.3f degrees Celsius", fahrenheit, getCelsius());
+		System.out.printf(String.format("%.3f degrees Fahrenheit == %.3f degrees Celsius", fahrenheit, getCelsius()));
 	}
 }

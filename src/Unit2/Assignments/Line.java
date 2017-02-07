@@ -30,6 +30,6 @@ public class Line
 
 	public void print( )
 	{
-		System.out.println("The slope from (" + xOne + ", " + yOne + ") to (" + xTwo + ", " + yTwo + ") is: " + slope);
+		System.out.println(String.format("The slope from (%d, %d) to (%d, %d) is: %s", xOne, yOne, xTwo, yTwo, slope));
 	}
 }

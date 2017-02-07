@@ -13,7 +13,7 @@ public class Lab02e
    {
 		//add test cases
 		Circle circ1 = new Circle();
-		for(int i = 0; i < 10; i ++)
+		for(int i = 1; i < 10; i ++)
 		{
 			double radius = Math.random() * 10 * i;
 			circ1.setRadius(radius);
