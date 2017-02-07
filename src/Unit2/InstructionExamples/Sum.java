@@ -1,3 +1,6 @@
+package Unit2.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -11,13 +14,16 @@ public class Sum
 
 	public void setNums(double num1, double num2)
 	{
+		one = num1; two = num2;
 	}
 
 	public void sum( )
 	{
+		sum = one + two;
 	}
 
 	public void print( )
 	{
+		System.out.println("The sum is :: " + sum);
 	}
 }

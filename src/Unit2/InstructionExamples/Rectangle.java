@@ -1,3 +1,6 @@
+package Unit2.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -18,9 +21,11 @@ public class Rectangle
 
 	public void calculatePerimeter( )
 	{
+		perimeter = 2*length + 2*width;
 	}
 
 	public void print( )
 	{
+		System.out.println("The perimeter is :: " + perimeter);
 	}
 }
