@@ -1,3 +1,6 @@
+package Unit2.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -14,9 +17,16 @@ public class Lab02d
 	 	test.print();
 
 	 	//add more test cases
+	 	for(int i = 1; i <= 10; i++)
+	 	{
+	 		test.setSide(randomInt(i*10)); test.calculateSurfaceArea(); test.print();
+	 	}
 	 	
 	 	
 	 	
-	 	
+	}
+	public static int randomInt(int max)
+	{
+		return (int) (Math.random()*max + 1);
 	}
 }

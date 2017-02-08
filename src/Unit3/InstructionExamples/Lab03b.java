@@ -1,3 +1,6 @@
+package Unit3.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -14,21 +17,20 @@ public class Lab03b
 	{
 		Scanner keyboard = new Scanner(in);
 
-		out.print("Enter the distance :: ");
-		int dist = keyboard.nextInt();
+		for(int i = 1; i <= 10; i++) {
+			out.print("Enter the distance :: ");
+			int dist = keyboard.nextInt();
 
-		out.print("Enter the hours :: ");
-		int hrs = keyboard.nextInt();
+			out.print("Enter the hours :: ");
+			int hrs = keyboard.nextInt();
 
-		out.print("Enter the minutes :: ");
-		int mins = keyboard.nextInt();
+			out.print("Enter the minutes :: ");
+			int mins = keyboard.nextInt();
 
-		MilesPerHour test = new MilesPerHour(dist, hrs, mins);
-		test.calcMPH();
-		test.print();
-		
-		//add more test cases
-		
+			MilesPerHour test = new MilesPerHour(dist, hrs, mins);
+			test.calcMPH();
+			test.print();
+		}
 		
 	}
 }

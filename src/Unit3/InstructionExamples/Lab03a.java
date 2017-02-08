@@ -1,3 +1,6 @@
+package Unit3.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -48,9 +51,19 @@ public class Lab03a  //this class is used to test Triangle
 
 
 		//add one more input section
+		System.out.print("Enter side A ::  ");
+		a = keyboard.nextInt();
+
+		System.out.print("Enter side B ::  ");
+		b = keyboard.nextInt();
+
+		System.out.print("Enter side C ::  ");
+		c = keyboard.nextInt();
 
 
-
-
+		test.setSides(a,b,c);
+		test.calcPerimeter();
+		test.calcArea();
+		test.print();
 	}
 }

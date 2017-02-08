@@ -1,3 +1,6 @@
+package Unit2.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -11,13 +14,16 @@ public class Cube
 
 	public void setSide(int s)
 	{
+		side = s;
 	}
 
 	public void calculateSurfaceArea( )
 	{
+		surfaceArea = 6*side*side;
 	}
 
 	public void print( )
 	{
+		System.out.println(String.format("The surface area of a cube with sides of length %d is %d", side, surfaceArea));
 	}
 }

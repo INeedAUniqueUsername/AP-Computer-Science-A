@@ -25,6 +25,6 @@ public class Average
 	}
 	public void print( )
 	{
-		System.out.println("The average of " + one + " and " + two + " is " + average);
+		System.out.println(String.format("The average of %.3f and %.3f is %.3f", one, two, average));
 	}
 }

@@ -12,20 +12,17 @@ public class Name
 
 	public Name()
 	{
-
-
+		setName("");
 	}
 
 	public Name(String s)
 	{
-
-
+		setName(name);
 	}
 
    public void setName(String s)
    {
-
-
+	   name = s;
    }
 
 	public String getFirst()
@@ -35,11 +32,10 @@ public class Name
 
 	public String getLast()
 	{
-		return "";
 	}
 
  	public String toString()
  	{
- 		return "";
+ 		return "A person named " + name;
 	}
 }

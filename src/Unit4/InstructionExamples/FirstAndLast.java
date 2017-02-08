@@ -33,9 +33,15 @@ public class FirstAndLast
 
 	public void findFirstLastLetters()
 	{
-
-
-
+		
+	}
+	public char findFirstLetter(String s)
+	{
+		
+	}
+	public char findLastLetter(String s)
+	{
+		word.charAt(word.length()-1);
 	}
 
  	public String toString()
