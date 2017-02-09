@@ -1,3 +1,7 @@
+package Unit3.Assignments;
+
+import java.util.Scanner;
+/*
 Unit 3: Loops
 Answer the questions and complete the programs in preparation for the end of Unit exam
 Review Questions:
@@ -19,18 +23,18 @@ Review Questions:
 1 2 4 8
 		f.	for (int i = 1; i < 10; i++){if(i % 2 == 0){Sytem.out.print(i + “ “);}}
 	3.	Provide trace tables of the following loops.
-a.	int s = 1;
-int n = 1;
-while(s < 10) { s = s + n;}
-n++;
-b.	int s = 1;
-for(int n = 1; n < 5; n++){ s = s + n;}
-c.	int s = 1;
-int n = 1;
-do
-{ s = s + n;
-  n++;}
-while(s < 10 * n);
+		a.	int s = 1;
+			int n = 1;
+			while(s < 10) { s = s + n;}
+			n++;
+		b.	int s = 1;
+			for(int n = 1; n < 5; n++){ s = s + n;}
+		c.	int s = 1;
+			int n = 1;
+			do
+			{ s = s + n;
+			  n++;}
+			while(s < 10 * n);
 Exercises:
 1.	Write a program that reads a sequence of integer inputs to print
 a.	The smallest and largest of the inputs.
@@ -56,3 +60,32 @@ e.	The positions of all vowels in the string.
  *****
   ***
    *
+*/
+
+public class Review03 {
+	public static void main(String[] args) {
+		Review03 r = new Review03();
+		r.runExercises();
+	}
+	public void runExercises() {
+		exercise1a();
+	}
+	public void exercise1a() {
+		Scanner input = new Scanner(System.in);
+		String result_a = "";
+		int result_b_even = 0;
+		int result_b_odd = 0;
+		for(int i = 0; i < 10; i++) {
+			System.out.println(String.format("Number #%d :: ", i+1));
+			int next = input.nextInt();
+			result_a = result_a + String.format("%d ", next);
+			if(next % 2 == 0) {
+				result_b_even++;
+			} else {
+				result_b_odd++;
+			}
+		}
+		System.out.println(result_a);
+		input.close();
+	}
+}

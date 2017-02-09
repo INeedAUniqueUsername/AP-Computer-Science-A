@@ -1,3 +1,6 @@
+package Unit5.Assignments;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -19,14 +22,9 @@ public class Lab05d
 		out.println(test);   //A
 
 		//add more test cases
-		
-		
-		
-		
-		
-		
-		
-		
-
+		for(int i = 0; i < 10; i++)
+		{
+			out.println(new CharacterAnalyzer(keyboard.next().charAt(0)));
+		}
 	}
 }

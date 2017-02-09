@@ -1,3 +1,6 @@
+package Unit4.Assignments;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -10,32 +13,27 @@ public class Name
 {
 	private String name;
 
-	public Name()
-	{
+	public Name() {
 		setName("");
 	}
 
-	public Name(String s)
-	{
-		setName(name);
+	public Name(String s) {
+		setName(s);
 	}
 
-   public void setName(String s)
-   {
+   public void setName(String s) {
 	   name = s;
    }
 
-	public String getFirst()
-	{
-		return "";
+	public String getFirst() {
+		return name.split(" ")[0];
 	}
 
-	public String getLast()
-	{
+	public String getLast() {
+		return name.split(" ")[1];
 	}
 
- 	public String toString()
- 	{
- 		return "A person named " + name;
+ 	public String toString() {
+ 		return name;
 	}
 }

@@ -1,3 +1,6 @@
+package Unit4.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -15,9 +18,8 @@ public class Lab04b
 		out.println(demo);
 
 		//add more test cases
-		
-		
-		
-		
+		for(String s : new String[]{"Goodbye", "Hey", "What"}) {
+			demo.setString(s); demo.findFirstLastLetters(); out.println(demo);
+		}
 	}
 }

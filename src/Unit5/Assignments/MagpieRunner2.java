@@ -1,3 +1,5 @@
+package Unit5.Assignments;
+
 import java.util.Scanner;
 
 /**

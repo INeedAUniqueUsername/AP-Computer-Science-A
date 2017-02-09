@@ -1,3 +1,6 @@
+package Unit5.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -13,36 +16,26 @@ public class StringOddOrEven
 
 	public StringOddOrEven()
 	{
-
+		setString("");
 	}
 
 	public StringOddOrEven(String s)
 	{
-
+		setString(s);
 	}
 
 	public void setString(String s)
 	{
-
-
+		word = s;
 	}
 
  	public boolean isEven()
  	{
-
-
-
-		return false;
+ 		return word.length() % 2 == 0;
 	}
 
  	public String toString()
  	{
- 		String output="";
-
-
-
-
-
- 		return output;
+ 		return String.format("%s is %s", word, isEven() ? "even" : "odd");
 	}
 }

@@ -1,3 +1,6 @@
+package Unit4.Assignments;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -12,14 +15,12 @@ public class StringChecker
 
 	public StringChecker()
 	{
-
-
+		setString("");
 	}
 
 	public StringChecker(String s)
 	{
-
-
+		setString(s);
 	}
 
    public void setString(String s)
@@ -29,22 +30,16 @@ public class StringChecker
 
 	public boolean findLetter(char c)
 	{
-
-
-
-		return false;
+		return (word.indexOf(c) != -1);
 	}
 
 	public boolean findSubString(String s)
 	{
-
-
-
-		return false;
+		return (word.indexOf(s) != -1);
 	}
 
  	public String toString()
  	{
- 		return "\n\n";
+ 		return word;
 	}
 }

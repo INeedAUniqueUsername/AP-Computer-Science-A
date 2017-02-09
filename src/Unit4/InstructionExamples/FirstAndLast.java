@@ -1,3 +1,6 @@
+package Unit4.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -14,43 +17,35 @@ public class FirstAndLast
 
 	public FirstAndLast()
 	{
-
-
+		setString("");
 	}
 
 	public FirstAndLast(String s)
 	{
-
-
-
+		setString(s);
 	}
 
 	public void setString(String s)
 	{
-
-
+		word = s;
 	}
 
 	public void findFirstLastLetters()
 	{
-		
+		firstLetter = findFirstLetter(word);
+		lastLetter = findLastLetter(word);
 	}
 	public char findFirstLetter(String s)
 	{
-		
+		return s.charAt(0);
 	}
 	public char findLastLetter(String s)
 	{
-		word.charAt(word.length()-1);
+		return s.charAt(word.length()-1);
 	}
 
  	public String toString()
  	{
- 		String output="";
-
-
-
-
- 		return output;
+ 		return String.format("First letter :: %s\nLast letter :: %s\n%s", firstLetter, lastLetter, word);
 	}
 }
