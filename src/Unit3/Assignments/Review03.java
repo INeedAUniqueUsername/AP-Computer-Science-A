@@ -36,23 +36,23 @@ Review Questions:
 			  n++;}
 			while(s < 10 * n);
 Exercises:
-1.	Write a program that reads a sequence of integer inputs to print
-a.	The smallest and largest of the inputs.
-b.	The number of even and odd inputs.
-c.	Cumulative totals. For example, if the input is 1 7 2 9, the program should print 1 8 10 19.
-d.	All Adjacent duplicates. For example, if the input is 1 3 3 4 5 5 6 6 6 2, the program should print 3 5 6.
-2.	Write programs that read a line of input as a string and print
-a.	Only the uppercase letters in the string.
-b.	Every second letter of the string.
-c.	The string, with all vowels replaced by an underscore.
-d.	The number of vowels in the string.
-e.	The positions of all vowels in the string.
-3.	Write a program that reads a number and prints all of its binary digits: Print the remainder number % 2, then replace the number with number / 2. Keep going until the number is 0. For example, if the user provides the input 13, the output should be 
+	1.	Write a program that reads a sequence of integer inputs to print
+		a.	The smallest and largest of the inputs.
+		b.	The number of even and odd inputs.
+		c.	Cumulative totals. For example, if the input is 1 7 2 9, the program should print 1 8 10 19.
+		d.	All Adjacent duplicates. For example, if the input is 1 3 3 4 5 5 6 6 6 2, the program should print 3 5 6.
+	2.	Write programs that read a line of input as a string and print
+		a.	Only the uppercase letters in the string.
+		b.	Every second letter of the string.
+		c.	The string, with all vowels replaced by an underscore.
+		d.	The number of vowels in the string.
+		e.	The positions of all vowels in the string.
+	3.	Write a program that reads a number and prints all of its binary digits: Print the remainder number % 2, then replace the number with number / 2. Keep going until the number is 0. For example, if the user provides the input 13, the output should be 
 1
 0
 1
 1
-4.	Write a program that reads an integer and displays, using asterisks, a filling diamond of the given side length. For example, if the side length is 4, the program should display
+	4.	Write a program that reads an integer and displays, using asterisks, a filling diamond of the given side length. For example, if the side length is 4, the program should display
    *
   ***
  *****
@@ -63,15 +63,56 @@ e.	The positions of all vowels in the string.
 */
 
 public class Review03 {
+	Scanner input = new Scanner(System.in);
 	public static void main(String[] args) {
 		Review03 r = new Review03();
+		r.runQuestions();
 		r.runExercises();
+	}
+	public void runQuestions() {
+		question1a();
+		question1b();
+		question1c();
+	}
+	public void question1a() {
+		System.out.println("n :: ");
+		int n = input.nextInt();
+		int i = 1;
+		int j = 1;
+		while(j < n)
+		{
+			System.out.println(j);
+			i++;
+			j = i*i;
+		}
+	}
+	public void question1b() {
+		System.out.println("n :: ");
+		int n = input.nextInt();
+		int i = 1;
+		int j = 10;
+		while(j < n)
+		{
+			System.out.println(j);
+			i++;
+			j = i*10;
+		}
+	}
+	public void question1c() {
+		System.out.println("n :: ");
+		int n = input.nextInt();
+		int i = 0;
+		int j = 1;
+		while(j < n) {
+			System.out.println(j);
+			i++;
+			j = (int) Math.pow(2, i);
+		}
 	}
 	public void runExercises() {
 		exercise1a();
 	}
 	public void exercise1a() {
-		Scanner input = new Scanner(System.in);
 		String result_a = "";
 		int result_b_even = 0;
 		int result_b_odd = 0;
@@ -86,6 +127,5 @@ public class Review03 {
 			}
 		}
 		System.out.println(result_a);
-		input.close();
 	}
 }
