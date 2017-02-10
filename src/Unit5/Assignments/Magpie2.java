@@ -61,25 +61,7 @@ public class Magpie2
 		final int NUMBER_OF_RESPONSES = 4;
 		double r = Math.random();
 		int whichResponse = (int)(r * NUMBER_OF_RESPONSES);
-		String response = "";
-		
-		if (whichResponse == 0)
-		{
-			response = "Interesting, tell me more.";
-		}
-		else if (whichResponse == 1)
-		{
-			response = "Hmmm.";
-		}
-		else if (whichResponse == 2)
-		{
-			response = "Do you really think so?";
-		}
-		else if (whichResponse == 3)
-		{
-			response = "You don't say.";
-		}
-
+		String response = new String[] {"Interesting, tell me more.", "Hmmm.", "Do you really think so?", "You don't say."}[whichResponse];
 		return response;
 	}
 }
