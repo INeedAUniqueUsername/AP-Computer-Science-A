@@ -1,3 +1,6 @@
+package Unit6.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -13,10 +16,8 @@ public class ForLoopRunner
 	//runForLoop() will run a for loop from start to stop going up by increment
 	public static void runForLoop(int start, int stop, int increment )
 	{
-
-
-
-
-
+		for(int i = start; i < stop; i += increment) {
+			System.out.println(i);
+		}
 	}
 }

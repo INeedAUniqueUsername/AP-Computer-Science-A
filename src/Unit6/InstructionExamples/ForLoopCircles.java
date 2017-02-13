@@ -1,3 +1,6 @@
+package Unit6.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -28,13 +31,11 @@ public class ForLoopCircles extends Canvas
 	
 	public void drawCircles(Graphics window)
 	{
-		int x=20;
-		
 		//add in a for loop to draw the circles
-		
-			window.setColor(Color.BLUE);
+		window.setColor(Color.BLUE);
+		for(int x = 20; x < 600; x = x + 50) {
 			//drawOval(int x1, it y1, int width, int height)
-			window.drawOval( x, 200, 40, 40 );
-		
+			window.drawOval( x, 200 + (int) ((x % 250) - (x % 200) + (x % Math.sqrt(x))), 40, 40 );
+		}
 	}
 }

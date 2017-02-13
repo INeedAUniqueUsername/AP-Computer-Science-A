@@ -1,3 +1,6 @@
+package Unit6.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -16,7 +19,8 @@ public class GraphicsRunner extends JFrame
 		super("Graphics Runner");
 		setSize(WIDTH,HEIGHT);
 						
-		getContentPane().add(new ForLoopCircles());
+		//getContentPane().add(new ForLoopCircles());
+		getContentPane().add(new WhileLoopCircles());
 				
 		setVisible(true);
 	}

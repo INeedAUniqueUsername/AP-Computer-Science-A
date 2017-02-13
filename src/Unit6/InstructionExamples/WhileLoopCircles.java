@@ -1,3 +1,6 @@
+package Unit6.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -32,13 +35,16 @@ public class WhileLoopCircles extends Canvas
 	public void drawCircles(Graphics window)
 	{
 		int x = 95;
-		int y = 95;                                                                             ;
+		int y = 95;;
 
 		//add in a while loop
-		
+		while(x + y < 1000) {
 			window.setColor(Color.blue);
 			//drawOval(int x1, it y1, int width, int height)
 			window.drawOval( x, y, x/2, y/2 );
-
+			int x_original = x;
+			x += y % 53;
+			y += x_original % 53;
+		}
 	}	
 }
