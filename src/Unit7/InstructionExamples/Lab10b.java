@@ -1,3 +1,6 @@
+package Unit7.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -15,12 +18,13 @@ public class Lab10b
 		System.out.println("biggest = " + run.getBiggest() + "\n");
 
 		//add more test cases
-		
-		
-		
-		
-		
-		
-		
+		for(int i = 1; i < 10; i++) {
+			BiggestDouble b = new BiggestDouble(randomDouble(i), randomDouble(i), randomDouble(i), randomDouble(i));
+			System.out.println(b);
+			System.out.println(String.format("biggest = %f", b.getBiggest()));
+		}
+	}
+	public static double randomDouble(double max) {
+		return Math.random() * max;
 	}
 }

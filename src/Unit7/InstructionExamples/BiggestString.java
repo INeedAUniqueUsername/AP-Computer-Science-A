@@ -1,3 +1,6 @@
+package Unit7.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -17,28 +20,27 @@ public class BiggestString
 
 	public BiggestString(String a, String b, String c)
 	{
-
-
+		setStrings(a, b, c);
 	}
 
 	public void setStrings(String a, String b, String c)
 	{
-
-
-
+		one = a; two = b; three = c;
 	}
 
 	public String getBiggest()
 	{
-
-
-
-
-		return "";
+		String result = "";
+		for(String s : new String[] {one, two, three}) {
+			if(s.compareTo(result) > 0) {
+				result = s;
+			}
+		}
+		return result;
 	}
 
 	public String toString()
 	{
-	   return "";
+	   return String.format("%s %s %s", one, two, three);
 	}
 }
