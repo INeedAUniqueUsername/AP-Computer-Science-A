@@ -41,7 +41,7 @@ public class TriangleFour
 			for(int j = 0; j < i; j++) {
 				result += " ";
 			}
-			for(int k = size - i; k < size; k++) {
+			for(int k = i; k < size; k++) {
 				result += letter;
 			}
 			result += "\n";

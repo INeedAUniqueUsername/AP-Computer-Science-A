@@ -1,3 +1,6 @@
+package Unit7.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -14,7 +17,13 @@ public class TriangleOne
 
 	public static String createTriangle( String let, int size)
 	{
-		String output="";
-		return output;
+		String result = "";
+		for(int i = 0; i < size; i++) {
+			for(int j = 0; j <= i; j++) {
+				result += let;
+			}
+			result += "\n";
+		}
+		return result;
 	}
 }

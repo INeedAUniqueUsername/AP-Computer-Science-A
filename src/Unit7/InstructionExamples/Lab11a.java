@@ -1,3 +1,6 @@
+package Unit7.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -24,6 +27,6 @@ public class Lab11a
 
 			System.out.print("Do you want to enter more data? ");
 			choice=keyboard.next();
-		}while(choice.equals("Y")||choice.equals("y"));
+		} while(choice.equals("Y")||choice.equals("y"));
 	}
 }
