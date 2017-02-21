@@ -2,3 +2,7 @@ Create a student class example
 * variables
 * Methods
 * Test code
+
+public class Student {
+	public Student
+}
