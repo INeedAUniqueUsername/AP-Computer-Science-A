@@ -1,10 +1,11 @@
+package Unit8.Assignments;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
 //Class -
 //Lab  -
-
-import static java.lang.System.*;
 
 public class RomanNumeral
 {
@@ -19,32 +20,43 @@ public class RomanNumeral
 
 	public RomanNumeral(String str)
 	{
-
-
-
+		setRoman(str);
 	}
 
 	public RomanNumeral(Integer orig)
 	{
-
-
-
+		setNumber(orig);
 	}
 
 	public void setNumber(Integer num)
 	{
-
-
-
-
-
+		number = num;
+		roman = "";
+		for(int i = 0; i < NUMBERS.length; i++) {
+			int n = NUMBERS[i];
+			String r = LETTERS[i];
+			while(num >= n) {
+				num -= n;
+				roman += r;
+			}
+		}
 	}
 
 	public void setRoman(String rom)
 	{
-
-
-
+		roman = rom;
+		number = 0;
+		while(rom.length() > 0) {
+			for(int i = 0; i < LETTERS.length; i++) {
+				int n = NUMBERS[i];
+				String r = LETTERS[i];
+				if(rom.indexOf(i) == 0) {
+					rom = rom.substring(r.length());
+					number += n;
+					break;
+				}
+			}
+		}
 	}
 
 	public Integer getNumber()

@@ -1,3 +1,6 @@
+package Unit8.Assignments;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -44,6 +47,5 @@ public class Lab14i
 		out.println("XX is " + test.getNumber() + "\n");
 
 		test.setRoman("XLIX");
-		out.println("XLIX is " + test.getNumber() + "\n");
 	}
 }
