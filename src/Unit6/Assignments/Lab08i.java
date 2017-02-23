@@ -18,6 +18,5 @@ public class Lab08i
 		for(int i = 1; i <= 30; i += 3) {
 			System.out.println(new Prime(i));
 		}
-		ArrayList<Object> a = new ArrayList<>();
 	}	
 }

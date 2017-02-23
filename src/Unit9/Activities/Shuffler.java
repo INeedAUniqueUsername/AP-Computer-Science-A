@@ -22,6 +22,14 @@ public class Shuffler {
 	 * @param args is not used.
 	 */
 	public static void main(String[] args) {
+		/*
+		for(int i = 0; i < 10; i++) {
+			System.out.println(flip());
+		}
+		*/
+		System.out.println(arePermutations(new int[]{1, 2, 3, 2, 3, 4, 5}, new int[]{5, 4, 3, 2, 2, 1, 3}));
+		
+		
 		System.out.println("Results of " + SHUFFLE_COUNT +
 								 " consecutive perfect shuffles:");
 		int[] values1 = new int[VALUE_COUNT];
@@ -64,6 +72,21 @@ public class Shuffler {
 	 */
 	public static void perfectShuffle(int[] values) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
+		int[] shuffled = new int[VALUE_COUNT];
+		int middle = (VALUE_COUNT+1)/2;
+		int k = 0;
+		for(int j = 0; j < middle; j++) {
+			shuffled[k] = values[j];
+			k += 2;
+		}
+		k = 1;
+		for(int j = middle; j < VALUE_COUNT; j++) {
+			shuffled[k] = values[j];
+			k += 2;
+		}
+		for(int i = 0; i < VALUE_COUNT; i++) {
+			values[i] = shuffled[i];
+		}
 	}
 
 	/**
@@ -79,5 +102,44 @@ public class Shuffler {
 	 */
 	public static void selectionShuffle(int[] values) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 3 *** */
+		for(int k = VALUE_COUNT-1; k >= 1; k--) {
+			int r = (int) (Math.random() * k);
+			int c_k = values[k];
+			int c_r = values[r];
+			values[k] = c_r;
+			values[r] = c_k;
+		}
+	}
+	
+	public static String flip() {
+		return new String[]{"heads", "heads", "tails"}[(int) (Math.random()*3)];
+	}
+	public static boolean arePermutations(int[] a, int[] b) {
+		boolean result = true;
+		//Cannot be permutations if they are not even the same length
+		if(a.length == b.length) {
+			boolean[] used = new boolean[b.length];
+			for(int i = 0; i < b.length; i++) {
+				used[i] = false;
+			}
+			for(int n_a : a) {
+				boolean hasCounterpart = false;
+				for(int i = 0; i < b.length; i++) {
+					int n_b = b[i];
+					if(n_b == n_a && !used[i]) {
+						hasCounterpart = true;
+						used[i] = true;
+						break;
+					}
+				}
+				if(!hasCounterpart) {
+					result = false;
+					break;
+				}
+			}
+		} else {
+			result = false;
+		}
+		return result;
 	}
 }
