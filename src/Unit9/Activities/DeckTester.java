@@ -12,22 +12,15 @@ public class DeckTester {
 	 */
 	public static void main(String[] args) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-		for(int i = 0; i < 5; i++) {
-			/*
-			String[] s = new String[10];
-			for(int j = 0; j < 10; j++) {
-				s[j] = Card.randomSuit();
-			}
-			String[] r = new String[10];
-			for(int j = 0; j < 10; j++) {
-				r[j] = Card.randomRank();
-			}
-			int[] p = new int[10];
-			for(int j = 0; j < 10; j++) {
-				p[j] = (int) (Math.random() * 100);
-			}
-			System.out.println(new Deck_List(s, r, p));
-			*/
+		Deck_List test = new Deck_List(
+				new String[] {"Scout", "Swordsman", "Archer"},
+				new String[] {"Eyes", "Hands", "Feet"},
+				new int[] {1, 5, 25}
+				);
+		test.shuffle();
+		for(int i = 0; i < 5; i ++) {
+			System.out.println(test.deal());
 		}
+		System.out.println(test);
 	}
 }

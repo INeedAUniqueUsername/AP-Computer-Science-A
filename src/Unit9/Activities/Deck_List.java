@@ -10,7 +10,6 @@ import java.util.ArrayList;
  *      initialize, shuffle, deal, and check if empty.
  */
 public class Deck_List {
-
 	/**
 	 * cards contains all the cards in the deck.
 	 */
@@ -34,6 +33,15 @@ public class Deck_List {
 	 */
 	public Deck_List(String[] ranks, String[] suits, int[] values) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
+		ArrayList<Card> a = new ArrayList<Card>();
+		for(String r : ranks) {
+			for(String s : suits) {
+				for(int v : values) {
+					a.add(new Card(r, s, v));
+				}
+			}
+		}
+		setCards(a);
 	}
 	/*
 	public void setCards(String[] r, String[] s, int[] pv) {
@@ -45,6 +53,10 @@ public class Deck_List {
 	}
 	*/
 
+	public void setCards(ArrayList<Card> a) {
+		cards = a;
+		size = a.size();
+	}
 	/**
 	 * Determines if this deck is empty (no undealt cards).
 	 * @return true if this deck is empty, false otherwise.
@@ -77,6 +89,7 @@ public class Deck_List {
 			cards.remove(index);
 			cardsLeft--;
 		}
+		setCards(shuffled);
 	}
 
 	/**

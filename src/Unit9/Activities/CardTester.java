@@ -13,9 +13,14 @@ public class CardTester {
 	public static void main(String[] args) {
 		for(int i = 0; i < 10; i++) {
 			System.out.println(new Card(
+					/*
 					Card.randomSuit(),
 					Card.randomRank(),
 					(int) (Math.random() * 100)
+					*/
+					"Spades",
+					"Ace",
+					1
 					));
 		}
 	}
