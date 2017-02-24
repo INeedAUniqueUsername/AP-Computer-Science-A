@@ -83,30 +83,36 @@ public class Deck {
 	 */
 	public void shuffle() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 4 *** */
-		
+		shuffleSelect();
 	}
 	
 	public void shufflePerfect() {
-		Card[] shuffled = new Card[52];
+		Card[] shuffled = new Card[cards.length];
+		int middle = (cards.length+1)/2;
 		int k = 0;
-		for(int j = 0; j <= 25; j++) {
-			cards[k] = shuffled[k];
+		for(int j = 0; j < middle; j++) {
+			shuffled[k] = cards[j];
 			k += 2;
 		}
 		k = 1;
-		for(int j = 26; j <= 51; j++) {
-			cards[j] = shuffled[k];
+		for(int j = middle; j < cards.length; j++) {
+			shuffled[k] = cards[j];
 			k += 2;
+		}
+		for(int i = 0; i < cards.length; i++) {
+			cards[i] = shuffled[i];
 		}
 	}
 	public void shuffleSelect() {
-		for(int k = 51; k >= 1; k--) {
+		Card[] shuffled = cards;
+		for(int k = cards.length-1; k >= 1; k--) {
 			int r = (int) (Math.random() * k);
-			Card c_k = cards[k];
-			Card c_r = cards[r];
-			cards[k] = c_r;
-			cards[r] = c_k;
+			Card c_k = shuffled[k];
+			Card c_r = shuffled[r];
+			shuffled[k] = c_r;
+			shuffled[r] = c_k;
 		}
+		setCards(shuffled);
 	}
 
 	/**

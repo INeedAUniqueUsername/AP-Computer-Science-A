@@ -12,15 +12,17 @@ public class DeckTester {
 	 */
 	public static void main(String[] args) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 2 *** */
-		Deck_List test = new Deck_List(
+		Deck test = new Deck(
 				new String[] {"Scout", "Swordsman", "Archer"},
 				new String[] {"Eyes", "Hands", "Feet"},
 				new int[] {1, 5, 25}
 				);
+		System.out.println(test);
 		test.shuffle();
 		for(int i = 0; i < 5; i ++) {
 			System.out.println(test.deal());
 		}
-		System.out.println(test);
+		assert false : "a";
 	}
+	System.out.println(test);
 }
