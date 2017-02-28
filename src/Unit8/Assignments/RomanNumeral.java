@@ -46,6 +46,7 @@ public class RomanNumeral
 	{
 		roman = rom;
 		number = 0;
+		/*
 		while(rom.length() > 0) {
 			for(int i = 0; i < LETTERS.length; i++) {
 				int n = NUMBERS[i];
@@ -55,6 +56,15 @@ public class RomanNumeral
 					number += n;
 					break;
 				}
+			}
+		}
+		*/
+		for(int i = 0; i < LETTERS.length; i++) {
+			int N = NUMBERS[i];
+			String R = LETTERS[i];
+			while(rom.indexOf(R) == 0) {
+				number += N;
+				rom = rom.substring(R.length(), rom.length());
 			}
 		}
 	}

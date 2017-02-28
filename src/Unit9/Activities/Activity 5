@@ -1,0 +1,18 @@
+	Alex Chen
+	2/28/17
+	Period 2
+	
+	Activity 5
+	--------------------------------------------------------------------------------------------------------------------------------
+	Buggy1	|	public boolean isEmpty()
+			|	The empty deck has a size of 0, but isEmpty() returns false. Maybe it always returns false.
+	--------------------------------------------------------------------------------------------------------------------------------
+	Buggy2	|	Card(String cardRank, String cardSuit, int cardPointValue)
+			|	Maybe size() does not return the respective instance variable. Maybe it always returns 0.
+	--------------------------------------------------------------------------------------------------------------------------------
+	Buggy3	|	Deck(String[] arg0, String[] arg1, int[] arg2)
+			|	Maybe the decks are not shuffled when they are instantiated
+	--------------------------------------------------------------------------------------------------------------------------------
+	Buggy4	|	Card Deck.deal()
+			|	Maybe deal() does not return the card at index 0. Maybe it always returns null.
+	--------------------------------------------------------------------------------------------------------------------------------

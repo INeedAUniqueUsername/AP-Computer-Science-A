@@ -24,5 +24,4 @@ public class DeckTester {
 		}
 		assert false : "a";
 	}
-	System.out.println(test);
 }
