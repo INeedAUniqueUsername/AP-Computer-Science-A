@@ -1,3 +1,6 @@
+package Unit10.Assignments.Lab16d;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -11,7 +14,6 @@ public class Lab16d
 	public static void main( String args[] )
 	{
 		//make a new MadLib
-		
-		out.println("\n");
+		System.out.println(new MadLib("story.dat"));
 	}
 }

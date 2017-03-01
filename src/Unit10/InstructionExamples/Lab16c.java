@@ -28,10 +28,6 @@ public class Lab16c
 		int vowelsRemoved = test.removeWordsWithXChars(3);
 		out.println("\nafter removing words with 3 chars \n" + test);
 		out.println("\nnumber of vowels in the words removed == " + vowelsRemoved);
-		out.println("\n\n");		
-			
-			
-		//more test cases
-				
+		out.println("\n\n");
 	}
 }
