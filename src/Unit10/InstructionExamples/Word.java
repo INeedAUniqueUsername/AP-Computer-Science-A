@@ -47,6 +47,6 @@ public class Word
 
 	public String toString()
 	{
-		return String.format("%s\nVowels:%s", word, getNumVowels());
+		return word;
 	}
 }

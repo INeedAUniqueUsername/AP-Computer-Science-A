@@ -1,3 +1,6 @@
+package Unit10.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -27,47 +30,54 @@ public class Words
 
 	public void setWords(String wordList)
 	{
-		words = new ArrayList<Word>(Arrays.asList(wordList.trim().split(",")));
-		
+		words = new ArrayList<Word>();
+		for(String s : wordList.split(" ")) {
+			words.add(new Word(s));
+		}
 	}
 	
 	public int countWordsWithXChars(int size)
 	{
-		int count=0;
-
-
-
-
-
-		return count;
+		int result = 0;
+		for(Word s : words) {
+			if(s.getLength() == size) {
+				result++;
+			}
+		}
+		return result;
 	}
 	
 	//this method will remove all words with a specified size / length
 	//this method will also return the sum of the vowels in all words removed
 	public int removeWordsWithXChars(int size)
 	{
-
-
-
-
-
-		return 0;
+		int vowels = 0;
+		int i = 0;
+		while(i < words.size()) {
+			Word w = words.get(i);
+			if(w.getLength() == size) {
+				vowels += w.getNumVowels();
+				words.remove(i);
+			} else {
+				i++;
+			}
+		}
+		return vowels;
 	}
 
 	public int countWordsWithXVowels(int numVowels)
 	{
-		int count=0;
-
-
-
-
-
-
-		return count;
+		int result = 0;
+		for(Word w : words) {
+			if(w.getNumVowels() == numVowels) {
+				result++;
+			}
+		}
+		return result;
 	}
 	
 	public String toString()
 	{
-	   return "";
+	   return words.toString();
 	}
 }
