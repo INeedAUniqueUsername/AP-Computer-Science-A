@@ -23,7 +23,7 @@ public class MadLib
 	
 	public MadLib()
 	{
-		this("story.dat");
+		this("src\\Unit10\\Assignments\\Lab16d\\story.dat");
 	}
 
 	public MadLib(String fileName)
@@ -67,7 +67,7 @@ public class MadLib
 	{
 		try{
 			nouns = new ArrayList<String>();
-			Scanner file = new Scanner(new File("nouns.dat"));
+			Scanner file = new Scanner(new File("src\\Unit10\\Assignments\\Lab16d\\nouns.dat"));
 			while(file.hasNextLine()) {
 				nouns.add(file.nextLine());
 			}
@@ -84,7 +84,7 @@ public class MadLib
 	{
 		try{
 			verbs = new ArrayList<String>();
-			Scanner file = new Scanner(new File("verbs.dat"));
+			Scanner file = new Scanner(new File("src\\Unit10\\Assignments\\Lab16d\\verbs.dat"));
 			while(file.hasNextLine()) {
 				verbs.add(file.nextLine());
 			}
@@ -100,7 +100,7 @@ public class MadLib
 	{
 		try{
 			adjectives = new ArrayList<String>();
-			Scanner file = new Scanner(new File("adjectives.dat"));
+			Scanner file = new Scanner(new File("src\\Unit10\\Assignments\\Lab16d\\adjectives.dat"));
 			while(file.hasNextLine()) {
 				adjectives.add(file.nextLine());
 			}

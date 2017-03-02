@@ -14,6 +14,6 @@ public class Lab16d
 	public static void main( String args[] )
 	{
 		//make a new MadLib
-		System.out.println(new MadLib("story.dat"));
+		System.out.println(new MadLib());
 	}
 }
