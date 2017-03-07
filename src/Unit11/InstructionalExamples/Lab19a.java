@@ -1,3 +1,6 @@
+package Unit11.InstructionalExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -6,6 +9,8 @@
 
 import java.util.Arrays;
 import java.util.Scanner;
+
+import Unit12.Assignments.Lab18b.Monster;
 import static java.lang.System.*;
 import static java.lang.Math.*;
 import static java.util.Arrays.*;
@@ -24,7 +29,6 @@ public class Lab19a
 		for(int i=0; i<size;i++)
 		{
 			//read in monster values 
-	
 			//ask for ht
 			
 			//ask for wt
@@ -33,10 +37,11 @@ public class Lab19a
 	
 			
 			//instantiate a new Monster() and add it to the herd
-			
-			
-			
-			
+			herd.add(i, new Monster(
+					getInput(keyboard, "Height :: "),
+					getInput(keyboard, "Weight :: "),
+					getInput(keyboard, "Age :: ")
+					));
 		}		
 		
 		System.out.println("HERD :: "+herd+"\n");
@@ -45,5 +50,9 @@ public class Lab19a
 		
 		
 			
-	}		
+	}
+   public static int getInput(Scanner scan, String message) {
+	   System.out.println(message);
+	   return scan.nextInt();
+   }
 }
