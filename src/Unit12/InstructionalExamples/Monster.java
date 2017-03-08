@@ -1,3 +1,6 @@
+package Unit12.InstructionalExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -13,44 +16,47 @@ public class Monster
 
 	public Monster()
 	{
-
-
+		this("", 0);
 	}
 
 	public Monster(String n, int size)
 	{
-
-
+		setName(n);
+		setSize(size);
 	}
-
+	public void setName(String s) {
+		name = s;
+	}
 	public String getName()
 	{
-		return "";
+		return name;
 	}
-	
+	public void setSize(int s) {
+		howBig = s;
+	}
 	public int getHowBig()
 	{
-		return 0;
+		return howBig;
 	}
 	
 	public boolean isBigger(Monster other)
 	{
-		return false;
+		return howBig > other.getHowBig();
 	}
 	
 	public boolean isSmaller(Monster other)
 	{
 		//call isBigger() use !
-		return false;
+		return !isBigger(other);
 	}
 
 	public boolean namesTheSame(Monster other)
 	{
-		return false;
+		return name.equals(other.getName());
 	}
 	
 	public String toString()
 	{
-		return "";
+		return String.format("%s %d", name, howBig);
 	}
 }
