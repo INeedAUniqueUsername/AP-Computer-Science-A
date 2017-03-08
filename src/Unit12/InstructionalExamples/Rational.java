@@ -6,6 +6,8 @@ package Unit12.InstructionalExamples;
 //Class -
 //Lab  -
 
+
+//INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE
 class Rational implements Comparable<Rational>
 {
 	//add two instance variables
