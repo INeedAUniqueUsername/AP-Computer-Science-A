@@ -6,8 +6,6 @@ package Unit12.InstructionalExamples;
 //Class -
 //Lab  -
 
-
-//INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE_INCOMPLETE
 class Rational implements Comparable<Rational>
 {
 	//add two instance variables
@@ -43,7 +41,19 @@ class Rational implements Comparable<Rational>
 				);
 		reduce();
 	}
-
+	public void subtract(Rational other) {
+		add(new Rational(-other.getNumerator(), other.getDenominator()));
+	}
+	public void multiply(Rational other) {
+		setRational(
+				numerator * other.getNumerator(),
+				denominator * other.getDenominator()
+				);
+		reduce();
+	}
+	public void divide(Rational other) {
+		multiply(new Rational(other.getDenominator(), other.getNumerator()));
+	}
 	private void reduce()
 	{
 		int gcd = gcd(numerator, denominator);
@@ -55,7 +65,7 @@ class Rational implements Comparable<Rational>
 	private int gcd(int numOne, int numTwo)
 	{
 		int result = 1;
-		for(int i = 2; i < Math.min(numOne, numTwo); i++) {
+		for(int i = 2; i <= Math.min(numOne, numTwo); i++) {
 			if(numOne % i + numTwo % i == 0) {
 				result = i;
 			}
@@ -82,7 +92,7 @@ class Rational implements Comparable<Rational>
 	public boolean equals( Object obj)
 	{
 		if(obj instanceof Rational) {
-			return getValue == ((Rational) obj).getValue();
+			return getValue() == ((Rational) obj).getValue();
 		}
 		return false;
 	}
