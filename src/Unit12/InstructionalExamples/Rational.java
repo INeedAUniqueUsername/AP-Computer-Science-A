@@ -49,7 +49,9 @@ class Rational implements Comparable<Rational>
 		int gcd = gcd(numerator, denominator);
 		setRational(numerator/gcd, denominator/gcd);
 	}
-
+	public double getValue() {
+		return (double) numerator/denominator;
+	}
 	private int gcd(int numOne, int numTwo)
 	{
 		int result = 1;
@@ -80,9 +82,7 @@ class Rational implements Comparable<Rational>
 	public boolean equals( Object obj)
 	{
 		if(obj instanceof Rational) {
-			Rational r = (Rational) obj;
-			r.reduce();
-			return numerator == r.getNumerator() && denominator == r.getDenominator();
+			return getValue == ((Rational) obj).getValue();
 		}
 		return false;
 	}
