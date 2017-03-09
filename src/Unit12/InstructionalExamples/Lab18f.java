@@ -13,18 +13,14 @@ public class Lab18f
 {
 	public static void main( String args[] )
 	{
-		Rational r1 = new Rational(5, 7);
-		Rational r2 = new Rational(7, 5);
-		System.out.println(String.format("%s + %s = %s", r1, r2, add(r1, r2)));
-		System.out.println(String.format("%s - %s = %s", r1, r2, subtract(r1, r2)));
-		System.out.println(String.format("%s * %s = %s", r1, r2, multiply(r1, r2)));
-		System.out.println(String.format("%s / %s = %s", r1, r2, divide(r1, r2)));
-		
-		
-		
-		
-		
-		
+		for(int i=0;i<5;i++) {
+			Rational r1 = new Rational(randomNatural(100), randomNatural(100));
+			Rational r2 = new Rational(randomNatural(100), randomNatural(100));
+			System.out.println(String.format("%s + %s = %s", r1, r2, add(r1, r2)));
+			System.out.println(String.format("%s - %s = %s", r1, r2, subtract(r1, r2)));
+			System.out.println(String.format("%s * %s = %s", r1, r2, multiply(r1, r2)));
+			System.out.println(String.format("%s / %s = %s", r1, r2, divide(r1, r2)));
+		}
 		Rational test = new Rational();
 		out.println("test = " + test);
 
@@ -100,5 +96,8 @@ public class Lab18f
 		Rational r = ((Rational) r1.clone());
 		r.divide(r2);
 		return r;
+	}
+	public static int randomNatural(int max) {
+		return (int) (1 + Math.random() * max);
 	}
 }
