@@ -46,7 +46,6 @@ public class Lab18e
 					break;
 				}
 			}
-			System.out.println(words);
 		}
 		System.out.println(words);
 	}
