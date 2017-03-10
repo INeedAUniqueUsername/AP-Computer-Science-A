@@ -23,10 +23,29 @@ public class Ship implements Locatable, Movable
 
 	
 	//add set methods - use Movable interface
+	@Override
+	public void setX(int x) {
+		// TODO Auto-generated method stub
+		
+	}
 
-
+	@Override
+	public void setY(int y) {
+		// TODO Auto-generated method stub
+		
+	}
 	//add get methods - use Locatable interface
+	@Override
+	public int getX() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
+	@Override
+	public int getY() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 
 	public boolean equals(Object obj)
@@ -40,5 +59,11 @@ public class Ship implements Locatable, Movable
 	public String toString()
 	{
 		return " "+xPos+" "+yPos;
+	}
+
+	@Override
+	public void setPos(int x, int y) {
+		// TODO Auto-generated method stub
+		
 	}
 }
