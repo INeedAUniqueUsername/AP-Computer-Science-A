@@ -6,9 +6,10 @@ package Unit11.Assignments.Lab19b;
 //Date -
 //Class -
 //Lab  -
-
 import java.util.Arrays;
 import java.util.Scanner;
+
+import Misc.Alex;
 import static java.lang.System.*;
 import static java.util.Arrays.*;
 
@@ -117,21 +118,7 @@ public class Class
 		return output.substring(0, output.lastIndexOf(", "));
 	}
 	public void sortByAverage() {
-		int studentCount = studentList.length;
-		boolean active;
-		do {
-			active = false;
-			for(int index_first = 0; index_first < studentCount-1; index_first++) {
-				int index_second = index_first+1;
-				Student first = studentList[index_first];
-				Student second = studentList[index_second];
-				if(second.compareTo(first) > 0) {
-					studentList[index_second] = first;
-					studentList[index_first] = second;
-					active = true;
-				}
-			}
-		} while(active);
+		Alex.sort(studentList);
 	}
 	public String toString()
 	{

@@ -8,7 +8,7 @@ package Unit11.Assignments.Lab19b;
 
 public class Student implements Comparable {
 	private String myName;
-	private Grades myGrades;
+	private Grades_ArrayList myGrades;
 
 	public Student() {
 		this("", "");
@@ -24,7 +24,7 @@ public class Student implements Comparable {
 	}
 
 	public void setGrades(String gradeList) {
-		myGrades = new Grades(gradeList);
+		myGrades = new Grades_ArrayList(gradeList);
 	}
 
 	public void setGrade(int spot, double grade) {

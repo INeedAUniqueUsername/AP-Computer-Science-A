@@ -1,4 +1,6 @@
-package Unit11.Assignments.Lab19b.List;
+package Unit11.Assignments.Lab19b;
+
+import java.util.ArrayList;
 
 
 //© A+ Computer Science  -  www.apluscompsci.com
@@ -7,37 +9,32 @@ package Unit11.Assignments.Lab19b.List;
 //Class -
 //Lab  -
 
-import java.util.Arrays;
-import java.util.Scanner;
-import static java.lang.System.*;
-import static java.util.Arrays.*;
-
-public class Grades
+public class Grades_ArrayList
 {
-	private double[] grades;
+	private ArrayList<Double> grades;
 	
-	public Grades()
+	public Grades_ArrayList()
 	{
 		setGrades("");
 	}
 	
-	public Grades(String gradeList)
+	public Grades_ArrayList(String gradeList)
 	{
 		setGrades(gradeList);		
 	}
 	
 	public void setGrades(String gradeList)
 	{
-		grades = new double[Integer.valueOf(gradeList.substring(0, gradeList.indexOf(" ")))];
+		grades = new ArrayList<Double>();
 		String[] g = gradeList.substring(gradeList.indexOf("-") + 2).split(" ");
 		for(int i = 0; i < g.length; i++) {
-			grades[i] = Double.valueOf(g[i]);
+			grades.add(Double.valueOf(g[i]));
 		}
 	}
 	
 	public void setGrade(int spot, double grade)
 	{
-		grades[spot] = grade;
+		grades.set(spot, grade);
 	}
 	
 	public double getSum()
@@ -73,7 +70,7 @@ public class Grades
 	
 	public int getNumGrades()
 	{
-		return grades.length;
+		return grades.size();
 	}
 	public double getAverage() {
 		return getSum() / getNumGrades();
