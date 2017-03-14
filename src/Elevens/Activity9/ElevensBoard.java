@@ -1,6 +1,8 @@
+package Elevens.Activity9;
+
+import java.util.Arrays;
 import java.util.List;
 import java.util.ArrayList;
-
 /**
  * The ElevensBoard class represents the board in a game of Elevens.
  */
@@ -54,6 +56,11 @@ public class ElevensBoard extends Board {
 	@Override
 	public boolean isLegal(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		int cards = selectedCards.size();
+		boolean result = (cards == 2 && containsPairSum11(selectedCards)) || (cards == 3 && containsJQK(selectedCards));
+		if(I_AM_DEBUGGING)
+			System.out.println("Legal: " + result);
+		return result;
 	}
 
 	/**
@@ -67,6 +74,11 @@ public class ElevensBoard extends Board {
 	@Override
 	public boolean anotherPlayIsPossible() {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		List<Integer> indexes = cardIndexes();
+		boolean result = containsPairSum11(indexes) || containsJQK(indexes);
+		if(I_AM_DEBUGGING)
+			System.out.println("Plays: " + result);
+		return result;
 	}
 
 	/**
@@ -79,6 +91,30 @@ public class ElevensBoard extends Board {
 	 */
 	private boolean containsPairSum11(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		int indexes = selectedCards.size();
+		for(int i = 0; i < indexes; i++) {
+			int index_i = selectedCards.get(i);
+			Card c_i = cardAt(index_i);
+			for(int j = i+1; j < indexes; j++) {
+				int index_j = selectedCards.get(j);
+				Card c_j = cardAt(index_j);
+				if(I_AM_DEBUGGING) {
+					System.out.println(	"-----------");
+					System.out.println(String.format("Card %d: %d", index_i, c_i.pointValue()));
+					System.out.println(String.format("Card %d: %d", index_j, c_j.pointValue()));
+					System.out.println(	"-----------");
+				}
+				
+				if(c_i.pointValue() + c_j.pointValue() == 11) {
+					if(I_AM_DEBUGGING)
+						System.out.println("Sum 11: True");
+					return true;
+				}
+			}
+		}
+		if(I_AM_DEBUGGING)
+			System.out.println("Sum 11: False");
+		return false;
 	}
 
 	/**
@@ -91,5 +127,21 @@ public class ElevensBoard extends Board {
 	 */
 	private boolean containsJQK(List<Integer> selectedCards) {
 		/* *** TO BE IMPLEMENTED IN ACTIVITY 9 *** */
+		boolean jackFound = false;
+		boolean queenFound = false;
+		boolean kingFound = false;
+		for(int index : selectedCards) {
+			Card c = cardAt(index);
+			switch(c.suit()) {
+			case "jack":	jackFound = true;	break;
+			case "queen":	queenFound = true;	break;
+			case "king":	kingFound = true;	break;
+			}
+		}
+		boolean result = jackFound && queenFound && kingFound;
+		if(I_AM_DEBUGGING) {
+			System.out.println("JQK: " + result);
+		}
+		return result;
 	}
 }
