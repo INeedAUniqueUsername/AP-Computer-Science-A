@@ -43,4 +43,36 @@ public final class Alex {
 		System.out.println(message);
 		return s.nextLine();
 	}
+	public static final String randomStrings(int count, int length, String separator) {
+		String output = "";
+		for(int i = 0; i < count-1; i++) {
+			output += randomString(length) + separator;
+		}
+		output += randomString(length);
+		return output;
+	}
+	public static final String randomString(int length) {
+		String result = "";
+		for(int i = 0; i < length; i++) {
+			result += randomChar();
+		}
+		return result;
+	}
+	public static final char randomChar() {
+		switch((int) (Math.random() * 3)) {
+		case 0 : return randomLowerCase();
+		case 1 : return randomUpperCase();
+		case 2 : return randomNumber();
+		default : return (Character) null;
+		}
+	}
+	public static final char randomLowerCase() {
+		return (char) ('a' + Math.random() * (1 + 'z' - 'a'));
+	}
+	public static final char randomUpperCase() {
+		return (char) ('A' + Math.random() * (1 + 'Z' - 'A'));
+	}
+	public static final char randomNumber() {
+		return (char) ('0' + Math.random() * (1 + '9' - '0'));
+	}
 }

@@ -1,10 +1,13 @@
+package Unit13.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
 //Class - 
 //Lab  - 
 
-public class Lab22c
+public class Lab22d
 {
 	public static void main( String args[] )
 	{
