@@ -1,5 +1,9 @@
 package Misc;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public final class Alex {
@@ -43,7 +47,38 @@ public final class Alex {
 		System.out.println(message);
 		return s.nextLine();
 	}
-	public static final String randomStrings(int count, int length, String separator) {
+	public static final List<String> scanFileToList(String path) {
+		ArrayList<String> output = new ArrayList<String>();
+		try {
+			Scanner s = new Scanner(new File(path));
+			while(s.hasNextLine()) {
+				output.add(s.nextLine());
+			}
+			s.close();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return output;
+	}
+	public static final String[] scanFileToArray(String path) {
+		return scanFileToList(path).toArray(new String[0]);
+	}
+	public static final String joinStringList(List<String> s, String separator) {
+		return joinStringArray(s.toArray(new String[0]), separator);
+	}
+	public static final String joinStringArray(String[] s, String separator) {
+		String output = "";
+		int i_last = s.length-1;
+		for(int i = 0; i < i_last; i++) {
+			output += s[i] + separator;
+		}
+		if(i_last > 0) {
+			output += s[i_last];
+		}
+		return output;
+	}
+	public static final String randomString(int count, int length, String separator) {
 		String output = "";
 		for(int i = 0; i < count-1; i++) {
 			output += randomString(length) + separator;
