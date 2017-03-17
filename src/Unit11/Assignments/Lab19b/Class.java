@@ -118,7 +118,7 @@ public class Class
 		return output.substring(0, output.lastIndexOf(", "));
 	}
 	public void sortByAverage() {
-		Alex.sort(studentList);
+		Alex.swapSort(studentList);
 	}
 	public String toString()
 	{

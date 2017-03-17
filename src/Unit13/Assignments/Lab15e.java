@@ -1,3 +1,5 @@
+package Unit13.Assignments;
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -5,6 +7,9 @@
 //Lab  -
 
 import java.util.Arrays;
+import java.util.Scanner;
+
+import Misc.Alex;
 import static java.lang.System.*;
 
 public class Lab15e
@@ -18,36 +23,10 @@ public class Lab15e
 			System.out.print(item + " ");
 		}
 		System.out.println();
-		
-		//test case 2	
-		
-		
-	
-	
-	
-	
-	
-	
-		
-		
-		
-			
-
-		//test case 3
-		
-		
-		
-	
-	
-	
-	
-	
-	
-		
-		
-		
-		
-		
-
+		Scanner s = new Scanner(System.in);
+		for(int i = 0; i < 6; i++) {
+			System.out.println(Arrays.toString(NumberSort.getSortedDigitArray(Integer.valueOf(Alex.askForNextLine(s, "Number :: ")))));
+		}
+		s.close();
 	}
 }

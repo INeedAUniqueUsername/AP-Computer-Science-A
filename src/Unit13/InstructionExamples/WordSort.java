@@ -28,7 +28,7 @@ public class WordSort
 
 	public void sort()
 	{
-		Alex.sort(wordRay);
+		Alex.swapSort(wordRay);
 	}
 
 	public String toString( )
