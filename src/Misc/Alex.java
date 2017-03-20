@@ -15,7 +15,22 @@ public final class Alex {
 		a[0] = new int[1000];
 		a[1] = new int[200000];
 	}
-
+	public static final <T> T[] subArray(T[] array, int left, int right) {
+		/*
+		System.out.println("Array: " + Arrays.toString(array));
+		System.out.println("Left: " + left);
+		System.out.println("Right: " + right);
+		*/
+		if(right <= left) {
+			return (T[]) new Object[0];
+		}
+		int count = right-left;
+		T[] result = (T[]) new Object[count];
+		for(int i = 0; i < count; i++) {
+			result[i] = array[left+i];
+		}
+		return result;
+	}
 	public static final void swapSortTest() {
 		for (int i = 0; i < 20; i++) {
 			Integer[] test = new Integer[i];

@@ -23,12 +23,15 @@ class InsertionSort
 	public void add( String  word)
 	{
 		int loc = Collections.binarySearch(list, word);
+		//out.println(String.format("Location: %d", loc));
 		if(loc < 0) {
-			loc = Math.abs(loc);
+			loc = Math.abs(loc)-1;
 			if(loc > list.size()) {
+				//out.println(String.format("Appending %s", word));
 				list.add(word);
 			} else {
-				list.add(loc, word); a
+				//out.println(String.format("Adding %s at %d", word, loc));
+				list.add(loc, word);
 			}
 		}
 	}
