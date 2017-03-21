@@ -41,7 +41,13 @@ public final class Alex {
 			swapSort(test);
 		}
 	}
-
+	public static final String spaces(int count) {
+		String result = "";
+		for(int i = 0; i < count; i++) {
+			result += " ";
+		}
+		return result;
+	}
 	public static final void swapSort(Comparable[] array) {
 		int count = array.length;
 		int i_left = 0;

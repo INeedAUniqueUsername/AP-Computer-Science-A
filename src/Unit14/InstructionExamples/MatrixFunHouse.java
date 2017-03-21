@@ -1,3 +1,6 @@
+package Unit14.InstructionExamples;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -12,42 +15,40 @@ public class MatrixFunHouse
 
 	public MatrixFunHouse()
 	{
-
+		this(0, 0);
 	}
 
 	public MatrixFunHouse(int numRows, int numCols)
 	{
-
+		setSize(numRows, numCols);
 	}
 	
    public void setSize(int numRows, int numCols)
    {
-
+	   mat = new int[numRows][numCols];
    }	
 
 	public void setSpot(int row, int col, int val)
 	{
-
+		mat[row][col] = val;
 	}
-	
-   public int getRowTotal(int row)
-   {
-   	int total=0;
-
-
-
-
+	public int getRowTotal(int row)
+	{
+		int total=0;
+		for(int n : mat[row]) {
+			total += n;
+		}
 		return total;
-   }
+	}
 
 	public int getTotal()
 	{
 		int total=0;
-
-
-
-
-
+		for(int[] n : mat) {
+			for(int m : n) {
+				total += m;
+			}
+		}
 		return total;
 	}
 

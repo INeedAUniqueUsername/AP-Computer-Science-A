@@ -1,3 +1,6 @@
+package Unit14.Assignments;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -13,5 +16,6 @@ public class Lab21g
 		//instantiate an AtCounter
 
 		//test the code
+		new AtCounter().countAts(0, 0);
 	}
 }
