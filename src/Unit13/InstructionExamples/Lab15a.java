@@ -17,7 +17,7 @@ public class Lab15a
 	public static void main(String args[])
 	{
 		//add test cases
-		WordSort ws = new WordSort(Alex.randomString(20, 2, " "));
+		WordSort ws = new WordSort(Alex.randomStringMultiple(20, 2, " "));
 		ws.sort();
 		System.out.println(ws);
 	}

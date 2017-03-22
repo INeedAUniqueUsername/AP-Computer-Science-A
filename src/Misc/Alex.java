@@ -125,7 +125,7 @@ public final class Alex {
 		return output;
 	}
 
-	public static final String randomString(int count, int length,
+	public static final String randomStringMultiple(int count, int length,
 			String separator) {
 		String output = "";
 		for (int i = 0; i < count - 1; i++) {
@@ -134,11 +134,27 @@ public final class Alex {
 		output += randomString(length);
 		return output;
 	}
-
+	public static final String randomStringMultiple(int count, int length, String separator, char[] choices) {
+		String output = "";
+		for (int i = 0; i < count - 1; i++) {
+			output += randomString(length, choices) + separator;
+		}
+		output += randomString(length, choices);
+		return output;
+	}
 	public static final String randomString(int length) {
 		String result = "";
 		for (int i = 0; i < length; i++) {
 			result += randomChar();
+		}
+		return result;
+	}
+	
+	public static final String randomString(int length, char[] choices) {
+		String result = "";
+		int choicesCount = choices.length;
+		for (int i = 0; i < length; i++) {
+			result += choices[random(choicesCount)];
 		}
 		return result;
 	}
@@ -157,14 +173,31 @@ public final class Alex {
 	}
 
 	public static final char randomLowerCase() {
-		return (char) ('a' + Math.random() * (1 + 'z' - 'a'));
+		return (char) ('a' + random(1 + 'z' - 'a'));
 	}
 
 	public static final char randomUpperCase() {
-		return (char) ('A' + Math.random() * (1 + 'Z' - 'A'));
+		return (char) ('A' + random(1 + 'Z' - 'A'));
 	}
 
 	public static final char randomNumber() {
-		return (char) ('0' + Math.random() * (1 + '9' - '0'));
+		return (char) ('0' + random(1 + '9' - '0'));
+	}
+	public static final int random(int max) {
+		return (int) (Math.random()*max);
+	}
+	public static final <T> String matrixToString(T[][] matrix) {
+		String result = "";
+		for(int i = 0; i < matrix.length; i++) {
+			for(int j = 0; j < matrix[i].length; j++) {
+				result += matrix[i][j];
+			}
+			result += "\n";
+		}
+		return result;
+	}
+	
+	public static final <T> boolean isInBounds(int r, int c, T[][] matrix) {
+		return (r > -1 && c > -1) && (r < matrix.length && c < matrix[r].length);
 	}
 }
