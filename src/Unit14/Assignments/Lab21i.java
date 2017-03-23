@@ -16,5 +16,6 @@ public class Lab21i
 {
 	public static void main( String args[] ) throws IOException
 	{
+		System.out.println(new Maze().hasExitPath(0, 0));
 	}
 }
