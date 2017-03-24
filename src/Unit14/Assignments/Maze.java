@@ -18,7 +18,7 @@ import static java.lang.System.*;
 
 public class Maze
 {
-	private final static boolean DEBUG = true;
+	private final static boolean DEBUG = false;
 	private Integer[][] map;
 
 	public Maze()
@@ -49,7 +49,7 @@ public class Maze
 		}
 	}
 
-	public Boolean hasExitPath(int r, int c)
+	public Boolean[][] getExitPath(int r, int c)
 	{
 		ArrayList<Boolean[][]> paths = new ArrayList<Boolean[][]>();
 		int size = map.length;
@@ -61,22 +61,42 @@ public class Maze
 			}
 		}
 		//Find all possible paths
-		explore(paths, visited, r, c, map.length-1, map.length-1);
-		
+		//explore(paths, visited, r, c, map.length-1, map.length-1);
+		explore(paths, visited, r, c);
 		//We found all the paths, so find the shortest
 		Boolean[][] shortestPath = null;
 		int shortestLength = Integer.MAX_VALUE;
 		for(Boolean[][] p : paths) {
 			int steps = countSteps(p);
 			if(steps < shortestLength) {
-				print(pathToString(p));
 				shortestLength = steps;
 				shortestPath = p;
 			}
 		}
-		return !(shortestPath == null);
+		
+		return shortestPath;
 	}
 
+	private void explore(ArrayList<Boolean[][]> allPaths, Boolean[][] visited, int rPos, int cPos) {
+		//We are in bounds on a new, valid spot
+		print(String.format("Exploring R%dC%d", rPos, cPos));
+		if(isInBounds(rPos, cPos) && !visited[rPos][cPos] && map[rPos][cPos] == 1) {
+			visited[rPos][cPos] = true;
+			if(cPos == map[rPos].length-1) {
+				//We reached the end, so record this path
+				print("Reached the exit");
+				allPaths.add(visited);
+			} else {
+				print("Exploring Right");	explore(allPaths, Alex.duplicateMatrix(visited), rPos, cPos+1); //Clone visited because we branch out
+				print("Exploring Left");	explore(allPaths, Alex.duplicateMatrix(visited), rPos, cPos-1);
+				print("Exploring Down");	explore(allPaths, Alex.duplicateMatrix(visited), rPos+1, cPos);
+				print("Exploring Up");		explore(allPaths, Alex.duplicateMatrix(visited), rPos-1, cPos);
+			}
+		} else {
+			print("Reached dead end");
+		}
+	}
+	/*
 	private void explore(ArrayList<Boolean[][]> allPaths, Boolean[][] visited, int rPos, int cPos, int rDest, int cDest) {
 		//We are in bounds on a new, valid spot
 		print(String.format("Exploring R%dC%d", rPos, cPos));
@@ -87,19 +107,20 @@ public class Maze
 				print("Reached the exit");
 				allPaths.add(visited);
 			} else {
-				print("Exploring Right");	explore(allPaths, visited.clone(), rPos, cPos+1, rDest, cDest); //Clone visited because we branch out
-				print("Exploring Left");	explore(allPaths, visited.clone(), rPos, cPos-1, rDest, cDest);
-				print("Exploring Down");	explore(allPaths, visited.clone(), rPos+1, cPos, rDest, cDest);
-				print("Exploring Up");		explore(allPaths, visited.clone(), rPos-1, cPos, rDest, cDest);
+				print("Exploring Right");	explore(allPaths, Alex.duplicateMatrix(visited), rPos, cPos+1, rDest, cDest); //Clone visited because we branch out
+				print("Exploring Left");	explore(allPaths, Alex.duplicateMatrix(visited), rPos, cPos-1, rDest, cDest);
+				print("Exploring Down");	explore(allPaths, Alex.duplicateMatrix(visited), rPos+1, cPos, rDest, cDest);
+				print("Exploring Up");		explore(allPaths, Alex.duplicateMatrix(visited), rPos-1, cPos, rDest, cDest);
 			}
 		} else {
 			print("Reached dead end");
 		}
 	}
+	*/
 	private Boolean isInBounds(int row, int column) {
 		return Alex.isInBounds(row, column, map);
 	}
-	private int countSteps(Boolean[][] path) {
+	public int countSteps(Boolean[][] path) {
 		int result = 0;
 		for(Boolean[] bb : path) {
 			for(Boolean b : bb) {

@@ -1,3 +1,6 @@
+package Unit14.Assignments;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -13,16 +16,15 @@ public class Lab24b
 {
 	public static void main( String args[] ) throws IOException
 	{
-		Scanner file = new Scanner(new File ("lab24b.dat"));
+		Scanner file = new Scanner(new File ("src\\Unit14\\Assignments\\lab24b.dat"));
 		int size = file.nextInt();
 		file.nextLine();
 		for(int i = 0; i<size; i++)
 		{
-			String word = file.next();
-
-
-
-
-	   }
+			System.out.println(new FancyWord(file.nextLine()));
+		}
+		for(String s : new String[]{"Here is an hourglass, but where is the sand?"}) {
+			System.out.println(new FancyWord(s));
+		}
 	}
 }

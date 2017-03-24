@@ -186,6 +186,16 @@ public final class Alex {
 	public static final int random(int max) {
 		return (int) (Math.random()*max);
 	}
+	public static final <T> void reverse(T[] array) {
+		int i_last = array.length - 1;
+		for(int i = 0; i <= i_last; i++) {
+			int i_other = i_last - i;
+			T t = array[i];
+			T t_other = array[i_other];
+			array[i] = t_other;
+			array[i_other] = t;
+		}
+	}
 	public static final <T> String matrixToString(T[][] matrix) {
 		String result = "";
 		for(int i = 0; i < matrix.length; i++) {
@@ -195,6 +205,12 @@ public final class Alex {
 			result += "\n";
 		}
 		return result;
+	}
+	public static final <T> T[][] duplicateMatrix(T[][] matrix) {
+		T[][] clone = matrix.clone();
+		for(int i = 0; i < matrix.length; i++)
+		    clone[i] = matrix[i].clone();
+		return clone;
 	}
 	
 	public static final <T> boolean isInBounds(int r, int c, T[][] matrix) {
