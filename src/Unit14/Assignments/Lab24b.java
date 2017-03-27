@@ -23,7 +23,7 @@ public class Lab24b
 		{
 			System.out.println(new FancyWord(file.nextLine()));
 		}
-		for(String s : new String[]{"Here is an hourglass, but where is the sand?"}) {
+		for(String s : new String[]{"Here is an hourglass, but where is the sand?".toUpperCase()}) {
 			System.out.println(new FancyWord(s));
 		}
 	}

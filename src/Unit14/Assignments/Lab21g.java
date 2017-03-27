@@ -14,10 +14,7 @@ public class Lab21g
 {
 	public static void main(String args[])
 	{
-		//instantiate an AtCounter
-
-		//test the code
-		/*
+		
 		AtCounter path1 = new AtCounter(	"@@@@@@@@@@@@@@@@@@@@@@@@@@@ " +
 											"--------------------------@ " +
 											"@@@@@@@@@@@@@@@@@@@@@@@@@-@ " +
@@ -32,11 +29,12 @@ public class Lab21g
 											"@-@@@@@@@@@@@@@@@@@@@@@@@-@ " +
 											"@@@@@@@@@@@@@@@@@@@@@@@@@@@ "
 					);
-		path1.countAts(5, 7);
+		path1.count(5, 7);
 		System.out.println("Found " + path1.getAtCount());
-		*/
-		AtCounter path2 = new AtCounter(Alex.randomStringMultiple(20, 200, " ", new char[]{'@', '@', '@', '-'}));
+		/*
+		AtCounter path2 = new AtCounter(Alex.randomStringMultiple(20, 20, " ", new char[]{'@', '@', '@', '-'}));
 		path2.countRandomSpot();
 		System.out.println("Done: Found " + path2.getAtCount());
+		*/
 	}
 }

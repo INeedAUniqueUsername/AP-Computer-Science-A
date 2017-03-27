@@ -16,7 +16,7 @@ import Misc.Alex;
 public class AtCounter
 {
 	private final boolean DEBUG = false;
-	private final boolean PRINT_MAP = false;
+	private final boolean PRINT_MAP = true;
 	
 	private char[][] atMat;
 	private int atCount;
