@@ -1,3 +1,6 @@
+package Unit15.Assignments;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -29,8 +32,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		//set up all variables related to the game
 		
 		keys = new boolean[4];
-
-    
+		
     	setBackground(Color.WHITE);
 		setVisible(true);
 		
@@ -42,10 +44,10 @@ public class Pong extends Canvas implements KeyListener, Runnable
 	   paint(window);
    }
 
-   public void paint(Graphics window)
+   public void paint(Graphics g)
    {
 		//set up the double buffering to make the game animation nice and smooth
-		Graphics2D twoDGraph = (Graphics2D)window;
+		Graphics2D g2D = (Graphics2D)g;
 
 		//take a snap shop of the current screen and same it as an image
 		//that is the exact same width and height as the current screen
@@ -54,55 +56,61 @@ public class Pong extends Canvas implements KeyListener, Runnable
 
 		//create a graphics reference to the back ground image
 		//we will draw all changes on the background image
-		Graphics graphToBack = back.createGraphics();
+		Graphics gBack = back.createGraphics();
 
 
-		ball.moveAndDraw(graphToBack);
-		leftPaddle.draw(graphToBack);
-		rightPaddle.draw(graphToBack);
+		ball.moveAndDraw(gBack);
+		leftPaddle.draw(gBack);
+		rightPaddle.draw(gBack);
 
 
-		//see if ball hits left wall or right wall
+		/*
 		if(!(ball.getX()>=10 && ball.getX()<=780))
 		{
-			ball.setXSpeed(0);
-			ball.setYSpeed(0);
+			ball.setVelX(0);
+			ball.setVelY(0);
 		}
+		*/
 
-		
+		//see if ball hits left wall or right wall
+		if(ball.getX() < 0 || ball.getX() > getWidth()) {
+			//ball.collideHorizontal();
+			ball.setVelX(0);
+			ball.setVelY(0);
+		}
 		//see if the ball hits the top or bottom wall 
-
-
-
-
-		//see if the ball hits the left paddle
+		if(ball.getY() < 0 || ball.getY() > getHeight()) {
+			ball.collideVertical();
+		}
 		
+		for(Block b : new Block[]{leftPaddle, rightPaddle}) {
+			if(ball.didCollideLeft(b) || ball.didCollideRight(b)) {
+				ball.collideHorizontal();
+			} else if(ball.didCollideBottom(b) || ball.didCollideTop(b)) {
+				ball.collideVertical();
+			}
+		}
 		
-		
-		//see if the ball hits the right paddle
-		
-		
-		
-
-
 		//see if the paddles need to be moved
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		
-		twoDGraph.drawImage(back, null, 0, 0);
+		if(keys[0] == true)
+		{
+			//move left paddle up and draw it on the window
+			leftPaddle.moveUpAndDraw(gBack);
+		}
+		if(keys[1] == true)
+		{
+			//move left paddle down and draw it on the window
+			leftPaddle.moveDownAndDraw(gBack);
+		}
+		if(keys[2] == true)
+		{
+			rightPaddle.moveUpAndDraw(gBack);
+		}
+		if(keys[3] == true)
+		{
+			rightPaddle.moveDownAndDraw(gBack);
+		}
+		g2D.drawImage(back, null, 0, 0);
 	}
 
 	public void keyPressed(KeyEvent e)
