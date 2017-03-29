@@ -72,20 +72,40 @@ public class Ball extends Block implements Collidable
 		return String.format("%s %d %d", super.toString(), vel_x, vel_y);
 	}
 	//Check if the ball's vertical position allows it to collide horizontally with another object
-	public boolean checkHorizontalCollision(Block b) {
-		return	(getY() + getVelY() >= b.getY() && getY() <= b.getY() + b.getHeight()) || //Top edge
-				(getY() + getVelY() + getHeight() >= b.getY() && getY() + getVelY() + getHeight() <= b.getY() + b.getHeight()); //Bottom edge
+	public boolean checkHorizontalAlignment(Block b) {
+		int top = getY() + getVelY();
+		int bottom = top + getHeight();
+		int top_b = b.getY();
+		int bottom_b = top_b + b.getHeight();
+		boolean result = (top >= top_b && top <= bottom_b) || //Top edge
+				(bottom >= top_b && bottom <= bottom_b) || //Bottom edge
+				(top <= top_b && bottom >= bottom_b); //Both edges
+		if(result)TheGame.print("Horizontal Alignment");
+		return	result; //Bottom edge
 	}
 	//Check if the ball's horizontal position allows it to collide vertically with another object
-	public boolean checkVerticalCollision(Block b) {
-		return	(getX() + getVelX() >= b.getX() && getX() + getVelX() <= b.getX() + b.getWidth()) || //Left edge
-				(getX() + getVelX() + getWidth() >= b.getX() && getX() + getVelX() + getWidth() <= b.getX() + b.getWidth()); //Right edge
+	public boolean checkVerticalAlignment(Block b) {
+		int left = getX() + getVelX();
+		int right = left + getWidth();
+		int left_b = b.getX();
+		int right_b = left_b + b.getWidth();
+		boolean result = (left >= left_b && left <= right_b) || //Left edge
+				(right >= left_b && right <= right_b) || //Right edge
+				(left <= left_b && right >= right_b); //Both edges
+		if(result)TheGame.print("Vertical Alignment");
+		return	result; //Right edge
 	}
 	@Override
 	public boolean didCollideLeft(Object obj) {
 		if(obj instanceof Block) {
 			Block b = (Block) obj;
-			return	getX() + getVelX() <= b.getX() + b.getWidth() && checkHorizontalCollision(b); //Left edge collision
+			int left = getX() + getVelX();
+			int right = left + getWidth();
+			int left_b = b.getX();
+			int right_b = left_b + b.getWidth();
+			boolean result = left <= right_b && right >= right_b && checkHorizontalAlignment(b);
+			if(result)TheGame.print("Left Collision");
+			return	result; //Left edge collision
 		}
 		return false;
 	}
@@ -93,7 +113,13 @@ public class Ball extends Block implements Collidable
 	public boolean didCollideRight(Object obj) {
 		if(obj instanceof Block) {
 			Block b = (Block) obj;
-			return	getX() + getVelX() + getWidth() >= b.getX() && checkHorizontalCollision(b); //Right edge collision
+			int left = getX() + getVelX();
+			int right = left + getWidth();
+			int left_b = b.getX();
+			//int right_b = left_b + b.getWidth();
+			boolean result = right >= left_b && left <= left_b && checkHorizontalAlignment(b);
+			if(result)TheGame.print("Right Collision");
+			return	result; //Right edge collision
 		}
 		return false;
 	}
@@ -101,7 +127,13 @@ public class Ball extends Block implements Collidable
 	public boolean didCollideTop(Object obj) {
 		if(obj instanceof Block) {
 			Block b = (Block) obj;
-			return	getY() + getVelY() <= b.getY() + b.getHeight() && checkVerticalCollision(b); //Top edge collision
+			int top = getY() + getVelY();
+			int bottom = top + getHeight();
+			int top_b = b.getY();
+			//int bottom_b = top_b + b.getHeight();
+			boolean result = top <= top_b && bottom >= top_b && checkVerticalAlignment(b);
+			if(result)TheGame.print("Top Collision: ");
+			return	result; //Top edge collision
 		}
 		return false;
 	}
@@ -109,7 +141,13 @@ public class Ball extends Block implements Collidable
 	public boolean didCollideBottom(Object obj) {
 		if(obj instanceof Block) {
 			Block b = (Block) obj;
-			return	getY() + getHeight() + getVelY() >= b.getY() && checkVerticalCollision(b); //Bottom edge collision
+			int top = getY() + getVelY();
+			int bottom = top + getHeight();
+			int top_b = b.getY();
+			int bottom_b = top_b + b.getHeight();
+			boolean result = top <= bottom_b && bottom >= bottom_b && checkVerticalAlignment(b); 
+			if(result)TheGame.print("Bottom Collision");
+			return	result; //Bottom edge collision
 		}
 		return false;
 	}

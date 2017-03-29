@@ -15,6 +15,7 @@ public class TheGame extends JFrame
 	private static final int WIDTH = 800;
 	private static final int HEIGHT = 600;
 
+	public static boolean DEBUG = true;
 	public TheGame()
 	{
 		super("PONG");
@@ -26,8 +27,11 @@ public class TheGame extends JFrame
 		getContentPane().add(game);
 						
 		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
-	
+	public static void print(String message) {
+		if(DEBUG)System.out.println(message);
+	}
 	public static void main( String args[] )
 	{
 		TheGame run = new TheGame();

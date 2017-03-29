@@ -24,14 +24,19 @@ public class Pong extends Canvas implements KeyListener, Runnable
 	private Paddle leftPaddle;
 	private Paddle rightPaddle;
 	private boolean[] keys;
+	private boolean[] keys_debug;
 	private BufferedImage back;
-
 
 	public Pong()
 	{
 		//set up all variables related to the game
 		
+		ball = new Ball(400, 400, 90, 90, new Color(50, 50, 255), 1, 1);
+		leftPaddle = new Paddle(10, 10, 10, 50);
+		rightPaddle = new Paddle(760, 10, 10, 50);
+		
 		keys = new boolean[4];
+		keys_debug = new boolean[5];
 		
     	setBackground(Color.WHITE);
 		setVisible(true);
@@ -58,7 +63,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		//we will draw all changes on the background image
 		Graphics gBack = back.createGraphics();
 
-
+		gBack.clearRect(0, 0, getWidth(), getHeight());
 		ball.moveAndDraw(gBack);
 		leftPaddle.draw(gBack);
 		rightPaddle.draw(gBack);
@@ -73,21 +78,28 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		*/
 
 		//see if ball hits left wall or right wall
-		if(ball.getX() < 0 || ball.getX() > getWidth()) {
+		if(ball.getX() < 0 || ball.getX()+ball.getWidth() > getWidth()) {
 			//ball.collideHorizontal();
 			ball.setVelX(0);
 			ball.setVelY(0);
 		}
 		//see if the ball hits the top or bottom wall 
-		if(ball.getY() < 0 || ball.getY() > getHeight()) {
+		if(ball.getY() < 0 || ball.getY()+ball.getHeight() > getHeight()) {
 			ball.collideVertical();
 		}
 		
 		for(Block b : new Block[]{leftPaddle, rightPaddle}) {
-			if(ball.didCollideLeft(b) || ball.didCollideRight(b)) {
+			if(ball.didCollideRight(b) || ball.didCollideLeft(b)) {
+				System.out.println("Ball -> Horizontal Collision -> Paddle");
 				ball.collideHorizontal();
-			} else if(ball.didCollideBottom(b) || ball.didCollideTop(b)) {
+			} else if(ball.didCollideTop(b) || ball.didCollideBottom(b)) {
+				System.out.println("Ball -> Vertical Collision -> Paddle");
 				ball.collideVertical();
+			}
+			if(b.getY() < 0) {
+				b.setY(0);
+			} else if(b.getY() + b.getHeight() > getHeight()) {
+				b.setY(getHeight() - b.getHeight());
 			}
 		}
 		
@@ -110,35 +122,54 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		{
 			rightPaddle.moveDownAndDraw(gBack);
 		}
+		if(TheGame.DEBUG) {
+			if(keys_debug[4]) {
+				ball.setVelX(0);
+				ball.setVelY(0);
+			}
+			if(keys_debug[0]) {
+				ball.setVelY(ball.getVelY()-1);
+			}
+			if(keys_debug[1]) {
+				ball.setVelY(ball.getVelY()+1);
+			}
+			if(keys_debug[2]) {
+				ball.setVelX(ball.getVelX()-1);
+			}
+			if(keys_debug[3]) {
+				ball.setVelX(ball.getVelX()+1);
+			}
+		}
+			
 		g2D.drawImage(back, null, 0, 0);
 	}
 
 	public void keyPressed(KeyEvent e)
 	{
-		switch(toUpperCase(e.getKeyChar()))
-		{
-			case 'W' : keys[0]=true; break;
-			case 'Z' : keys[1]=true; break;
-			case 'I' : keys[2]=true; break;
-			case 'M' : keys[3]=true; break;
-		}
+		setKeyState(e.getKeyCode(), true);
 	}
 
 	public void keyReleased(KeyEvent e)
 	{
-		switch(toUpperCase(e.getKeyChar()))
-		{
-			case 'W' : keys[0]=false; break;
-			case 'Z' : keys[1]=false; break;
-			case 'I' : keys[2]=false; break;
-			case 'M' : keys[3]=false; break;
-		}
+		setKeyState(e.getKeyCode(), false);
 	}
 
-	public void keyTyped(KeyEvent e){}
+	public void setKeyState(int keyCode, boolean state) {
+		switch(keyCode) {
+		case KeyEvent.VK_W : keys[0] = state; break;
+		case KeyEvent.VK_Z : keys[1] = state; break;
+		case KeyEvent.VK_I : keys[2] = state; break;
+		case KeyEvent.VK_M : keys[3] = state; break;
+		case KeyEvent.VK_UP : keys_debug[0] = state; break;
+		case KeyEvent.VK_DOWN : keys_debug[1] = state; break;
+		case KeyEvent.VK_LEFT : keys_debug[2] = state; break;
+		case KeyEvent.VK_RIGHT : keys_debug[3] = state; break;
+		case KeyEvent.VK_ENTER : keys_debug[4] = state; break;
+		}
+	}
 	
-   public void run()
-   {
+	public void run()
+	{
    	try
    	{
    		while(true)
@@ -149,5 +180,11 @@ public class Pong extends Canvas implements KeyListener, Runnable
       }catch(Exception e)
       {
       }
-  	}	
+  	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}	
 }
