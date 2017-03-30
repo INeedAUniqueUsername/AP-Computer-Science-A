@@ -58,6 +58,7 @@ public class Paddle extends Block
 		draw(g);
 	}
 	public void draw(Graphics g) {
+		g.setColor(getColor());
 		g.drawRect(getX(), getY(), getWidth(), getHeight());
 	}
 	public String toString() {

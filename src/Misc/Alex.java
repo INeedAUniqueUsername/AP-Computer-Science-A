@@ -216,4 +216,15 @@ public final class Alex {
 	public static final <T> boolean isInBounds(int r, int c, T[][] matrix) {
 		return (r > -1 && c > -1) && (r < matrix.length && c < matrix[r].length);
 	}
+	//Triangle wave
+	public static final int triangle(int input, int amplitude) {
+		/*
+		while(input < 0) {
+			input += amplitude;
+		}
+		*/
+		System.out.println("In: " + input);
+		System.out.println("Out: " + Math.abs((Math.abs(input) % (amplitude * 2)) - amplitude));
+		return Math.abs((Math.abs(input) % (amplitude * 2)) - amplitude);
+	}
 }

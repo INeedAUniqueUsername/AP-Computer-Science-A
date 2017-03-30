@@ -1,3 +1,6 @@
+package Unit15.Assignments;
+
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -13,54 +16,29 @@ class SpeedUpBall extends Ball
 
    //instance variables
 
-   public SpeedUpBall()
-   {
+	public SpeedUpBall() {
+		super();
+	}
 
+	public SpeedUpBall(int x, int y) {
+		super(x, y);
+	}
 
-   }
+	public SpeedUpBall(int x, int y, int wid, int ht) {
+		super(x, y, wid, ht);
+	}
 
-   public SpeedUpBall(int x, int y)
-   {
+	public SpeedUpBall(int x, int y, int wid, int ht, int xSpd, int ySpd) {
+		super(x, y, wid, ht, new Color(0), xSpd, ySpd);
+	}
 
-
-   }
-
-
-   public SpeedUpBall(int x, int y, int xSpd, int ySpd)
-   {
-
-
-   }
-
-   public SpeedUpBall(int x, int y, int wid, int ht, int xSpd, int ySpd)
-   {
-
-
-   }
-
-
-   public SpeedUpBall(int x, int y, int wid, int ht, Color col, int xSpd, int ySpd)
-   {
-
-
-
-
-   }
-
-   public void setXSpeed( int xSpd )
-   {
-
-
-
-
-   }
-
-   public void setYSpeed( int ySpd )
-   {
-
-
-
-
-   }
+	public SpeedUpBall(int x, int y, int wid, int ht, Color col, int xSpd,
+			int ySpd) {
+		super(x, y, wid, ht, col, xSpd, ySpd);
+	}
+	public void collide() {
+		incVelX(getVelX() > 0 ? 1 : -1);
+		incVelY(getVelY() > 0 ? 1 : -1);
+	}
 }
 

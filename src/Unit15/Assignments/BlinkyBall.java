@@ -1,3 +1,5 @@
+package Unit15.Assignments;
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -5,60 +7,40 @@
 //Lab  -
 
 import java.awt.Color;
-import java.awt.Graphics;
-import java.util.Random;
+import Misc.Alex;
 
-class BlinkyBall extends Ball
-{
+class BlinkyBall extends Ball {
 
-   //constructors
-   public BlinkyBall()
-   {
+	// constructors
+	public BlinkyBall() {
 		super();
-   }
+	}
 
-   public BlinkyBall(int x, int y)
-   {
+	public BlinkyBall(int x, int y) {
+		super(x, y);
+	}
 
+	public BlinkyBall(int x, int y, int wid, int ht) {
+		super(x, y, wid, ht);
+	}
 
+	public BlinkyBall(int x, int y, int wid, int ht, int xSpd, int ySpd) {
+		super(x, y, wid, ht, new Color(0), xSpd, ySpd);
+	}
 
-   }
+	public BlinkyBall(int x, int y, int wid, int ht, Color col, int xSpd,
+			int ySpd) {
+		super(x, y, wid, ht, col, xSpd, ySpd);
+	}
 
-   public BlinkyBall(int x, int y, int wid, int ht)
-   {
+	@Override
+	public void update() {
+		super.update();
+		setColor(new Color(colorWave(getX()), colorWave(getY()),
+				colorWave(getX() + getY())));
+	}
 
-
-
-   }
-
-   public BlinkyBall(int x, int y, int wid, int ht, int xSpd, int ySpd)
-   {
-
-
-
-   }
-
-   public BlinkyBall(int x, int y, int wid, int ht, Color col, int xSpd, int ySpd)
-   {
-
-
-
-
-   }
-
-   public Color randomColor()
-   {
-   	int r = 0;		//use Math.random()
- 		int g = 0;
- 		int b = 0;
- 		return new Color(r,g,b);
-   }
-
-   public void moveAndDraw(Graphics window)
-   {
-
-
-
-
-   }
+	public int colorWave(int input) {
+		return Alex.triangle(input, 255);
+	}
 }

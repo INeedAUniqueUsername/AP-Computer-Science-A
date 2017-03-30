@@ -10,6 +10,8 @@ package Unit15.Assignments;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import Misc.Alex;
+
 public class Ball extends Block implements Collidable
 {
 	private int vel_x;
@@ -36,11 +38,17 @@ public class Ball extends Block implements Collidable
 	public void setVelX(int x) {
 		vel_x = x;
 	}
+	public void incVelX(int x) {
+		vel_x += x;
+	}
 	public int getVelX() {
 		return vel_x;
 	}
 	public void setVelY(int y) {
 		vel_y = y;
+	}
+	public void incVelY(int y) {
+		vel_y += y;
 	}
 	public int getVelY() {
 		return vel_y;
@@ -153,8 +161,13 @@ public class Ball extends Block implements Collidable
 	}
 	public void collideHorizontal() {
 		setVelX(-getVelX());
+		collide();
 	}
 	public void collideVertical() {
 		setVelY(-getVelY());
+		collide();
+	}
+	public void collide() {
+		
 	}
 }

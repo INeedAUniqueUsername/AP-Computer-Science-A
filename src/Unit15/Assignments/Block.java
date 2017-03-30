@@ -50,6 +50,12 @@ public class Block implements Locatable
 		// TODO Auto-generated method stub
 		pos_y = y;
 	}
+	public void incX(int x) {
+		pos_x += x;
+	}
+	public void incY(int y) {
+		pos_y += y;
+	}
 	@Override
 	public int getX() {
 		// TODO Auto-generated method stub

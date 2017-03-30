@@ -8,6 +8,9 @@ package Unit15.Assignments;
 //Lab  -
 
 import javax.swing.JFrame;
+
+import Misc.Alex;
+
 import java.awt.Component;
 
 public class TheGame extends JFrame
