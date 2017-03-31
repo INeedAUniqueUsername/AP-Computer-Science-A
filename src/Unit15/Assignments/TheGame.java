@@ -18,7 +18,7 @@ public class TheGame extends JFrame
 	private static final int WIDTH = 800;
 	private static final int HEIGHT = 600;
 
-	public static boolean DEBUG = true;
+	public static boolean DEBUG = false;
 	public TheGame()
 	{
 		super("PONG");

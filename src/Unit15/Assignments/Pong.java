@@ -8,6 +8,7 @@ package Unit15.Assignments;
 //Lab  -
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Canvas;
@@ -19,15 +20,19 @@ import static java.lang.Character.*;
 
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Pong extends Canvas implements KeyListener, Runnable
 {
 	private Ball ball;
-	private Paddle leftPaddle;
-	private Paddle rightPaddle;
+	private Paddle paddle_left, paddle_right;
+	private Wall wall_left, wall_right;
+	private int score_left, score_right;
 	private boolean[] keys;
 	private boolean[] keys_debug;
-	private Wall[] walls;
+	private ArrayList<Wall> walls;
 	private BufferedImage back;
 
 	public Pong()
@@ -35,15 +40,29 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		//set up all variables related to the game
 		int width = 780;
 		int height = 560;
-		ball = new SpeedUpBall(width/2, height/2, 20, 20, new Color(50, 50, 255), 1, 1);
-		leftPaddle = new Paddle(20, 10, 10, 50);
-		rightPaddle = new Paddle(width-30, 10, 10, 50);
-		walls = new Wall[]{
+		ball = new InvisibleBall(width/2 + 200, height/2, 10, 10, new Color(50, 50, 255), 2, 4);
+		paddle_left = new Paddle(40, 10, 10, 50);
+		paddle_right = new Paddle(width-50, 10, 10, 50);
+		wall_left = new Wall(0, 0, 10, height); //Left
+		wall_right = new Wall(width-10, 0, 10, height); //Right
+		walls = new ArrayList<Wall>(Arrays.asList(
 				new Wall(0, 0, width, 10), //Top
 				new Wall(0, height-10, width, 10), //Bottom
-				new Wall(width-10, 0, 10, height), //Right
-				new Wall(0, 0, 10, height) //Left
-				};
+				wall_right,
+				wall_left
+				));
+		/*
+		for(int i = 0; i < 25; i++) {
+			for(int j = 0; j < 30; j++) {
+				walls.add(new Wall_Breakable(100 + i * 20, 10 + j * 20, 15, 15));
+			}
+		}
+		for(int i = 0; i < 25; i++) {
+			for(int j = 0; j < 10; j++) {
+				walls.add(new Wall_Breakable(150 + i * 20, 20 + j * 50, 15, 15));
+			}
+		}
+		*/
 		keys = new boolean[4];
 		keys_debug = new boolean[5];
 		
@@ -57,11 +76,16 @@ public class Pong extends Canvas implements KeyListener, Runnable
 	public void update(Graphics window){
 		paint(window);
 	}
+	public void update() {
+		
+	}
 	public void paint(Graphics g)
 	{
+		update();
 		//set up the double buffering to make the game animation nice and smooth
 		Graphics2D g2D = (Graphics2D)g;
-
+		
+		
 		//take a snap shop of the current screen and same it as an image
 		//that is the exact same width and height as the current screen
 		if(back==null)
@@ -72,6 +96,11 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		Graphics gBack = back.createGraphics();
 
 		gBack.clearRect(0, 0, getWidth(), getHeight());
+		
+		gBack.setFont(new Font("Impact", 0, 48));
+		gBack.drawString("" + score_left, 100, 225);
+		gBack.drawString("" + score_right, 660, 225);
+		
 		ball.moveAndDraw(gBack);
 
 		//see if ball hits left wall or right wall
@@ -84,9 +113,9 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		if(ball.getY() < 0 || ball.getY()+ball.getHeight() > getHeight()) {
 			ball.collideVertical();
 		}
-		for(Block b : new Block[]{leftPaddle, rightPaddle}) {
+		for(Block b : new Block[]{paddle_left, paddle_right}) {
 			b.draw(gBack);
-			collision(ball, b);
+			checkCollision(ball, b);
 			if(b.getY() < 0) {
 				b.setY(0);
 			} else if(b.getY() + b.getHeight() > getHeight()) {
@@ -95,26 +124,26 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		}
 		for(Block b : walls) {
 			b.draw(gBack);
-			collision(ball, b);
+			checkCollision(ball, b);
 		}
 		//see if the paddles need to be moved
 		if(keys[0] == true)
 		{
 			//move left paddle up and draw it on the window
-			leftPaddle.moveUpAndDraw(gBack);
+			paddle_left.moveUpAndDraw(gBack);
 		}
 		if(keys[1] == true)
 		{
 			//move left paddle down and draw it on the window
-			leftPaddle.moveDownAndDraw(gBack);
+			paddle_left.moveDownAndDraw(gBack);
 		}
 		if(keys[2] == true)
 		{
-			rightPaddle.moveUpAndDraw(gBack);
+			paddle_right.moveUpAndDraw(gBack);
 		}
 		if(keys[3] == true)
 		{
-			rightPaddle.moveDownAndDraw(gBack);
+			paddle_right.moveDownAndDraw(gBack);
 		}
 		if(TheGame.DEBUG) {
 			if(keys_debug[4]) {
@@ -136,13 +165,30 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		}
 		g2D.drawImage(back, null, 0, 0);
 	}
-	public void collision(Ball b1, Block b2) {
-		if(b1.didCollideRight(b2) || ball.didCollideLeft(b2)) {
-			System.out.println("Ball -> Horizontal Collision -> Paddle");
-			b1.collideHorizontal();
-		} else if(b1.didCollideTop(b2) || ball.didCollideBottom(b2)) {
-			System.out.println("Ball -> Vertical Collision -> Paddle");
+	public void checkCollision(Ball b1, Block b2) {
+		boolean collision = false;
+		
+		if(b2 instanceof Wall_Breakable && !((Wall_Breakable) b2).getActive())
+			return;
+		if(b1.didCollideTop(b2) || b1.didCollideBottom(b2)) {
+			System.out.println("Ball -> Vertical Collision -> " + b2.getClass().getName());
 			b1.collideVertical();
+			collision = true;
+		}
+		if(b1.didCollideRight(b2) || b1.didCollideLeft(b2)) {
+			System.out.println("Ball -> Horizontal Collision -> " + b2.getClass().getName());
+			b1.collideHorizontal();
+			collision = true;
+		}
+		if(collision) {
+			if(b2.equals(wall_left)) {
+				score_right++;
+			} else if(b2.equals(wall_right)) {
+				score_left++;
+			}
+			if(b2 instanceof Wall_Breakable) {
+				((Wall_Breakable) b2).destroy();
+			}
 		}
 	}
 	public void keyReleased(KeyEvent e)

@@ -1,21 +1,8 @@
 package Unit15.Assignments;
 
-
-//© A+ Computer Science  -  www.apluscompsci.com
-//Name -
-//Date -
-//Class -
-//Lab  -
-
 import java.awt.Color;
-import java.awt.Graphics;
-import java.util.Random;
 
-class SpeedUpBall extends Ball
-{
-
-   //instance variables
-
+public class SpeedUpBall extends Ball {
 	public SpeedUpBall() {
 		super();
 	}
@@ -36,9 +23,12 @@ class SpeedUpBall extends Ball
 			int ySpd) {
 		super(x, y, wid, ht, col, xSpd, ySpd);
 	}
-	public void collide() {
-		incVelX(getVelX() > 0 ? 1 : -1);
+	public void collideHorizontal() {
+		super.collideHorizontal();
 		incVelY(getVelY() > 0 ? 1 : -1);
 	}
+	public void collideVertical() {
+		super.collideVertical();
+		incVelX(getVelX() > 0 ? 1 : -1);
+	}
 }
-

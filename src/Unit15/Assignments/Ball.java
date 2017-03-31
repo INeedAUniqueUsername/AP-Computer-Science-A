@@ -140,7 +140,7 @@ public class Ball extends Block implements Collidable
 			int top_b = b.getY();
 			//int bottom_b = top_b + b.getHeight();
 			boolean result = top <= top_b && bottom >= top_b && checkVerticalAlignment(b);
-			if(result)TheGame.print("Top Collision: ");
+			if(result)TheGame.print("Top Collision");
 			return	result; //Top edge collision
 		}
 		return false;
@@ -164,7 +164,9 @@ public class Ball extends Block implements Collidable
 		collide();
 	}
 	public void collideVertical() {
+		System.out.println("Old Velocity Y: " + getVelY());
 		setVelY(-getVelY());
+		System.out.println("New Velocity Y: " + getVelY());
 		collide();
 	}
 	public void collide() {
