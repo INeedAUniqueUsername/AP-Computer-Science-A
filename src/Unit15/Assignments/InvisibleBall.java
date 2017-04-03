@@ -40,11 +40,11 @@ class InvisibleBall extends Ball
 		tick++;
 		if(tick%15 == 0) {
 			if(visible) {
-				if(Math.random() < .75) {
+				if(Math.random() < .25) {
 					visible = false;
 				}
 			} else {
-				if(Math.random() < .25) {
+				if(Math.random() < .75) {
 					visible = true;
 				}
 			}

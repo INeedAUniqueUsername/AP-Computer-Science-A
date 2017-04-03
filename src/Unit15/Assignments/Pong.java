@@ -40,7 +40,7 @@ public class Pong extends Canvas implements KeyListener, Runnable
 		//set up all variables related to the game
 		int width = 780;
 		int height = 560;
-		ball = new InvisibleBall(width/2 + 200, height/2, 10, 10, new Color(50, 50, 255), 2, 4);
+		ball = new GravityBall(width/2 + 200, height/2, 10, 10, new Color(50, 50, 255), 2, 4);
 		paddle_left = new Paddle(40, 10, 10, 50);
 		paddle_right = new Paddle(width-50, 10, 10, 50);
 		wall_left = new Wall(0, 0, 10, height); //Left

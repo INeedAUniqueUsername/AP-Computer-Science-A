@@ -26,7 +26,7 @@ public class StrangeGravityBall extends Ball {
 	public void update() {
 		super.update();
 		tick++;
-		//double angle_from_center = Math.PI+Math.atan2(-getY(), getX());
+		//double angle_from_center = Math.PI+Math.atan2(600-getY(), 800-getX());
 		if(tick%30 == 0) {
 			incVelX((int) (5 * Math.cos(gravityAngle)));
 			incVelY((int) (5 * Math.sin(gravityAngle)));
