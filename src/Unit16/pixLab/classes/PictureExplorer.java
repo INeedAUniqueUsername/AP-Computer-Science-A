@@ -804,13 +804,20 @@ public class PictureExplorer implements MouseMotionListener, ActionListener, Mou
    */
   public static void main( String args[])
   {
-    Picture pix = new Picture("src\\Unit16\\pixLab\\images\\" + "robot.jpg");
-    pix = needsMoreJPEG(pix, 20);
+    Picture pix = new Picture("src\\Unit16\\pixLab\\images\\" + "Capture.PNG");
+    pix = needsMoreJPEG2(pix, 20, Math.PI/10);
     pix.explore();
   }
-  public static Picture needsMoreJPEG(Picture p, double times) {
-	  double factor = 1/times;
-	  return p.scale(factor, factor).scale(times, times);
+  public static Picture needsMoreJPEG(Picture p, double factor) {
+	  double divisor = 1/factor;
+	  return p.scale(divisor, divisor).scale(factor, factor);
+  }
+  public static Picture needsMoreJPEG2(Picture p, double factor, double increment) {
+	  Picture result = p;
+	  for(double i = 1; i < factor; i += increment) {
+		  result = needsMoreJPEG(result, i);
+	  }
+	  return result;
   }
   
 }
