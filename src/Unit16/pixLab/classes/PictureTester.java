@@ -12,90 +12,106 @@ import Misc.Alex;
  */
 public class PictureTester
 {
-	static String PATH = "src\\Unit16\\pixLab\\images\\";
-	private static final Picture pix = new Picture(PATH + "Capture.PNG");
+	private final static String PATH = "src\\Unit16\\pixLab\\images\\";
+	//private static final Picture pix = new Picture(PATH + "Capture.PNG");
 	
 	/** Method to test zeroBlue */
+	public static Picture createPicture() {
+		return new Picture(PATH + "Capture2.PNG");
+	}
 	public static void testZeroBlue(){
-		Picture beach = new Picture(PATH + "beach.jpg");
-		beach.explore();
-		beach.zeroBlue();
-		beach.explore();
+		Picture pix = createPicture();
+		pix.explore();
+		pix.zeroBlue();
+		pix.explore();
 		}
 	public static void testKeepOnlyBlue() {
+		Picture pix = createPicture();
 		pix.explore();
-		for(Pixel[] pp : pix.getPixels2D()) {
-			for(Pixel p : pp) {
-				p.setRed(0);
-				p.setGreen(0);
-			}
-		}
+		pix.keepOnlyBlue();
 		pix.explore();
 	}
 	public static void testKeepOnlyRed() {
+		Picture pix = createPicture();
 		pix.explore();
-		for(Pixel[] pp : pix.getPixels2D()) {
-			for(Pixel p : pp) {
-				p.setGreen(0);
-				p.setBlue(0);
-			}
-		}
+		pix.keepOnlyRed();
 		pix.explore();
 	}
 	public static void testKeepOnlyGreen() {
+		Picture pix = createPicture();
 		pix.explore();
-		for(Pixel[] pp : pix.getPixels2D()) {
-			for(Pixel p : pp) {
-				p.setRed(0);
-				p.setBlue(0);
-			}
-		}
+		pix.keepOnlyGreen();
+		pix.explore();
+	}
+	public static void testNegate() {
+		Picture pix = createPicture();
+		pix.explore();
+		pix.negate();
 		pix.explore();
 	}
 	/** Method to test mirrorVertical */
 	public static void testMirrorVertical()
 	{
-		Picture caterpillar = new Picture(PATH + "caterpillar.jpg");
-		caterpillar.explore();
-		caterpillar.mirrorVertical();
-		caterpillar.explore();
+		Picture pix = createPicture();
+		pix.explore();
+		pix.mirrorVertical();
+		pix.explore();
+	}
+	public static void testGrayscale() {
+		Picture pix = createPicture();
+		pix.explore();
+		pix.grayscale();
+		pix.explore();
 	}
 	
 	/** Method to test mirrorTemple */
 	public static void testMirrorTemple()
 	{
-		Picture temple = new Picture(PATH + "temple.jpg");
-		temple.explore();
-		temple.mirrorTemple();
-		temple.explore();
+		Picture pix = createPicture();
+		pix.explore();
+		pix.mirrorTemple();
+		pix.explore();
 	}
 	
 	/** Method to test the collage method */
 	public static void testCollage()
 	{
-		Picture canvas = new Picture(PATH + "640x480.jpg");
-		canvas.createCollage();
-		canvas.explore();
+		Picture pix = createPicture();
+		pix.createCollage();
+		pix.explore();
 	}
 	
 	/** Method to test edgeDetection */
 	public static void testEdgeDetection()
 	{
-		Picture swan = new Picture(PATH + "swan.jpg");
-		swan.edgeDetection(10);
-		swan.explore();
+		Picture pix = createPicture();
+		pix.edgeDetection(10);
+		pix.explore();
 	}
 	
 	/** Main method for testing.	Every class can have a main
 		* method in Java */
 	public static void main(String[] args)
 	{
+		Picture pix = createPicture();
+		pix.explore();
+		pix.flipSectionHorizontal(200, 200, 500, 500);
+		/*
+		for(int i = 0; i < 50; i++) {
+			int w = pix.getWidth();
+			int h = pix.getHeight();
+			int x = Alex.random(w);
+			int y = Alex.random(h);
+			pix.flipSectionHorizontal(x, y, w-x, h-y);
+		}
+		*/
+		pix.explore();
 		// uncomment a call here to run a test
 		// and comment out the ones you don't want
 		// to run
 		//testZeroBlue();	
 		//testKeepOnlyBlue();
-		testKeepOnlyRed();
+		//testKeepOnlyRed();
 		//testKeepOnlyGreen();
 		//testNegate();
 		//testGrayscale();
@@ -116,16 +132,15 @@ public class PictureTester
 		//testClearBlueOverValue(200);
 		//testGetAverageForColumn(0);
 		/*
-		Picture pix = new Picture(PATH + "Capture.PNG");
-		for (Pixel[] pp : pix.getPixels2D())
-		{
-			for (Pixel p : pp)
-			{
-				p.setBlue(p.getBlue() + Alex.random(200)-100);
-				p.setRed(p.getRed() + Alex.random(200)-100);
-				p.setGreen(p.getGreen() + Alex.random(200)-100);
-			}
-		}
+		Picture pix = createPicture();
+		pix.moreJPEG(255);
+		pix.moreJPEG(255);
+		pix.moreJPEG(255);
+		pix.moreJPEG(255);
+		pix.moreJPEG(255);
+		pix.moreJPEG(255);
+		pix.moreJPEG(255);
+		pix.moreJPEG(255);
 		pix.explore();
 		*/
 	}
