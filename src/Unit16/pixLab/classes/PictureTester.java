@@ -95,7 +95,31 @@ public class PictureTester
 	{
 		Picture pix = createPicture();
 		pix.explore();
-		pix.flipSectionHorizontal(200, 200, 500, 500);
+		//pix.flipSectionHorizontal(200, 200, 500, 500);
+		//pix.swapSection(0, 0, 500, 500, 250, 250);
+		for(int i = 0; i < 100; i++) {
+			int w_p = pix.getWidth();
+			int h_p = pix.getHeight();
+			int x1 = Alex.random(w_p);
+			int y1 = Alex.random(h_p);
+			int w = Alex.random(w_p - x1);
+			int h = Alex.random(h_p - y1);
+			int x2 = Alex.random(w_p - w);
+			int y2 = Alex.random(h_p - h);
+			/*
+			System.out.println(
+					"Pix Width: " + w_p + "\n" +
+					"Pix Height: " + h_p + "\n" +
+					"Swap X1: " + x1 + "\n" +
+					"Swap Y1: " + y1 + "\n" +
+					"Swap Width: " + w + "\n" +
+					"Swap Height: " + h + "\n" +
+					"Swap X2: " + x2 + "\n" +
+					"Swap Y2: " + y2 + "\n"
+					);
+			*/
+			pix.swapSection(x1, y1, x2, y2, w, h);
+		}
 		/*
 		for(int i = 0; i < 50; i++) {
 			int w = pix.getWidth();

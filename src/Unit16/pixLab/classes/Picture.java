@@ -206,6 +206,19 @@ public class Picture extends SimplePicture
 			}
 		}
 	}
+	public void swapSection(int x1, int y1, int x2, int y2, int w, int h) {
+		Pixel[][] pixels = getPixels2D();
+		for(int y = 0; y < h; y++) {
+			for(int x = 0; x < w; x++) {
+				Pixel p1 = pixels[y1+y][x1+x];
+				Pixel p2 = pixels[y2+y][x2+x];
+				Color c1 = p1.getColor();
+				Color c2 = p2.getColor();
+				p1.setColor(c2);
+				p2.setColor(c1);
+			}
+		}
+	}
 	
 	/** copy from the passed fromPic to the
 		* specified startRow and startCol in the
