@@ -557,14 +557,11 @@ public class SimplePicture implements DigitalPicture
     // create a new picture object that is the right size
     Picture result = new Picture((int) (getWidth() * xFactor),
                                  (int) (getHeight() * yFactor));
-    
     // get the graphics 2d object to draw on the result
     Graphics graphics = result.getGraphics();
     Graphics2D g2 = (Graphics2D) graphics;
-    
     // draw the current image onto the result image scaled
     g2.drawImage(this.getImage(),scaleTransform,null);
-    
     return result;
   }
   

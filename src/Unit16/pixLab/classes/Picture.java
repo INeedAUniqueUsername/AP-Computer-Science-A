@@ -151,7 +151,62 @@ public class Picture extends SimplePicture
 			}
 		} 
 	}
-	
+	public void mirrorVerticalRightToLeft()
+	{
+		Pixel[][] pixels = this.getPixels2D();
+		Pixel leftPixel = null;
+		Pixel rightPixel = null;
+		int width = pixels[0].length;
+		for (int row = 0; row < pixels.length; row++)
+		{
+			for (int col = 0; col < width / 2; col++)
+			{
+				leftPixel = pixels[row][col];
+				rightPixel = pixels[row][width - 1 - col];
+				leftPixel.setColor(rightPixel.getColor());
+			}
+		} 
+	}
+	public void mirrorHorizontal()
+	{
+		Pixel[][] pixels = this.getPixels2D();
+		Pixel topPixel = null;
+		Pixel bottomPixel = null;
+		int height = pixels.length;
+		for (int row = 0; row < pixels.length/2; row++)
+		{
+			for (int col = 0; col < pixels[row].length; col++)
+			{
+				topPixel = pixels[row][col];
+				bottomPixel = pixels[height - 1 - row][col];
+				bottomPixel.setColor(topPixel.getColor());
+			}
+		} 
+	}
+	public void mirrorHorizontalBottomToTop()
+	{
+		Pixel[][] pixels = this.getPixels2D();
+		Pixel topPixel = null;
+		Pixel bottomPixel = null;
+		int height = pixels.length;
+		for (int row = 0; row < pixels.length/2; row++)
+		{
+			for (int col = 0; col < pixels[row].length; col++)
+			{
+				topPixel = pixels[row][col];
+				bottomPixel = pixels[height - 1 - row][col];
+				topPixel.setColor(bottomPixel.getColor());
+			}
+		} 
+	}
+	public void mirrorDiagonal() {
+		Pixel[][] pixels = this.getPixels2D();
+		for(int i = 0; i < pixels.length && i < pixels[i].length; i++) {
+			for(int j = 0; j < i; j++) {
+				pixels[j][i].setColor(pixels[i][j].getColor());
+			}
+		}
+	}
 	/** Mirror just part of a picture of a temple */
 	public void mirrorTemple()
 	{
@@ -172,8 +227,10 @@ public class Picture extends SimplePicture
 				rightPixel = pixels[row]											 
 												 [mirrorPoint - col + mirrorPoint];
 				rightPixel.setColor(leftPixel.getColor());
+				count++;
 			}
 		}
+		System.out.println("Temple Count: " + count);
 	}
 	public void mirrorSection(int x, int y, int w, int h) {
 		int mirrorPoint = x+w;
@@ -250,6 +307,17 @@ public class Picture extends SimplePicture
 			}
 		}	 
 	}
+	public static Picture lossy(Picture p, double factor) {
+		double divisor = 1/factor;
+		return p.scale(divisor, divisor).scale(factor, factor);
+	}
+	public static Picture lossy(Picture p, double factor, double increment) {
+		Picture result = p;
+		for(double i = 1; i < factor; i += increment) {
+			result = lossy(result, i);
+		}
+		return result;
+	}
 
 	/** Method to create a collage of several pictures */
 	public void createCollage()
@@ -295,6 +363,7 @@ public class Picture extends SimplePicture
 		}
 	}
 	
+	//The JPEG stands for Java Photographic Elimination Gauntlet
 	public void moreJPEG() {
 		moreJPEG(1);
 	}
@@ -307,17 +376,25 @@ public class Picture extends SimplePicture
 			p.setRed(p.getRed() + Alex.random(range*2)-range);
 			p.setGreen(p.getGreen() + Alex.random(range*2)-range);
 		}
+		System.out.println("MORE");
 	}
 	public void moreJPEG(int x, int y, int w, int h, int range) {
 		Pixel[][] pp = getPixels2D();
-		for(int row = y; row < y+h; row++) {
-			for(int column = x; column < x+w; column++) {
-				Pixel p = pp[y][x];
+		for(int r = y; r < y+h; r++) {
+			for(int c = x; c < x+w; c++) {
+				Pixel p = pp[r][c];
 				p.setBlue(p.getBlue() + Alex.random(range*2)-range);
 				p.setRed(p.getRed() + Alex.random(range*2)-range);
 				p.setGreen(p.getGreen() + Alex.random(range*2)-range);
 			}
 		}
+		System.out.println(
+				"MORE" + "\n" +
+				"X: " + x + "\n" +
+				"Y: " + y + "\n" +
+				"W: " + w + "\n" +
+				"H: " + h + "\n"
+				);
 	}
 	/* Main method for testing - each class in Java can have a main 
 	 * method 

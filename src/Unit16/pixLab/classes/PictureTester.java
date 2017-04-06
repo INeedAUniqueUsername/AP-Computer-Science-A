@@ -57,6 +57,31 @@ public class PictureTester
 		pix.mirrorVertical();
 		pix.explore();
 	}
+	public static void testMirrorVerticalRightToLeft()
+	{
+		Picture pix = createPicture();
+		pix.explore();
+		pix.mirrorVerticalRightToLeft();
+		pix.explore();
+	}
+	public static void testMirrorHorizontal() {
+		Picture pix = createPicture();
+		pix.explore();
+		pix.mirrorHorizontal();
+		pix.explore();
+	}
+	public static void testMirrorHorizontalBottomToTop() {
+		Picture pix = createPicture();
+		pix.explore();
+		pix.mirrorHorizontalBottomToTop();
+		pix.explore();
+	}
+	public static void testMirrorDiagonal() {
+		Picture pix = createPicture();
+		pix.explore();
+		pix.mirrorDiagonal();
+		pix.explore();
+	}
 	public static void testGrayscale() {
 		Picture pix = createPicture();
 		pix.explore();
@@ -67,7 +92,7 @@ public class PictureTester
 	/** Method to test mirrorTemple */
 	public static void testMirrorTemple()
 	{
-		Picture pix = createPicture();
+		Picture pix = new Picture(PATH + "temple.jpg");
 		pix.explore();
 		pix.mirrorTemple();
 		pix.explore();
@@ -93,11 +118,12 @@ public class PictureTester
 		* method in Java */
 	public static void main(String[] args)
 	{
-		Picture pix = createPicture();
-		pix.explore();
 		//pix.flipSectionHorizontal(200, 200, 500, 500);
 		//pix.swapSection(0, 0, 500, 500, 250, 250);
-		for(int i = 0; i < 100; i++) {
+		
+		/*
+		//Destroy the picture
+		for(int i = 0; i < 10; i++) {
 			int w_p = pix.getWidth();
 			int h_p = pix.getHeight();
 			int x1 = Alex.random(w_p);
@@ -117,9 +143,16 @@ public class PictureTester
 					"Swap X2: " + x2 + "\n" +
 					"Swap Y2: " + y2 + "\n"
 					);
-			*/
+			*//*
+			pix.swapSection(x1, y1, x2, y2, w, h);
+			pix.moreJPEG(x1, y1, w, h, Alex.random(20));
+			pix.moreJPEG(x2, y2, w, h, Alex.random(20));
+			pix = Picture.lossy(pix, 2);
+			pix.moreJPEG(x1, y1, w, h, Alex.random(20));
+			pix.moreJPEG(x2, y2, w, h, Alex.random(20));
 			pix.swapSection(x1, y1, x2, y2, w, h);
 		}
+		/*
 		for(int i = 0; i < 50; i++) {
 			int w = pix.getWidth();
 			int h = pix.getHeight();
@@ -127,7 +160,8 @@ public class PictureTester
 			int y = Alex.random(h);
 			pix.flipSectionHorizontal(x, y, w-x, h-y);
 		}
-		pix.explore();
+		*/
+		//pix.explore();
 		// uncomment a call here to run a test
 		// and comment out the ones you don't want
 		// to run
@@ -139,7 +173,11 @@ public class PictureTester
 		//testGrayscale();
 		//testFixUnderwater();
 		//testMirrorVertical();
-		//testMirrorTemple();
+		//testMirrorVerticalRightToLeft();
+		//testMirrorHorizontal();
+		//testMirrorHorizontalBottomToTop();
+		//testMirrorDiagonal();
+		testMirrorTemple();
 		//testMirrorArms();
 		//testMirrorGull();
 		//testMirrorDiagonal();
@@ -163,7 +201,6 @@ public class PictureTester
 		pix.moreJPEG(255);
 		pix.moreJPEG(255);
 		pix.moreJPEG(255);
-		pix.explore();
 		*/
 	}
 }
