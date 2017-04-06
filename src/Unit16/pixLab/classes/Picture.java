@@ -298,11 +298,25 @@ public class Picture extends SimplePicture
 	public void moreJPEG() {
 		moreJPEG(1);
 	}
+	public void moreJPEG(int x, int y, int w, int h) {
+		moreJPEG(x, y, w, h, 1);
+	}
 	public void moreJPEG(int range) {
 		for(Pixel p : getPixels()) {
 			p.setBlue(p.getBlue() + Alex.random(range*2)-range);
 			p.setRed(p.getRed() + Alex.random(range*2)-range);
 			p.setGreen(p.getGreen() + Alex.random(range*2)-range);
+		}
+	}
+	public void moreJPEG(int x, int y, int w, int h, int range) {
+		Pixel[][] pp = getPixels2D();
+		for(int row = y; row < y+h; row++) {
+			for(int column = x; column < x+w; column++) {
+				Pixel p = pp[y][x];
+				p.setBlue(p.getBlue() + Alex.random(range*2)-range);
+				p.setRed(p.getRed() + Alex.random(range*2)-range);
+				p.setGreen(p.getGreen() + Alex.random(range*2)-range);
+			}
 		}
 	}
 	/* Main method for testing - each class in Java can have a main 

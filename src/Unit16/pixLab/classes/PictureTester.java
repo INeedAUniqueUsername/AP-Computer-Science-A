@@ -120,7 +120,6 @@ public class PictureTester
 			*/
 			pix.swapSection(x1, y1, x2, y2, w, h);
 		}
-		/*
 		for(int i = 0; i < 50; i++) {
 			int w = pix.getWidth();
 			int h = pix.getHeight();
@@ -128,7 +127,6 @@ public class PictureTester
 			int y = Alex.random(h);
 			pix.flipSectionHorizontal(x, y, w-x, h-y);
 		}
-		*/
 		pix.explore();
 		// uncomment a call here to run a test
 		// and comment out the ones you don't want
