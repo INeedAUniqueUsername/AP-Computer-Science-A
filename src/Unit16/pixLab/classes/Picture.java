@@ -340,16 +340,15 @@ public class Picture extends SimplePicture
 		for (int fromRow = fromRowStart, toRow = toRowStart;
 				 fromRow < fromRowEnd &&
 				 toRow < toPixels.length; 
-				 fromRow++, toRow++)
-		{
+				 fromRow++, toRow++) {
 			for (int fromCol = fromColStart, toCol = toColStart; 
 					 fromCol < fromColEnd &&
 					 toCol < toPixels[0].length;	
-					 fromCol++, toCol++)
-			{
+					 fromCol++, toCol++) {
 				fromPixel = fromPixels[fromRow][fromCol];
 				toPixel = toPixels[toRow][toCol];
 				toPixel.setColor(fromPixel.getColor());
+				System.out.println("Copy pixel");
 			}
 		}
 	}
@@ -404,7 +403,7 @@ public class Picture extends SimplePicture
 			int c = Alex.random(w);
 			int rTo = Alex.random(height);
 			int cTo = Alex.random(width);
-			this.copy(p, r, c, Alex.random(h - r), Alex.random(w - c), rTo, cTo);
+			this.copy(p, r, c, Alex.random(h - r)+r, Alex.random(w - c)+c, rTo, cTo);
 			this.copy(p, Alex.random(height), Alex.random(width));
 			//System.out.printf("Copying %s (%d - %d, %d - %d) to (%d, %d)", p.getFileName(), c, c+w, r, r+h, cTo, rTo);
 			int x = Alex.random(width);
@@ -530,7 +529,6 @@ public class Picture extends SimplePicture
 	/* Main method for testing - each class in Java can have a main 
 	 * method 
 	 */
-	/*
 	public static void main(String[] args) 
 	{
 		Picture beach = new Picture("beach.jpg");
@@ -538,6 +536,5 @@ public class Picture extends SimplePicture
 		beach.zeroBlue();
 		beach.explore();
 	}
-	*/
 	
 } // this } is the end of class Picture, put all new methods before this

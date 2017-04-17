@@ -160,15 +160,16 @@ public class PictureTester
 		
 		Picture p = createPicture();
 		for(int i = 0; i < 5; i++) {
-			Picture p_new = createPicture();
+			Picture p_new = new Picture(PATH + new String[]{"beach.jpg", "arch.jpg", "caterpillar.jpg", "koala.jpg", "seagull.jpg"}[i]);
 			int h = p.getHeight();
 			int w = p.getWidth();
 			p = Picture.lossy(p, Math.random()*3);
 			p.moreJPEG((int) (Math.random() * 20));
 			int frs = Alex.random(h);
 			int fcs = Alex.random(w);
-			int fre = Alex.random(h-frs);
-			int fce = Alex.random(w-fcs);
+			int fre = Alex.random(h-frs) + frs;
+			int fce = Alex.random(w-fcs) + fcs;
+			System.out.println(frs + " " + fcs + " " + fre + " " + fce);
 			p_new.copy(p, frs, fcs, fre, fce, Alex.random(p_new.getHeight()), Alex.random(p_new.getWidth()));
 			p = p_new;
 		}
