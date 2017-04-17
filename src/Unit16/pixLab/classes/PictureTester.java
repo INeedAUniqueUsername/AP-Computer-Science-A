@@ -1,5 +1,7 @@
 package Unit16.pixLab.classes;
 
+import Misc.Alex;
+
 
 /**
  * This class contains class (static) methods
@@ -104,17 +106,23 @@ public class PictureTester
 	public static void testMirrorArms() {
 		Picture pix = new Picture(PATH + "snowman.jpg");
 		pix.explore();
-		pix.mirrorSectionVertical(100, 160, 75, 30);
-		pix.mirrorSectionVertical(240, 170, 50, 20);
+		pix.mirrorArms();
 		pix.explore();
 	}
 	public static void testMirrorGull() {
 		Picture pix = new Picture(PATH + "seagull.jpg");
 		pix.explore();
-		pix.mirrorSectionHorizontal(230, 230, 120, 90);
+		pix.mirrorGull();
 		pix.explore();
 	}
-	
+	public static void testCopy() {
+		Picture pix = createPicture();
+		pix.explore();
+		pix.copy(pix, 200, 200);
+		pix.copy(pix, 0, 500);
+		pix.copy(pix, 500, 0);
+		pix.explore();
+	}
 	/** Method to test the collage method */
 	public static void testCollage()
 	{
@@ -149,6 +157,22 @@ public class PictureTester
 		* method in Java */
 	public static void main(String[] args)
 	{
+		
+		Picture p = createPicture();
+		for(int i = 0; i < 5; i++) {
+			Picture p_new = createPicture();
+			int h = p.getHeight();
+			int w = p.getWidth();
+			p = Picture.lossy(p, Math.random()*3);
+			p.moreJPEG((int) (Math.random() * 20));
+			int frs = Alex.random(h);
+			int fcs = Alex.random(w);
+			int fre = Alex.random(h-frs);
+			int fce = Alex.random(w-fcs);
+			p_new.copy(p, frs, fcs, fre, fce, Alex.random(p_new.getHeight()), Alex.random(p_new.getWidth()));
+			p = p_new;
+		}
+		p.explore();
 		//pix.flipSectionHorizontal(200, 200, 500, 500);
 		//pix.swapSection(0, 0, 500, 500, 250, 250);
 		
@@ -196,28 +220,31 @@ public class PictureTester
 		// uncomment a call here to run a test
 		// and comment out the ones you don't want
 		// to run
-		//testZeroBlue();	
-		//testKeepOnlyBlue();
-		//testKeepOnlyRed();
-		//testKeepOnlyGreen();
-		//testNegate();
-		//testGrayscale();
-		//textFixUnderwater();
-		//testMirrorVertical();
-		//testMirrorVerticalRightToLeft();
-		//testMirrorHorizontal();
-		//testMirrorHorizontalBottomToTop();
+		/*
+		testZeroBlue();	
+		testKeepOnlyBlue();
+		testKeepOnlyRed();
+		testKeepOnlyGreen();
+		testNegate();
+		testGrayscale();
+		textFixUnderwater();
+		testMirrorVertical();
+		testMirrorVerticalRightToLeft();
+		testMirrorHorizontal();
+		testMirrorHorizontalBottomToTop();
+		testMirrorDiagonal();
+		testMirrorTemple();
+		testMirrorArms();
+		testMirrorGull();
 		//testMirrorDiagonal();
-		//testMirrorTemple();
-		//testMirrorArms();
-		//testMirrorGull();
-		//testMirrorDiagonal();
-		//testCollage();
-		//testMyCollage();
-		//testCopy();
-		//testEdgeDetectionHorizontal();
-		//testEdgeDetectionVertical();
+		/*
+		testCollage();
+		testMyCollage();
+		testCopy();
+		testEdgeDetectionHorizontal();
+		testEdgeDetectionVertical();
 		testEdgeDetectionCustom();
+		*/
 		//testChromakey();
 		//testEncodeAndDecode();
 		//testGetCountRedOverValue(250);

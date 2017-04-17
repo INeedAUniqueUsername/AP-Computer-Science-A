@@ -231,25 +231,32 @@ public class Picture extends SimplePicture
 			{
 				
 				leftPixel = pixels[row][col];			
-				rightPixel = pixels[row][mirrorPoint - col];
+				rightPixel = pixels[row][2*mirrorPoint - col];
 				rightPixel.setColor(leftPixel.getColor());
 				count++;
 			}
 		}
 		System.out.println("Temple Count: " + count);
 	}
+	public void mirrorArms() {
+		mirrorSectionVertical(100, 160, 75, 30);
+		mirrorSectionVertical(240, 170, 50, 20);
+	}
+	public void mirrorGull() {
+		mirrorSectionHorizontal(230, 230, 120, 90);
+	}
 	public void mirrorSectionHorizontal(int x, int y, int w, int h) {
-		int mirrorPoint = x+w;
 		Pixel leftPixel = null;
 		Pixel rightPixel = null;
 		Pixel[][] pixels = this.getPixels2D();
+		int mirrorPoint = x+w;
 		for (int row = y; row < y+h; row++)
 		{
 			for (int col = x; col < mirrorPoint; col++)
 			{
 				
 				leftPixel = pixels[row][col];			
-				rightPixel = pixels[row][mirrorPoint - col];
+				rightPixel = pixels[row][2*mirrorPoint-col];
 				rightPixel.setColor(leftPixel.getColor());
 			}
 		}
@@ -265,7 +272,7 @@ public class Picture extends SimplePicture
 			{
 				
 				leftPixel = pixels[row][col];			
-				rightPixel = pixels[mirrorPoint - row][col];
+				rightPixel = pixels[mirrorPoint - row + mirrorPoint][col];
 				rightPixel.setColor(leftPixel.getColor());
 			}
 		}
@@ -523,6 +530,7 @@ public class Picture extends SimplePicture
 	/* Main method for testing - each class in Java can have a main 
 	 * method 
 	 */
+	/*
 	public static void main(String[] args) 
 	{
 		Picture beach = new Picture("beach.jpg");
@@ -530,5 +538,6 @@ public class Picture extends SimplePicture
 		beach.zeroBlue();
 		beach.explore();
 	}
+	*/
 	
 } // this } is the end of class Picture, put all new methods before this
