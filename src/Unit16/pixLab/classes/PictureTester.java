@@ -1,6 +1,5 @@
 package Unit16.pixLab.classes;
 
-import Misc.Alex;
 
 /**
  * This class contains class (static) methods
@@ -12,12 +11,12 @@ import Misc.Alex;
  */
 public class PictureTester
 {
-	private final static String PATH = "src\\Unit16\\pixLab\\images\\";
+	final static String PATH = "src\\Unit16\\pixLab\\images\\";
 	//private static final Picture pix = new Picture(PATH + "Capture.PNG");
 	
 	/** Method to test zeroBlue */
 	public static Picture createPicture() {
-		return new Picture(PATH + "Capture2.PNG");
+		return new Picture(PATH + "beach.jpg");
 	}
 	public static void testZeroBlue(){
 		Picture pix = createPicture();
@@ -88,13 +87,31 @@ public class PictureTester
 		pix.grayscale();
 		pix.explore();
 	}
-	
+	public static void textFixUnderwater() {
+		Picture pix = new Picture(PATH + "water.jpg");
+		pix.explore();
+		pix.fixUnderwater();
+		pix.explore();
+	}
 	/** Method to test mirrorTemple */
 	public static void testMirrorTemple()
 	{
 		Picture pix = new Picture(PATH + "temple.jpg");
 		pix.explore();
 		pix.mirrorTemple();
+		pix.explore();
+	}
+	public static void testMirrorArms() {
+		Picture pix = new Picture(PATH + "snowman.jpg");
+		pix.explore();
+		pix.mirrorSectionVertical(100, 160, 75, 30);
+		pix.mirrorSectionVertical(240, 170, 50, 20);
+		pix.explore();
+	}
+	public static void testMirrorGull() {
+		Picture pix = new Picture(PATH + "seagull.jpg");
+		pix.explore();
+		pix.mirrorSectionHorizontal(230, 230, 120, 90);
 		pix.explore();
 	}
 	
@@ -105,15 +122,29 @@ public class PictureTester
 		pix.createCollage();
 		pix.explore();
 	}
-	
-	/** Method to test edgeDetection */
-	public static void testEdgeDetection()
-	{
+	public static void testMyCollage() {
 		Picture pix = createPicture();
-		pix.edgeDetection(10);
+		pix.myCollage();
 		pix.explore();
 	}
 	
+	/** Method to test edgeDetectionHorizontal */
+	public static void testEdgeDetectionHorizontal()
+	{
+		Picture pix = createPicture();
+		pix.edgeDetectionHorizontal(10);
+		pix.explore();
+	}
+	public static void testEdgeDetectionVertical() {
+		Picture pix = createPicture();
+		pix.edgeDetectionVertical(10);
+		pix.explore();
+	}
+	public static void testEdgeDetectionCustom() {
+		Picture pix = createPicture();
+		pix.edgeDetectionCustom(25);
+		pix.explore();
+	}
 	/** Main method for testing.	Every class can have a main
 		* method in Java */
 	public static void main(String[] args)
@@ -171,20 +202,22 @@ public class PictureTester
 		//testKeepOnlyGreen();
 		//testNegate();
 		//testGrayscale();
-		//testFixUnderwater();
+		//textFixUnderwater();
 		//testMirrorVertical();
 		//testMirrorVerticalRightToLeft();
 		//testMirrorHorizontal();
 		//testMirrorHorizontalBottomToTop();
 		//testMirrorDiagonal();
-		testMirrorTemple();
+		//testMirrorTemple();
 		//testMirrorArms();
 		//testMirrorGull();
 		//testMirrorDiagonal();
 		//testCollage();
+		//testMyCollage();
 		//testCopy();
-		//testEdgeDetection();
-		//testEdgeDetection2();
+		//testEdgeDetectionHorizontal();
+		//testEdgeDetectionVertical();
+		testEdgeDetectionCustom();
 		//testChromakey();
 		//testEncodeAndDecode();
 		//testGetCountRedOverValue(250);
