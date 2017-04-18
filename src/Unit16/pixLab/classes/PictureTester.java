@@ -157,7 +157,7 @@ public class PictureTester
 		* method in Java */
 	public static void main(String[] args)
 	{
-		
+		/*
 		Picture p = createPicture();
 		for(int i = 0; i < 5; i++) {
 			Picture p_new = new Picture(PATH + new String[]{"beach.jpg", "arch.jpg", "caterpillar.jpg", "koala.jpg", "seagull.jpg"}[i]);
@@ -174,6 +174,7 @@ public class PictureTester
 			p = p_new;
 		}
 		p.explore();
+		*/
 		//pix.flipSectionHorizontal(200, 200, 500, 500);
 		//pix.swapSection(0, 0, 500, 500, 250, 250);
 		
@@ -263,5 +264,11 @@ public class PictureTester
 		pix.moreJPEG(255);
 		pix.moreJPEG(255);
 		*/
+		Picture pix = createPicture();
+		pix.explore();
+		for(int i = 0; i < 10; i++) {
+			pix.blur(50, 50, 400, 400);
+		}
+		pix.explore();
 	}
 }
