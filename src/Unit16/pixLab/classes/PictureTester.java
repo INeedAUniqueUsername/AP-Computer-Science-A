@@ -222,31 +222,28 @@ public class PictureTester
 		// uncomment a call here to run a test
 		// and comment out the ones you don't want
 		// to run
-		/*
-		testZeroBlue();	
-		testKeepOnlyBlue();
-		testKeepOnlyRed();
-		testKeepOnlyGreen();
-		testNegate();
-		testGrayscale();
-		textFixUnderwater();
-		testMirrorVertical();
-		testMirrorVerticalRightToLeft();
-		testMirrorHorizontal();
-		testMirrorHorizontalBottomToTop();
-		testMirrorDiagonal();
-		testMirrorTemple();
-		testMirrorArms();
-		testMirrorGull();
+		//testZeroBlue();	
+		//testKeepOnlyBlue();
+		//testKeepOnlyRed();
+		//testKeepOnlyGreen();
+		//testNegate();
+		//testGrayscale();
+		//textFixUnderwater();
+		//testMirrorVertical();
+		//testMirrorVerticalRightToLeft();
+		//testMirrorHorizontal();
+		//testMirrorHorizontalBottomToTop();
 		//testMirrorDiagonal();
-		/*
-		testCollage();
-		testMyCollage();
-		testCopy();
-		testEdgeDetectionHorizontal();
-		testEdgeDetectionVertical();
-		testEdgeDetectionCustom();
-		*/
+		//testMirrorTemple();
+		//testMirrorArms();
+		//testMirrorGull();
+		//testMirrorDiagonal();
+		//testCollage();
+		//testMyCollage();
+		//testCopy();
+		//testEdgeDetectionHorizontal();
+		//testEdgeDetectionVertical();
+		//testEdgeDetectionCustom();
 		//testChromakey();
 		//testEncodeAndDecode();
 		//testGetCountRedOverValue(250);
@@ -263,12 +260,13 @@ public class PictureTester
 		pix.moreJPEG(255);
 		pix.moreJPEG(255);
 		pix.moreJPEG(255);
-		*/
+		*//*
 		Picture pix = createPicture();
 		pix.explore();
 		for(int i = 0; i < 10; i++) {
 			pix.blur(50, 50, 400, 400);
 		}
 		pix.explore();
+		*/
 	}
 }

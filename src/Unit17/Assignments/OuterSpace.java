@@ -1,3 +1,5 @@
+package Unit17.Assignments;
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -38,7 +40,9 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		keys = new boolean[5];
 
 		//instantiate other stuff
-
+		ship = new Ship(500, 500, 1);
+		alienOne = new Alien(50, 50, 5);
+		alienTwo = new Alien(100, 50, 3);
 		this.addKeyListener(this);
 		new Thread(this).start();
 
@@ -69,69 +73,47 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		graphToBack.setColor(Color.BLACK);
 		graphToBack.fillRect(0,0,800,600);
 
-		if(keys[0] == true)
+		if(keys[0])
 		{
 			ship.move("LEFT");
 		}
-
-		//add code to move stuff
-
-
-		//add in collision detection
-
-
+		if(keys[1]) {
+			ship.move("RIGHT");
+		}
+		if(keys[2]) {
+			ship.move("UP");
+		}
+		if(keys[3]) {
+			ship.move("DOWN");
+		}
+		if(keys[4]) {
+		}
+		for(MovingThing m : new MovingThing[]{ship, alienOne, alienTwo}) {
+			m.draw(graphToBack);
+		}
 		twoDGraph.drawImage(back, null, 0, 0);
 	}
 
 
 	public void keyPressed(KeyEvent e)
 	{
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
-			keys[0] = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
-			keys[1] = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			keys[2] = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			keys[3] = true;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE)
-		{
-			keys[4] = true;
-		}
+		setKeyState(e, true);
 		repaint();
 	}
 
 	public void keyReleased(KeyEvent e)
 	{
-		if (e.getKeyCode() == KeyEvent.VK_LEFT)
-		{
-			keys[0] = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-		{
-			keys[1] = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_UP)
-		{
-			keys[2] = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN)
-		{
-			keys[3] = false;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE)
-		{
-			keys[4] = false;
-		}
+		setKeyState(e, false);
 		repaint();
+	}
+	public void setKeyState(KeyEvent e, boolean state) {
+		switch(e.getKeyCode()) {
+		case KeyEvent.VK_LEFT:	keys[0] = state;	break;
+		case KeyEvent.VK_RIGHT:	keys[1] = state;	break;
+		case KeyEvent.VK_UP:	keys[2] = state;	break;
+		case KeyEvent.VK_DOWN:	keys[3] = state;	break;
+		case KeyEvent.VK_SPACE:	keys[4] = state;	break;
+		}
 	}
 
 	public void keyTyped(KeyEvent e)

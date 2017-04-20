@@ -1,3 +1,5 @@
+package Unit17.Assignments;
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -10,52 +12,40 @@ import java.awt.Image;
 import java.io.File;
 import javax.imageio.ImageIO;
 
-public class Alien extends MovingThing
-{
+public class Alien extends MovingThing {
 	private int speed;
 	private Image image;
 
-	public Alien()
-	{
-		this(0,0,0);
+	public Alien() {
+		this(0, 0);
 	}
 
-	public Alien(int x, int y)
-	{
-		this(x,y,0);
+	public Alien(int x, int y) {
+		this(x, y, 0);
 	}
 
-	public Alien(int x, int y, int s)
-	{
+	public Alien(int x, int y, int s) {
 		super(x, y);
-		speed=s;
-		try
-		{
-			image = ImageIO.read(new File("alien.jpg"));
-		}
-		catch(Exception e)
-		{
-			//feel free to do something here
+		speed = s;
+		try {
+			image = ImageIO.read(new File("src\\Unit17\\Assignments\\alien.jpg"));
+		} catch (Exception e) {
+			// feel free to do something here
 		}
 	}
 
-	public void setSpeed(int s)
-	{
-	   //add code
+	public void setSpeed(int s) {
+		speed = s;
+	}
+	public int getSpeed() {
+		return speed;
 	}
 
-	public int getSpeed()
-	{
-	   return 0;
+	public void draw(Graphics window) {
+		window.drawImage(image, getX(), getY(), 80, 80, null);
 	}
 
-	public void draw( Graphics window )
-	{
-   	window.drawImage(image,getX(),getY(),80,80,null);
-	}
-
-	public String toString()
-	{
-		return "";
+	public String toString() {
+		return String.format("%s\nSpeed: %d",super.toString(), speed);
 	}
 }

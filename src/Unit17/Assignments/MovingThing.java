@@ -47,8 +47,7 @@ public abstract class MovingThing implements Locatable {
 			break;
 		}
 	}
-
 	public String toString() {
-		return "";
+		return String.format("X: %d\nY: %d", xPos, yPos);
 	}
 }

@@ -1,3 +1,5 @@
+package Unit17.Assignments;
+
 //© A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
@@ -16,27 +18,27 @@ public class Ammo extends MovingThing
 
 	public Ammo()
 	{
-		this(0,0,0);
+		this(0, 0);
 	}
 
 	public Ammo(int x, int y)
 	{
-		//add code
+		this(x, y, 0);
 	}
 
 	public Ammo(int x, int y, int s)
 	{
-		//add code
+		setPos(x, y);
+		setSpeed(s);
 	}
 
 	public void setSpeed(int s)
 	{
-	   //add code
+	   speed = s;
 	}
-
 	public int getSpeed()
 	{
-	   return 0;
+	   return speed;
 	}
 
 	public void draw( Graphics window )
