@@ -88,6 +88,10 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		}
 		if(keys[4]) {
 		}
+		for(Alien alien: new Alien[]{alienOne, alienTwo}) {
+			alien.move(alien.getDirection());
+		}
+		
 		for(MovingThing m : new MovingThing[]{ship, alienOne, alienTwo}) {
 			m.draw(graphToBack);
 		}

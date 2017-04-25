@@ -15,7 +15,8 @@ import javax.imageio.ImageIO;
 public class Alien extends MovingThing {
 	private int speed;
 	private Image image;
-
+	String direction = "";
+	
 	public Alien() {
 		this(0, 0);
 	}
@@ -27,13 +28,19 @@ public class Alien extends MovingThing {
 	public Alien(int x, int y, int s) {
 		super(x, y);
 		speed = s;
+		direction = "RIGHT";
 		try {
 			image = ImageIO.read(new File("src\\Unit17\\Assignments\\alien.jpg"));
 		} catch (Exception e) {
 			// feel free to do something here
 		}
 	}
-
+	public String getDirection() {
+		return direction;
+	}
+	public void setDirection(String d) {
+		direction = d;
+	}
 	public void setSpeed(int s) {
 		speed = s;
 	}
