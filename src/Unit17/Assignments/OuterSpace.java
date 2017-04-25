@@ -32,6 +32,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 	private boolean[] keys;
 	private BufferedImage back;
+	
+	int tick;
 
 	public OuterSpace()
 	{
@@ -41,16 +43,18 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 		//instantiate other stuff
 		ship = new Ship(500, 500, 1);
-		alienOne = new Alien(50, 50, 5);
-		alienTwo = new Alien(100, 50, 3);
+		alienOne = new Alien(50, 50, 1);
+		alienTwo = new Alien(100, 50, 2);
 		this.addKeyListener(this);
 		new Thread(this).start();
 
 		setVisible(true);
+		tick = 0;
 	}
 
    public void update(Graphics window)
    {
+	   tick++;
 	   paint(window);
    }
 
@@ -89,7 +93,25 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		if(keys[4]) {
 		}
 		for(Alien alien: new Alien[]{alienOne, alienTwo}) {
-			alien.move(alien.getDirection());
+			String direction = alien.getDirection();
+			alien.move(direction);
+			if(tick%15 == 0) {
+				switch(direction) {
+				case "LEFT":
+					if(alien.getX() < 0) {
+						alien.setDirection("DOWN");
+					}
+					break;
+				case "RIGHT":
+					if(alien.getX() + 50 > StarFighter.WIDTH) {
+						alien.setDirection("DOWN");
+					}
+					break;
+				case "DOWN":
+					alien.setDirection(alien.getX() < 0 ? "RIGHT" : "LEFT");
+					break;
+				}
+			}
 		}
 		
 		for(MovingThing m : new MovingThing[]{ship, alienOne, alienTwo}) {
