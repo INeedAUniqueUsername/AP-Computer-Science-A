@@ -1,5 +1,5 @@
 /*
-Alex Chen
+John Doe
 Period 2
 2/3/17
 */
@@ -16,7 +16,7 @@ public class Assessment0 {
 		System.out.println();
 		System.out.println("+++++++++++++++++++++++++");
 		System.out.println("+ +");
-		System.out.println("+ Alex Chen - " + theInt + " +");
+		System.out.println("+ John Doe - " + theInt + " +");
 		System.out.println("+ +");
 		System.out.println("+++++++++++++++++++++++++");
 		System.out.println();

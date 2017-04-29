@@ -34,7 +34,7 @@ public class Lab0b
 
 		//output your information here
 		System.out.println("/////////////////////////////////");
-		System.out.println("*Alex Chen                2/1/17*");
+		System.out.println("*John Doe                2/1/17*");
 		System.out.println("*                               *");
 		System.out.println("*        integer types          *");
 		System.out.println("*                               *");

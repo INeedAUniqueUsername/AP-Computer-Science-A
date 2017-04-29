@@ -1,6 +1,6 @@
 package Unit1.InstructionExamples;
 //© A+ Computer Science  -  www.apluscompsci.com
-//Name - Alex Chen
+//Name - John Doe
 //Date - 2/3/17
 //Class - AP Computer Science A
 //Lab  -
