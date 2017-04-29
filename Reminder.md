@@ -1,1 +1,1 @@
-- Remember to address edge case in which the Ammo is completely inside the Alien: (ammo_x > alien_x && ammo_x2 < alien_x2), (ammo_y > alien_y && ammo_y2 < alien_y2)
+- Remember to address edge case in which the `Ammo` is completely inside `Alien`: `(ammo_x > alien_x && ammo_x2 < alien_x2)`, `(ammo_y > alien_y && ammo_y2 < alien_y2)`
