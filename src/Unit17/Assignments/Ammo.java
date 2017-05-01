@@ -10,12 +10,19 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.io.File;
+
 import javax.imageio.ImageIO;
 
-public class Ammo extends MovingThing
+public class Ammo extends GameObject
 {
-	private int speed;
-
+	public static final int WIDTH = 4;
+	public static final int HEIGHT = 10;
+	public int getWidth() {
+		return WIDTH;
+	}
+	public int getHeight() {
+		return HEIGHT;
+	}
 	public Ammo()
 	{
 		this(0, 0);
@@ -28,28 +35,24 @@ public class Ammo extends MovingThing
 
 	public Ammo(int x, int y, int s)
 	{
-		setPos(x, y);
+		super(x, y);
 		setSpeed(s);
-	}
-
-	public void setSpeed(int s)
-	{
-	   speed = s;
-	}
-	public int getSpeed()
-	{
-	   return speed;
 	}
 
 	public void draw( Graphics window )
 	{
 		//add code to draw the ammo
-		window.setColor(Color.YELLOW);
-		window.drawRect(getX()-2, getY()-5, 4, 10);
+		window.setColor(Color.RED);
+		window.drawRect(getX()-WIDTH/2, getY()-HEIGHT/2, WIDTH, HEIGHT);
 	}
 
 	public String toString()
 	{
 		return "";
+	}
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -7,7 +7,9 @@ package Unit17.Assignments;
 //Lab  -
 
 import javax.swing.JFrame;
+
 import java.awt.Component;
+import java.util.Scanner;
 
 public class StarFighter extends JFrame
 {

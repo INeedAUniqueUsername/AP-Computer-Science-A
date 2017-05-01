@@ -13,22 +13,20 @@ import java.awt.Canvas;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
+
 import static java.lang.Character.*;
+
 import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class OuterSpace extends Canvas implements KeyListener, Runnable
 {
 	private Ship ship;
-	private Alien alienOne;
-	private Alien alienTwo;
-
-	/* uncomment once you are ready for this part
-	 *
-	private ArrayList<Alien> aliens;
-	private ArrayList<Ammo> shots;
-	*/
+	AlienHorde horde;
+	List<Ammo> fire_player;
+	List<Ammo> fire_alien;
 
 	private boolean[] keys;
 	private BufferedImage back;
@@ -43,8 +41,12 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 		//instantiate other stuff
 		ship = new Ship(500, 500, 1);
-		alienOne = new Alien(50, 50, 1);
-		alienTwo = new Alien(100, 50, 2);
+		horde = new AlienHorde(40);
+		for(Alien a : horde.getAliens()) {
+			a.setTarget(ship);
+		}
+		fire_player = new ArrayList<Ammo>();
+		fire_alien = new ArrayList<Ammo>();
 		this.addKeyListener(this);
 		new Thread(this).start();
 
@@ -79,43 +81,86 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 		if(keys[0])
 		{
-			ship.move("LEFT");
+			ship.setDirection("LEFT");
 		}
-		if(keys[1]) {
-			ship.move("RIGHT");
+		else if(keys[1]) {
+			ship.setDirection("RIGHT");
 		}
-		if(keys[2]) {
-			ship.move("UP");
+		else if(keys[2]) {
+			ship.setDirection("UP");
 		}
-		if(keys[3]) {
-			ship.move("DOWN");
+		else if(keys[3]) {
+			ship.setDirection("DOWN");
 		}
+		else {
+			ship.setDirection("");
+		}
+		ship.move(ship.getDirection());
 		if(keys[4]) {
-		}
-		for(Alien alien: new Alien[]{alienOne, alienTwo}) {
-			String direction = alien.getDirection();
-			alien.move(direction);
-			if(tick%15 == 0) {
-				switch(direction) {
-				case "LEFT":
-					if(alien.getX() < 0) {
-						alien.setDirection("DOWN");
-					}
-					break;
-				case "RIGHT":
-					if(alien.getX() + 50 > StarFighter.WIDTH) {
-						alien.setDirection("DOWN");
-					}
-					break;
-				case "DOWN":
-					alien.setDirection(alien.getX() < 0 ? "RIGHT" : "LEFT");
-					break;
-				}
+			if(tick%60 == 0) {
+				Ammo a = new Ammo(ship.getX() + ship.getWidth()/2, ship.getY()-7, 3);
+				a.setDirection("UP");
+				fire_player.add(a);
 			}
 		}
+		List<Alien> aliens = horde.getAliens();
+		for(int i = 0; i < aliens.size();) {
+			Alien alien = aliens.get(i);
+			alien.update();
+			if(alien.getFiring() && tick%25 == 0 && Math.random() < 0.4) {
+				Ammo a = new Ammo(alien.getX() + alien.getWidth()/2, alien.getY()+alien.getHeight()+18, 2);
+				a.setDirection("DOWN");
+				fire_alien.add(a);
+			}
+			if(GameObject.collision(alien, ship)) {
+				ship.setStructure(ship.getStructure()-1);
+				aliens.remove(i);
+			} else {
+				i++;
+			}
+		}
+		horde.removeDeadOnes(fire_player);
+		for(int i = 0; i < fire_player.size();) {
+			Ammo a = fire_player.get(i);
+			a.move(a.getDirection());
+			if(a.getY() < 0) {
+				fire_player.remove(i);
+			} else {
+				i++;
+			}
+		}
+		for(int i = 0; i < fire_alien.size();) {
+			Ammo a = fire_alien.get(i);
+			a.move(a.getDirection());
+			if(a.getY() > StarFighter.HEIGHT) {
+				fire_alien.remove(i);
+				continue;
+			}
+			if(GameObject.collision(a, ship)) {
+				ship.setStructure(ship.getStructure()-1);
+				fire_alien.remove(i);
+				continue;
+			}
+			i++;
+		}
 		
-		for(MovingThing m : new MovingThing[]{ship, alienOne, alienTwo}) {
-			m.draw(graphToBack);
+		if(ship.getStructure() < 1) {
+			for(Alien a : horde.getAliens()) {
+				a.setTarget(null);
+				a.setFiring(true);
+			}
+			ship.setSpeed(0);
+			ship.setY(-100);
+		}
+		ship.draw(graphToBack);
+		for(Alien a : horde.getAliens()) {
+			a.draw(graphToBack);
+		}
+		for(Ammo a : fire_player) {
+			a.draw(graphToBack);
+		}
+		for(Ammo a : fire_alien) {
+			a.draw(graphToBack);
 		}
 		twoDGraph.drawImage(back, null, 0, 0);
 	}

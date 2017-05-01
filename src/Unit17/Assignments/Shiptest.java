@@ -14,7 +14,7 @@ public class Shiptest
 {
     public static void main( String args[] )
     {
-        MovingThing test = new Ship();
+        Movable test = new Ship();
         System.out.println("Ship 1 " + test);
 
         Ship test2 = new Ship(50,75);

@@ -9,10 +9,10 @@ package Unit17.Assignments;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public abstract class MovingThing implements Locatable {
+public abstract class Movable implements Locatable {
 	private int xPos, yPos;
-	public MovingThing() { this(0, 0); }
-	public MovingThing(int x, int y) { setPos(x, y); }
+	public Movable() { this(0, 0); }
+	public Movable(int x, int y) { setPos(x, y); }
 	
 	public void setPos(int x, int y) { setX(x); setY(y); }
 	public void setX(int x) { xPos = x; }
@@ -28,7 +28,6 @@ public abstract class MovingThing implements Locatable {
 	public abstract int getSpeed();
 
 	public abstract void draw(Graphics window);
-
 	public void move(String direction) {
 		// add more code to complete the move method
 		int speed = getSpeed();
