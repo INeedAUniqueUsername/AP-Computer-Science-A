@@ -62,8 +62,7 @@ public class Alien extends GameObject {
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		String direction = getDirection();
-		move(direction);
+		moveInDirection();
 		tick++;
 		
 		int x = getX();
@@ -75,12 +74,16 @@ public class Alien extends GameObject {
 			int diff_x = Math.abs(x - x_target);
 			int diff_y = Math.abs(y - y_target);
 			if(tick%60 == 0) {
-				if(Math.random() < 0.1) {
-					setDirection(y > y_target ? "UP" : "DOWN");
+				if(Math.random() < 0.1 || diff_y < diff_x) {
+					//setDirection(y > y_target ? "UP" : "DOWN");
+					setDirection("DOWN");
 				} else {
-					setDirection(x > x_target ? "LEFT" : "RIGHT");
+					//setDirection(x > x_target ? "LEFT" : "RIGHT");
+					setDirection(x < x_target ? "LEFT" : "RIGHT");
 				}
 			}
+			
+			
 			if(tick%15 == 0) {
 				setFiring(diff_x < 20);
 			}

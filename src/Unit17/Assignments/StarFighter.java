@@ -13,8 +13,8 @@ import java.util.Scanner;
 
 public class StarFighter extends JFrame
 {
-	static final int WIDTH = 800;
-	static final int HEIGHT = 600;
+	static final int WIDTH = 1720;
+	static final int HEIGHT = 1080;
 
 	public StarFighter()
 	{
@@ -27,6 +27,7 @@ public class StarFighter extends JFrame
 		getContentPane().add(theGame);
 
 		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	public static void main( String args[] )

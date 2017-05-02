@@ -27,6 +27,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 	AlienHorde horde;
 	List<Ammo> fire_player;
 	List<Ammo> fire_alien;
+	List<GameObject> universe;
 
 	private boolean[] keys;
 	private BufferedImage back;
@@ -41,12 +42,13 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 		//instantiate other stuff
 		ship = new Ship(500, 500, 1);
-		horde = new AlienHorde(40);
+		horde = new AlienHorde(20);
 		for(Alien a : horde.getAliens()) {
 			a.setTarget(ship);
 		}
 		fire_player = new ArrayList<Ammo>();
 		fire_alien = new ArrayList<Ammo>();
+		universe = new ArrayList<GameObject>();
 		this.addKeyListener(this);
 		new Thread(this).start();
 
@@ -77,8 +79,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		graphToBack.setColor(Color.BLUE);
 		graphToBack.drawString("StarFighter ", 25, 50 );
 		graphToBack.setColor(Color.BLACK);
-		graphToBack.fillRect(0,0,800,600);
-
+		graphToBack.fillRect(0,0,StarFighter.WIDTH,StarFighter.HEIGHT);
+		
 		if(keys[0])
 		{
 			ship.setDirection("LEFT");
@@ -95,7 +97,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		else {
 			ship.setDirection("");
 		}
-		ship.move(ship.getDirection());
+		ship.moveInDirection();
+		ship.draw(graphToBack);
 		if(keys[4]) {
 			if(tick%60 == 0) {
 				Ammo a = new Ammo(ship.getX() + ship.getWidth()/2, ship.getY()-7, 3);
@@ -104,9 +107,9 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 			}
 		}
 		List<Alien> aliens = horde.getAliens();
-		for(int i = 0; i < aliens.size();) {
-			Alien alien = aliens.get(i);
+		aliens.removeIf( (Alien alien) -> {
 			alien.update();
+			alien.draw(graphToBack);
 			if(alien.getFiring() && tick%25 == 0 && Math.random() < 0.4) {
 				Ammo a = new Ammo(alien.getX() + alien.getWidth()/2, alien.getY()+alien.getHeight()+18, 2);
 				a.setDirection("DOWN");
@@ -114,35 +117,33 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 			}
 			if(GameObject.collision(alien, ship)) {
 				ship.setStructure(ship.getStructure()-1);
-				aliens.remove(i);
-			} else {
-				i++;
+				alien.setActive(false);
 			}
-		}
+			return !alien.getActive();
+		});
+		
 		horde.removeDeadOnes(fire_player);
-		for(int i = 0; i < fire_player.size();) {
-			Ammo a = fire_player.get(i);
-			a.move(a.getDirection());
+		
+		fire_player.removeIf((Ammo a) -> {
+			a.update();
+			a.draw(graphToBack);
 			if(a.getY() < 0) {
-				fire_player.remove(i);
-			} else {
-				i++;
+				a.setActive(false);
 			}
-		}
-		for(int i = 0; i < fire_alien.size();) {
-			Ammo a = fire_alien.get(i);
-			a.move(a.getDirection());
+			return !a.getActive();
+		});
+		fire_alien.removeIf((Ammo a) -> {
+			a.update();
+			a.draw(graphToBack);
 			if(a.getY() > StarFighter.HEIGHT) {
-				fire_alien.remove(i);
-				continue;
+				a.setActive(false);
 			}
 			if(GameObject.collision(a, ship)) {
 				ship.setStructure(ship.getStructure()-1);
-				fire_alien.remove(i);
-				continue;
+				a.setActive(false);
 			}
-			i++;
-		}
+			return !a.getActive();
+		});
 		
 		if(ship.getStructure() < 1) {
 			for(Alien a : horde.getAliens()) {
@@ -152,16 +153,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 			ship.setSpeed(0);
 			ship.setY(-100);
 		}
-		ship.draw(graphToBack);
-		for(Alien a : horde.getAliens()) {
-			a.draw(graphToBack);
-		}
-		for(Ammo a : fire_player) {
-			a.draw(graphToBack);
-		}
-		for(Ammo a : fire_alien) {
-			a.draw(graphToBack);
-		}
+		
 		twoDGraph.drawImage(back, null, 0, 0);
 	}
 
@@ -198,7 +190,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
    	{
    		while(true)
    		{
-   		   Thread.currentThread().sleep(5);
+   		   Thread.currentThread().sleep(3);
             repaint();
          }
       }catch(Exception e)
