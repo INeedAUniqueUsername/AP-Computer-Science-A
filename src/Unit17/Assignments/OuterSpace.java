@@ -20,10 +20,11 @@ import java.awt.image.BufferedImage;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class OuterSpace extends Canvas implements KeyListener, Runnable
 {
-	private Ship ship;
+	private static Ship ship;
 	AlienHorde horde;
 	List<Ammo> fire_player;
 	List<Ammo> fire_alien;
@@ -31,7 +32,11 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 	private boolean[] keys;
 	private BufferedImage back;
 	
-	int tick;
+	int tick = 0;
+	
+	private boolean waitForNextWave;
+	private NextWaveText text;
+	private int waveNumber = 0;
 
 	public OuterSpace()
 	{
@@ -40,25 +45,26 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		keys = new boolean[5];
 
 		//instantiate other stuff
-		ship = new Ship(500, 500, 1);
-		horde = new AlienHorde(40);
-		for(Alien a : horde.getAliens()) {
-			a.setTarget(ship);
-		}
+		ship = new Ship(500, 500, 4);
+		horde = new AlienHorde(2);
 		fire_player = new ArrayList<Ammo>();
 		fire_alien = new ArrayList<Ammo>();
 		this.addKeyListener(this);
 		new Thread(this).start();
 
 		setVisible(true);
-		tick = 0;
+		
+		waitForNextWave = true;
+		text = new NextWaveText("Wave 1");
 	}
-
-   public void update(Graphics window)
-   {
-	   tick++;
-	   paint(window);
-   }
+	public static Ship getPlayer() {
+		return ship;
+	}
+	public void update(Graphics window)
+	{
+		tick++;
+		paint(window);
+	}
 
 	public void paint( Graphics window )
 	{
@@ -68,7 +74,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		//take a snap shop of the current screen and same it as an image
 		//that is the exact same width and height as the current screen
 		if(back==null)
-		   back = (BufferedImage)(createImage(getWidth(),getHeight()));
+			back = (BufferedImage)(createImage(getWidth(),getHeight()));
 
 		//create a graphics reference to the back ground image
 		//we will draw all changes on the background image
@@ -77,8 +83,30 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		graphToBack.setColor(Color.BLUE);
 		graphToBack.drawString("StarFighter ", 25, 50 );
 		graphToBack.setColor(Color.BLACK);
-		graphToBack.fillRect(0,0,800,600);
+		graphToBack.fillRect(0,0,StarFighter.WIDTH,StarFighter.HEIGHT);
 
+		ship.draw(graphToBack);
+		for(Alien a : horde.getAliens()) {
+			a.draw(graphToBack);
+		}
+		for(Ammo a : fire_player) {
+			a.draw(graphToBack);
+		}
+		for(Ammo a : fire_alien) {
+			a.draw(graphToBack);
+		}
+		
+		if(waitForNextWave) {
+			text.draw(graphToBack);
+			if(tick == 480) {
+				waitForNextWave = false;
+				horde = new AlienHorde(waveNumber * 3);
+			}
+			twoDGraph.drawImage(back, null, 0, 0);
+			return;
+		}
+		twoDGraph.drawImage(back, null, 0, 0);
+		
 		if(keys[0])
 		{
 			ship.setDirection("LEFT");
@@ -95,74 +123,67 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		else {
 			ship.setDirection("");
 		}
-		ship.move(ship.getDirection());
+		ship.move();
+		ship.checkBounds();
 		if(keys[4]) {
-			if(tick%60 == 0) {
-				Ammo a = new Ammo(ship.getX() + ship.getWidth()/2, ship.getY()-7, 3);
+			if(tick%45 == 0) {
+				Ammo a = new Ammo(ship.getX() + ship.getWidth()/2, ship.getY()-7, 8);
 				a.setDirection("UP");
 				fire_player.add(a);
 			}
 		}
 		List<Alien> aliens = horde.getAliens();
-		for(int i = 0; i < aliens.size();) {
-			Alien alien = aliens.get(i);
+		
+		aliens.removeIf((Alien alien) -> {
 			alien.update();
+			alien.checkBounds();
 			if(alien.getFiring() && tick%25 == 0 && Math.random() < 0.4) {
-				Ammo a = new Ammo(alien.getX() + alien.getWidth()/2, alien.getY()+alien.getHeight()+18, 2);
+				Ammo a = new Ammo(alien.getX() + alien.getWidth()/2, alien.getY()+alien.getHeight()+18, 4);
 				a.setDirection("DOWN");
 				fire_alien.add(a);
 			}
 			if(GameObject.collision(alien, ship)) {
 				ship.setStructure(ship.getStructure()-1);
-				aliens.remove(i);
-			} else {
-				i++;
+				alien.setActive(false);
 			}
-		}
+			return !alien.getActive();
+		});
+		
 		horde.removeDeadOnes(fire_player);
-		for(int i = 0; i < fire_player.size();) {
-			Ammo a = fire_player.get(i);
+		
+		fire_player.removeIf((Ammo a) -> {
 			a.move(a.getDirection());
 			if(a.getY() < 0) {
-				fire_player.remove(i);
-			} else {
-				i++;
+				a.setActive(false);
 			}
-		}
-		for(int i = 0; i < fire_alien.size();) {
-			Ammo a = fire_alien.get(i);
+			return !a.getActive();
+		});
+		
+		fire_alien.removeIf((Ammo a) -> {
 			a.move(a.getDirection());
 			if(a.getY() > StarFighter.HEIGHT) {
-				fire_alien.remove(i);
-				continue;
+				a.setActive(false);
 			}
 			if(GameObject.collision(a, ship)) {
 				ship.setStructure(ship.getStructure()-1);
-				fire_alien.remove(i);
-				continue;
+				a.setActive(false);
 			}
-			i++;
-		}
+			return !a.getActive();
+		});
 		
 		if(ship.getStructure() < 1) {
 			for(Alien a : horde.getAliens()) {
-				a.setTarget(null);
 				a.setFiring(true);
 			}
 			ship.setSpeed(0);
 			ship.setY(-100);
 		}
-		ship.draw(graphToBack);
-		for(Alien a : horde.getAliens()) {
-			a.draw(graphToBack);
+		if(aliens.size() == 0) {
+			tick = 0;
+			waitForNextWave = true;
+			waveNumber++;
+			text = new NextWaveText("Wave " + waveNumber);
 		}
-		for(Ammo a : fire_player) {
-			a.draw(graphToBack);
-		}
-		for(Ammo a : fire_alien) {
-			a.draw(graphToBack);
-		}
-		twoDGraph.drawImage(back, null, 0, 0);
 	}
 
 
@@ -192,18 +213,18 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 	}
 
-   public void run()
-   {
-   	try
-   	{
-   		while(true)
-   		{
-   		   Thread.currentThread().sleep(5);
-            repaint();
-         }
-      }catch(Exception e)
-      {
-      }
+	public void run()
+	{
+		try
+		{
+			while(true)
+			{
+				Thread.currentThread().sleep(10);
+				repaint();
+			}
+		}catch(Exception e)
+		{
+		}
   	}
 }
 

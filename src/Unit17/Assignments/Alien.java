@@ -15,7 +15,6 @@ import javax.imageio.ImageIO;
 
 public class Alien extends GameObject {
 	boolean firing = false;
-	GameObject target = null;
 	public static final int WIDTH = 35;
 	public static final int HEIGHT = 40;
 	private int tick = 0;
@@ -47,12 +46,6 @@ public class Alien extends GameObject {
 	public String toString() {
 		return String.format("%s\nSpeed: %d",super.toString(), getSpeed());
 	}
-	public void setTarget(GameObject o) {
-		target = o;
-	}
-	public GameObject getTarget() {
-		return target;
-	}
 	public void setFiring(boolean b) {
 		firing = b;
 	}
@@ -68,21 +61,54 @@ public class Alien extends GameObject {
 		
 		int x = getX();
 		int y = getY();
+		int x2 = x + getWidth();
+		int y2 = y + getHeight();
 		
-		if(target != null) {
-			int x_target = target.getX();
-			int y_target = target.getY();
+		Ship player = OuterSpace.getPlayer();
+		boolean checkMove = tick%60 == 0;
+		boolean checkFire = tick%20 == 0;
+		if(player != null && (checkMove || checkFire)) {
+			System.out.println("Move 1 : " + checkMove);
+			//Make three clones of the player to abuse wraparound
+			int x_target_center = player.getX();
+			int x_target_left = x_target_center - StarFighter.WIDTH;
+			int x_target_right = x_target_center + StarFighter.WIDTH;
+			
+			int diff_x_center = Math.abs(x - x_target_center);
+			int diff_x_left = Math.abs(x - x_target_left);
+			int diff_x_right = Math.abs(x - x_target_right);
+			
+			//Find the closest clone
+			int x_target = x_target_center;
+			if(diff_x_left < diff_x_center) {
+				x_target = x_target_left;
+			}
+			if(diff_x_right < diff_x_center) {
+				x_target = x_target_right;
+			}
+			int y_target = player.getY();
+			
+			int x2_target = x_target + player.getWidth();
+			int y2_target = y_target + player.getHeight();
+			
 			int diff_x = Math.abs(x - x_target);
 			int diff_y = Math.abs(y - y_target);
-			if(tick%60 == 0) {
-				if(Math.random() < 0.1) {
-					setDirection(y > y_target ? "UP" : "DOWN");
+			if(checkMove) {	
+				System.out.println("Move 2 : " + checkMove);
+				if(diff_x < 5 * Alien.WIDTH && y2 < y_target && diff_y < 3 * StarFighter.HEIGHT) {
+					System.out.println("Move 3 : Horizontal");
+					setDirection(x < x_target ? "LEFT" : "RIGHT");
 				} else {
-					setDirection(x > x_target ? "LEFT" : "RIGHT");
+					System.out.println("Move 3 : Vertical");
+					setDirection("DOWN");
 				}
+				/*
+				if(Math.random() < 0.1 || y > y_target) {	
+				}
+				*/
 			}
-			if(tick%15 == 0) {
-				setFiring(diff_x < 20);
+			if(checkFire) {
+				setFiring(diff_x < 3 * Alien.WIDTH && y2 < y_target);
 			}
 			/*
 			switch(direction) {
@@ -101,7 +127,7 @@ public class Alien extends GameObject {
 				break;
 			}
 			*/
-		} else {
+		} else if(player == null) {
 			setDirection("DOWN");
 		}
 		
