@@ -83,17 +83,5 @@ public abstract class GameObject extends Movable {
 		} else if(x2 > x_bound) {
 			setX(0);
 		}
-		/*
-		int y = getY();
-		int height = getHeight();
-		int y2 = y + height;
-		int y_bound = StarFighter.HEIGHT;
-		
-		if(y < 0) {
-			setY(0);
-		} else if(y2 > y_bound) {
-			setY(y_bound - height);
-		}
-		*/
 	}
 }

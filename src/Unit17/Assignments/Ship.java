@@ -13,7 +13,6 @@ import java.io.File;
 import javax.imageio.ImageIO;
 
 public class Ship extends GameObject {
-	private int structure = 10;
 	private static final int WIDTH = 35;
 	private static final int HEIGHT = 50;
 	public int getWidth() {
@@ -43,13 +42,6 @@ public class Ship extends GameObject {
 		}
 	}
 	
-	public void setStructure(int s) {
-		structure = s;
-	}
-	public int getStructure() {
-		return structure;
-	}
-	
 	public String toString() {
 		return String.format("%s\nSpeed: %d", super.toString(), getSpeed());
 	}
@@ -57,5 +49,18 @@ public class Ship extends GameObject {
 	public void update() {
 		// TODO Auto-generated method stub
 		checkBounds();
+	}
+	public void checkBounds() {
+		super.checkBounds();
+		int y = getY();
+		int height = getHeight();
+		int y2 = y + height;
+		int y_bound = StarFighter.HEIGHT;
+		
+		if(y < 0) {
+			setY(0);
+		} else if(y2 > y_bound) {
+			setY(y_bound - height);
+		}
 	}
 }

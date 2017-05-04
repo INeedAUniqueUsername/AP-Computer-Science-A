@@ -24,6 +24,17 @@ import java.util.function.Predicate;
 
 public class OuterSpace extends Canvas implements KeyListener, Runnable
 {
+	private final int DAMAGE_SHIP_COLLISION = 3;
+	private final int DAMAGE_SHIP_FIRE = 1;
+	private final int DAMAGE_EARTH = 1;
+	
+	private final int REGEN_TICKS_SHIP = 300;
+	private final int REGEN_TICKS_EARTH = 900;
+	
+	private final int MAX_HP_SHIP = 10;
+	private final int MAX_HP_EARTH = 30;
+	private final int BAR_WIDTH = 500;
+	
 	private static Ship ship;
 	AlienHorde horde;
 	List<Ammo> fire_player;
@@ -32,12 +43,22 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 	private boolean[] keys;
 	private BufferedImage back;
 	
-	int tick = 0;
+	enum GameState {
+		PLAY, WAIT_FOR_NEXT_WAVE, GAME_OVER
+	}
+	GameState state;
 	
-	private boolean waitForNextWave;
-	private NextWaveText text;
+	
+	private FlashText text;
+	
+	int tick = 0;
 	private int waveNumber = 0;
-
+	private int hp_ship = MAX_HP_SHIP;
+	private int hp_earth = MAX_HP_EARTH;
+	private StatBar bar_ship, bar_earth, bar_score;
+	private int score = 0;
+	private int score_max = 0;
+	
 	public OuterSpace()
 	{
 		setBackground(Color.black);
@@ -45,8 +66,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		keys = new boolean[5];
 
 		//instantiate other stuff
-		ship = new Ship(500, 500, 4);
-		horde = new AlienHorde(2);
+		ship = new Ship(StarFighter.WIDTH/2, StarFighter.HEIGHT - 100, 4);
 		fire_player = new ArrayList<Ammo>();
 		fire_alien = new ArrayList<Ammo>();
 		this.addKeyListener(this);
@@ -54,8 +74,12 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 		setVisible(true);
 		
-		waitForNextWave = true;
-		text = new NextWaveText("Wave 1");
+		horde = new AlienHorde(0);
+		state = GameState.WAIT_FOR_NEXT_WAVE;
+		text = new FlashText("Starfighter", 72);
+		bar_ship = new StatBar("HP (Ship)", hp_ship, BAR_WIDTH, 20);
+		bar_earth = new StatBar("HP (Earth)", hp_earth, BAR_WIDTH, 40);
+		bar_score = new StatBar("Score", score, BAR_WIDTH, 60);
 	}
 	public static Ship getPlayer() {
 		return ship;
@@ -78,63 +102,83 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 
 		//create a graphics reference to the back ground image
 		//we will draw all changes on the background image
-		Graphics graphToBack = back.createGraphics();
+		Graphics gBack = back.createGraphics();
 
-		graphToBack.setColor(Color.BLUE);
-		graphToBack.drawString("StarFighter ", 25, 50 );
-		graphToBack.setColor(Color.BLACK);
-		graphToBack.fillRect(0,0,StarFighter.WIDTH,StarFighter.HEIGHT);
+		gBack.setColor(Color.BLUE);
+		gBack.drawString("StarFighter ", 25, 50 );
+		gBack.setColor(Color.BLACK);
+		gBack.fillRect(0,0,StarFighter.WIDTH,StarFighter.HEIGHT);
 
-		ship.draw(graphToBack);
+		ship.draw(gBack);
 		for(Alien a : horde.getAliens()) {
-			a.draw(graphToBack);
+			a.draw(gBack);
 		}
 		for(Ammo a : fire_player) {
-			a.draw(graphToBack);
+			a.draw(gBack);
 		}
 		for(Ammo a : fire_alien) {
-			a.draw(graphToBack);
+			a.draw(gBack);
 		}
+		bar_ship.setPoints(hp_ship);
+		bar_ship.draw(gBack);
+		bar_earth.setPoints(hp_earth);
+		bar_earth.draw(gBack);
+		bar_score.setPoints(score);
+		bar_score.draw(gBack);
 		
-		if(waitForNextWave) {
-			text.draw(graphToBack);
-			if(tick == 480) {
-				waitForNextWave = false;
-				horde = new AlienHorde(waveNumber * 3);
+		switch(state) {
+		case WAIT_FOR_NEXT_WAVE:
+			text.draw(gBack);
+			if(tick == text.getInterval()*3 - text.getInterval()/2) {
+				System.out.println("Begin wave");
+				state = GameState.PLAY;
+				int alienCount = waveNumber*3;
+				horde = new AlienHorde(alienCount);
+				for(int i = 0; i < alienCount; i++) {
+					score_max += StarFighter.HEIGHT - 50*i;
+				}
+				bar_score.setPoints_max(score_max);
+				tick = 0;
 			}
 			twoDGraph.drawImage(back, null, 0, 0);
 			return;
+		case GAME_OVER:
+			text.draw(gBack);
+			twoDGraph.drawImage(back, null, 0, 0);
+			return;
+		default:
+			break;
 		}
 		twoDGraph.drawImage(back, null, 0, 0);
-		
-		if(keys[0])
-		{
-			ship.setDirection("LEFT");
-		}
-		else if(keys[1]) {
-			ship.setDirection("RIGHT");
-		}
-		else if(keys[2]) {
-			ship.setDirection("UP");
-		}
-		else if(keys[3]) {
-			ship.setDirection("DOWN");
-		}
-		else {
-			ship.setDirection("");
-		}
-		ship.move();
-		ship.checkBounds();
-		if(keys[4]) {
-			if(tick%45 == 0) {
-				Ammo a = new Ammo(ship.getX() + ship.getWidth()/2, ship.getY()-7, 8);
-				a.setDirection("UP");
-				fire_player.add(a);
+		if(ship.getActive()) {
+			ship.move();
+			ship.checkBounds();
+			if(keys[0])
+			{
+				ship.setDirection("LEFT");
+			}
+			else if(keys[1]) {
+				ship.setDirection("RIGHT");
+			}
+			else if(keys[2]) {
+				ship.setDirection("UP");
+			}
+			else if(keys[3]) {
+				ship.setDirection("DOWN");
+			}
+			else {
+				ship.setDirection("");
+			}
+			if(keys[4]) {
+				if(tick%45 == 0) {
+					Ammo a = new Ammo(ship.getX() + ship.getWidth()/2, ship.getY()-7, 8);
+					a.setDirection("UP");
+					fire_player.add(a);
+				}
 			}
 		}
-		List<Alien> aliens = horde.getAliens();
 		
-		aliens.removeIf((Alien alien) -> {
+		horde.getAliens().removeIf((Alien alien) -> {
 			alien.update();
 			alien.checkBounds();
 			if(alien.getFiring() && tick%25 == 0 && Math.random() < 0.4) {
@@ -143,14 +187,21 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 				fire_alien.add(a);
 			}
 			if(GameObject.collision(alien, ship)) {
-				ship.setStructure(ship.getStructure()-1);
+				hp_ship -= DAMAGE_SHIP_COLLISION;
 				alien.setActive(false);
+			} else if(alien.getY() > StarFighter.HEIGHT) {
+				hp_earth -= DAMAGE_EARTH;
+				alien.setActive(false);
+			}
+			for(Ammo a : fire_player) {
+				if(GameObject.collision(a, alien)) {
+					score += StarFighter.HEIGHT - a.getY();
+					a.setActive(false);
+					alien.setActive(false);
+				}
 			}
 			return !alien.getActive();
 		});
-		
-		horde.removeDeadOnes(fire_player);
-		
 		fire_player.removeIf((Ammo a) -> {
 			a.move(a.getDirection());
 			if(a.getY() < 0) {
@@ -165,24 +216,46 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 				a.setActive(false);
 			}
 			if(GameObject.collision(a, ship)) {
-				ship.setStructure(ship.getStructure()-1);
+				hp_ship -= DAMAGE_SHIP_FIRE;
 				a.setActive(false);
 			}
 			return !a.getActive();
 		});
 		
-		if(ship.getStructure() < 1) {
-			for(Alien a : horde.getAliens()) {
-				a.setFiring(true);
+		if(hp_ship < MAX_HP_SHIP) {
+			if(hp_ship < 1) {
+				/*
+				for(Alien a : horde.getAliens()) {
+					a.setFiring(true);
+				}
+				ship.setSpeed(0);
+				ship.setY(-100);
+				text = new FlashText("GAME OVER", 144);
+				state = GameState.GAME_OVER;
+				*/
+				ship.setActive(false);
+				ship.setY(-100);
+			} else if(tick%REGEN_TICKS_SHIP == 0) {
+				hp_ship++;
 			}
-			ship.setSpeed(0);
-			ship.setY(-100);
 		}
-		if(aliens.size() == 0) {
+		if(hp_earth < MAX_HP_EARTH) {
+			if(hp_earth < 1) {
+				text = new FlashText("GAME OVER", 144);
+				state = GameState.GAME_OVER;
+				return;
+			} else if(tick%REGEN_TICKS_EARTH == 0) {
+				hp_earth++;
+			}
+		}
+		
+		System.out.println(horde.getAliens().size() + " Aliens");
+		if(horde.getAliens().size() == 0) {
 			tick = 0;
-			waitForNextWave = true;
+			state = GameState.WAIT_FOR_NEXT_WAVE;
 			waveNumber++;
-			text = new NextWaveText("Wave " + waveNumber);
+			text = new FlashText("Wave " + waveNumber, 24);
+			System.out.println("Wave done");
 		}
 	}
 

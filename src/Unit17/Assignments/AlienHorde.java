@@ -22,7 +22,7 @@ public class AlienHorde
 	{
 		Alien[] horde = new Alien[size];
 		for(int i = 0; i < size; i++) {
-			horde[i] = new Alien((int) (StarFighter.WIDTH/2 + (1.1*Alien.WIDTH*i*alternate(i))), -100, 1);
+			horde[i] = new Alien((int) (Math.random() * StarFighter.WIDTH), -100, 1);
 		}
 		setAliens(new ArrayList<Alien>(Arrays.asList(horde)));
 	}
@@ -50,22 +50,8 @@ public class AlienHorde
 	{
 		for(Alien a : aliens)
 		{
-			a.move(a.getDirection());
+			a.move();
 		}
-	}
-
-	public void removeDeadOnes(List<Ammo> shots)
-	{
-		aliens.removeIf((Alien alien) -> {
-			for(Ammo a : shots) {
-				if(GameObject.collision(alien, a)) {
-					alien.setActive(false);
-					a.setActive(false);
-					return true;
-				}
-			}
-			return false;
-		});
 	}
 
 	public String toString()
