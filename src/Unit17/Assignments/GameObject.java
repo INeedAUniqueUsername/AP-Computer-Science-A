@@ -7,16 +7,8 @@ public abstract class GameObject extends Movable {
 	private String direction = "";
 	private int speed;
 	private Image image;
-	private boolean active;
 	public GameObject(int x, int y) {
 		super(x, y);
-		setActive(true);
-	}
-	public void setActive(boolean b) {
-		active = b;
-	}
-	public boolean getActive() {
-		return active;
 	}
 	public void setSpeed(int s)
 	{
@@ -60,38 +52,6 @@ public abstract class GameObject extends Movable {
 		int b_y2 = b.getY() + b.getHeight();
 		return ((a_x < b_x && a_x2 > b_x) || (a_x > b_x && a_x2 < b_x2) || (a_x < b_x2 && a_x2 > b_x2)) &&
 		((a_y < b_y && a_y2 > b_y) || (a_y > b_y && a_y2 < b_y2) ||(a_y < b_y2 && a_y2 > b_y2));
-	}
-	public static boolean collisionInDirection(GameObject a, GameObject b, String direction) {
-		int a_x = a.getX();
-		int a_y = a.getY();
-		
-		switch(direction.toUpperCase()) {
-		case "LEFT":
-			a_x -= a.getSpeed();
-			break;
-		case "RIGHT":
-			a_x += a.getSpeed();
-			break;
-		case "UP":
-			a_y -= a.getSpeed();
-			break;
-		case "DOWN":
-			a_y += a.getSpeed();
-			break;
-		}
-		
-		int a_x2 = a.getX() + a.getWidth();
-		int a_y2 = a.getY() + a.getHeight();
-		
-		int b_x = b.getX();
-		int b_y = b.getY();
-		int b_x2 = b.getX() + b.getWidth();
-		int b_y2 = b.getY() + b.getHeight();
-		return ((a_x < b_x && a_x2 > b_x) || (a_x > b_x && a_x2 < b_x2) || (a_x < b_x2 && a_x2 > b_x2)) &&
-		((a_y < b_y && a_y2 > b_y) || (a_y > b_y && a_y2 < b_y2) ||(a_y < b_y2 && a_y2 > b_y2));
-	}
-	public void moveInDirection() {
-		move(getDirection());
 	}
 	public void checkBounds() {
 		/*

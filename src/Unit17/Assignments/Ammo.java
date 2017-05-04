@@ -53,6 +53,6 @@ public class Ammo extends GameObject
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
-		moveInDirection();
+		
 	}
 }
