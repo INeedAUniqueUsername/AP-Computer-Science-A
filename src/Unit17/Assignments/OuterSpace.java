@@ -10,20 +10,16 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Canvas;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.KeyEvent;
 
-import static java.lang.Character.*;
-
 import java.awt.image.BufferedImage;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 public class OuterSpace extends Canvas implements KeyListener, Runnable
 {
+	private static final long serialVersionUID = 1L;
 	private final int DAMAGE_SHIP_COLLISION = 3;
 	private final int DAMAGE_SHIP_FIRE = 1;
 	private final int DAMAGE_EARTH = 1;
