@@ -42,7 +42,9 @@ public class Alien extends GameObject {
 			// feel free to do something here
 		}
 	}
-	
+	public Ammo createAmmo() {
+		return new Ammo(getX() + getWidth()/2, getY()+getHeight(), 4);
+	}
 	public String toString() {
 		return String.format("%s\nSpeed: %d",super.toString(), getSpeed());
 	}
@@ -52,9 +54,13 @@ public class Alien extends GameObject {
 	public boolean getFiring() {
 		return firing;
 	}
+	public int getCooldownTicks() {
+		return 25;
+	}
 	@Override
 	public void update() {
 		// TODO Auto-generated method stub
+		super.update();
 		String direction = getDirection();
 		move(direction);
 		tick++;
@@ -130,7 +136,5 @@ public class Alien extends GameObject {
 		} else if(player == null) {
 			setDirection("DOWN");
 		}
-		
-		checkBounds();
 	}
 }

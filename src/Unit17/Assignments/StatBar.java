@@ -25,7 +25,7 @@ public class StatBar {
 		g.setFont(font);
 		FontMetrics fm = g.getFontMetrics();
 		g.drawString(name, 20, (int) (y + fm.getHeight()*0.75));
-		g.fillRect(150, y, (int) ((double) width * (points+1) / (points_max+1)), 18);
+		g.fillRect(150, y, (int) ((double) width * points / points_max), 18);
 	}
 	public String getName() {
 		return name;

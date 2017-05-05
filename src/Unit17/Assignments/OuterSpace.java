@@ -56,8 +56,8 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 	private int hp_ship = MAX_HP_SHIP;
 	private int hp_earth = MAX_HP_EARTH;
 	private StatBar bar_ship, bar_earth, bar_score;
-	private int score = 0;
-	private int score_max = 0;
+	private int score = 1;
+	private int score_max = 1;
 	
 	public OuterSpace()
 	{
@@ -76,7 +76,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		
 		horde = new AlienHorde(0);
 		state = GameState.WAIT_FOR_NEXT_WAVE;
-		text = new FlashText("Starfighter", 72);
+		text = new FlashText("Earth's Last Stand", 72);
 		bar_ship = new StatBar("HP (Ship)", hp_ship, BAR_WIDTH, 20);
 		bar_earth = new StatBar("HP (Earth)", hp_earth, BAR_WIDTH, 40);
 		bar_score = new StatBar("Score", score, BAR_WIDTH, 60);
@@ -151,7 +151,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		}
 		twoDGraph.drawImage(back, null, 0, 0);
 		if(ship.getActive()) {
-			ship.move();
+			ship.update();
 			ship.checkBounds();
 			if(keys[0])
 			{
@@ -170,8 +170,10 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 				ship.setDirection("");
 			}
 			if(keys[4]) {
-				if(tick%45 == 0) {
-					Ammo a = new Ammo(ship.getX() + ship.getWidth()/2, ship.getY()-7, 8);
+				if(ship.getFireTicks() > ship.getCooldownTicks()) {
+					System.out.println("Fire");
+					Ammo a = ship.createAmmo();
+					ship.setFireTicks(0);
 					a.setDirection("UP");
 					fire_player.add(a);
 				}
@@ -180,9 +182,9 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		
 		horde.getAliens().removeIf((Alien alien) -> {
 			alien.update();
-			alien.checkBounds();
-			if(alien.getFiring() && tick%25 == 0 && Math.random() < 0.4) {
-				Ammo a = new Ammo(alien.getX() + alien.getWidth()/2, alien.getY()+alien.getHeight()+18, 4);
+			if(alien.getFiring() && alien.getFireTicks() > alien.getCooldownTicks() && Math.random() < 0.4) {
+				Ammo a = alien.createAmmo();
+				alien.setFireTicks(0);
 				a.setDirection("DOWN");
 				fire_alien.add(a);
 			}
@@ -203,7 +205,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 			return !alien.getActive();
 		});
 		fire_player.removeIf((Ammo a) -> {
-			a.move(a.getDirection());
+			a.update();
 			if(a.getY() < 0) {
 				a.setActive(false);
 			}
@@ -211,7 +213,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		});
 		
 		fire_alien.removeIf((Ammo a) -> {
-			a.move(a.getDirection());
+			a.update();
 			if(a.getY() > StarFighter.HEIGHT) {
 				a.setActive(false);
 			}

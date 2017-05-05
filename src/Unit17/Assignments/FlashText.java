@@ -7,7 +7,7 @@ import java.awt.Graphics;
 
 public class FlashText {
 	private int tick = 0;
-	private final int interval = 180;
+	private final int interval = 18;
 	private String message;
 	private Font font;
 	public FlashText(String message, int size) {

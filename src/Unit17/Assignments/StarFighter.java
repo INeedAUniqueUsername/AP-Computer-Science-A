@@ -18,7 +18,7 @@ public class StarFighter extends JFrame
 
 	public StarFighter()
 	{
-		super("STARFIGHTER SYNDROME");
+		super("Earth's Last Stand");
 		setSize(WIDTH,HEIGHT);
 
 		OuterSpace theGame = new OuterSpace();

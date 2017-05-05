@@ -8,9 +8,11 @@ public abstract class GameObject extends Movable {
 	private String direction = "";
 	private int speed;
 	private Image image;
+	private int fireTicks;
 	public GameObject(int x, int y) {
 		super(x, y);
 		setActive(true);
+		setFireTicks(0);
 	}
 	public void setActive(boolean b) {
 		active = b;
@@ -40,7 +42,20 @@ public abstract class GameObject extends Movable {
 	public void setDirection(String d) {
 		direction = d;
 	}
-	public abstract void update();
+	public int getFireTicks() {
+		return fireTicks;
+	}
+	public void setFireTicks(int fireTicks) {
+		this.fireTicks = fireTicks;
+	}
+	public int getCooldownTicks() {
+		return 25;
+	}
+	public void update() {
+		fireTicks++;
+		move(getDirection());
+		checkBounds();
+	}
 	public void draw(Graphics g) {
 		g.drawImage(getImage(), getX(), getY(), getWidth(), getHeight(), null);
 	}

@@ -41,14 +41,14 @@ public class Ship extends GameObject {
 			System.out.println(e);
 		}
 	}
-	
+	public Ammo createAmmo() {
+		return new Ammo(getX() + getWidth()/2, getY(), 8);
+	}
+	public int getCooldownTicks() {
+		return 45;
+	}
 	public String toString() {
 		return String.format("%s\nSpeed: %d", super.toString(), getSpeed());
-	}
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-		checkBounds();
 	}
 	public void checkBounds() {
 		super.checkBounds();

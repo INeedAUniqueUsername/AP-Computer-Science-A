@@ -50,9 +50,7 @@ public class Ammo extends GameObject
 	{
 		return "";
 	}
-	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+		move(getDirection());
 	}
 }
