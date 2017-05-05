@@ -37,7 +37,8 @@ public class Alien extends GameObject {
 		setSpeed(s);
 		setDirection("RIGHT");
 		try {
-			setImage(ImageIO.read(new File("src\\Unit17\\Assignments\\alien.png")));
+			//setImage(ImageIO.read(new File("src\\Unit17\\Assignments\\alien.png")));
+			setImage(ImageIO.read(getClass().getResource("/Unit17/Assignments/alien.png")));
 		} catch (Exception e) {
 			// feel free to do something here
 		}

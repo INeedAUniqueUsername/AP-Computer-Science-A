@@ -34,7 +34,8 @@ public class Ship extends GameObject {
 		super(x, y);
 		setSpeed(s);
 		try {
-			setImage(ImageIO.read(new File("src\\Unit17\\Assignments\\ship.png")));
+			//setImage(ImageIO.read(new File("src\\Unit17\\Assignments\\ship.png")));
+			setImage(ImageIO.read(getClass().getResource("/Unit17/Assignments/ship.png")));
 		} catch (Exception e) {
 			// feel free to do something here
 			System.out.println("Hey, look what I found!");

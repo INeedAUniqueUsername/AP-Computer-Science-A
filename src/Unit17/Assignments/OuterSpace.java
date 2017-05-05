@@ -66,7 +66,7 @@ public class OuterSpace extends Canvas implements KeyListener, Runnable
 		keys = new boolean[5];
 
 		//instantiate other stuff
-		ship = new Ship(StarFighter.WIDTH/2, StarFighter.HEIGHT - 100, 4);
+		ship = new Ship(StarFighter.WIDTH/2, StarFighter.HEIGHT - 300, 4);
 		fire_player = new ArrayList<Ammo>();
 		fire_alien = new ArrayList<Ammo>();
 		this.addKeyListener(this);
