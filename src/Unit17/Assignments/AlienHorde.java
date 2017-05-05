@@ -18,13 +18,12 @@ public class AlienHorde
 
 	public AlienHorde(int size)
 	{
-		/*
 		Alien[] horde = new Alien[size];
 		for(int i = 0; i < size; i++) {
 			horde[i] = new Alien((int) (Math.random() * StarFighter.WIDTH), -100, 1);
 		}
 		setAliens(new ArrayList<Alien>(Arrays.asList(horde)));
-		*/
+		/*
 		aliens = new ArrayList<Alien>(0);
 		for(int i = size; i > 0;) {
 			int level = (int) (Math.random() * Math.min(i, 5)) + 1;
@@ -54,6 +53,7 @@ public class AlienHorde
 			}
 			aliens.add(a);
 		}
+		*/
 	}
 	public static int alternate(int i) {
 		return i%2 == 0 ? i : -i;
