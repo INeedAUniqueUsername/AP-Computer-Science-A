@@ -53,14 +53,11 @@ public abstract class GameObject extends Movable {
 	}
 	public void update() {
 		fireTicks++;
-		move(getDirection());
+		moveDirection();
 		checkBounds();
 	}
 	public void draw(Graphics g) {
 		g.drawImage(getImage(), getX(), getY(), getWidth(), getHeight(), null);
-	}
-	public void move() {
-		super.move(getDirection());
 	}
 	public static boolean collision(GameObject a, GameObject b) {
 		int a_x = a.getX();
@@ -98,5 +95,8 @@ public abstract class GameObject extends Movable {
 		} else if(x2 > x_bound) {
 			setX(0);
 		}
+	}
+	public void moveDirection() {
+		move(getDirection());
 	}
 }

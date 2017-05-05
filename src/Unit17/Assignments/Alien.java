@@ -44,7 +44,7 @@ public class Alien extends GameObject {
 		}
 	}
 	public Ammo createAmmo() {
-		return new Ammo(getX() + getWidth()/2, getY()+getHeight(), 4);
+		return new Ammo(getX() + getWidth()/2, getY()+getHeight(), (int) (Math.random() * 8) + 4);
 	}
 	public String toString() {
 		return String.format("%s\nSpeed: %d",super.toString(), getSpeed());
@@ -62,8 +62,6 @@ public class Alien extends GameObject {
 	public void update() {
 		// TODO Auto-generated method stub
 		super.update();
-		String direction = getDirection();
-		move(direction);
 		tick++;
 		
 		int x = getX();

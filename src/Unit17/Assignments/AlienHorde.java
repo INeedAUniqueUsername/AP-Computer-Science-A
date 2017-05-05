@@ -69,20 +69,6 @@ public class AlienHorde
 	   aliens.add(al);
 	}
 
-	public void draw( Graphics window )
-	{
-		for( Alien a : aliens)
-			a.draw( window );
-	}
-
-	public void move()
-	{
-		for(Alien a : aliens)
-		{
-			a.move();
-		}
-	}
-
 	public String toString()
 	{
 		return "" + aliens;

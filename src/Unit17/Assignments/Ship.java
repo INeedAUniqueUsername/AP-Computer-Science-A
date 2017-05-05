@@ -43,10 +43,10 @@ public class Ship extends GameObject {
 		}
 	}
 	public Ammo createAmmo() {
-		return new Ammo(getX() + getWidth()/2, getY(), 8);
+		return new Ammo(getX() + getWidth()/2, getY(), 10);
 	}
 	public int getCooldownTicks() {
-		return 45;
+		return 18;
 	}
 	public String toString() {
 		return String.format("%s\nSpeed: %d", super.toString(), getSpeed());
