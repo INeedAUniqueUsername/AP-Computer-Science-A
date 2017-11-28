@@ -1,6 +1,6 @@
 package Unit17.Assignments;
 
-//© A+ Computer Science  -  www.apluscompsci.com
+//ï¿½ A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
 //Class -
@@ -43,7 +43,7 @@ public class Ship extends GameObject {
 		}
 	}
 	public Ammo createAmmo() {
-		return new Ammo(getX() + getWidth()/2, getY(), 10);
+		return new Ammo(getX() + getWidth()/2, getY()+30, 10);
 	}
 	public int getCooldownTicks() {
 		return 18;

@@ -1,6 +1,6 @@
 package Unit17.Assignments;
 
-//© A+ Computer Science  -  www.apluscompsci.com
+//ï¿½ A+ Computer Science  -  www.apluscompsci.com
 //Name -
 //Date -
 //Class -
@@ -41,8 +41,13 @@ public class Ammo extends GameObject
 
 	public void draw( Graphics window )
 	{
-		//add code to draw the ammo
-		window.setColor(Color.RED);
+		if(getDirection().equals("UP")) {
+			window.setColor(Color.RED);
+		} else if(getDirection().equals("DOWN")) {
+			window.setColor(Color.YELLOW);
+		} else {
+			window.setColor(Color.GREEN);
+		}
 		window.drawRect(getX()-WIDTH/2, getY()-HEIGHT/2, WIDTH, HEIGHT);
 	}
 
